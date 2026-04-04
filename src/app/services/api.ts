@@ -7,14 +7,21 @@ import { Injectable } from '@angular/core';
 export class Api {
     constructor( private  api : HttpClient){}
     
-    private baseUrl = "https://shopapi.stepacademy.ge/api/products?Take=40&Page=1"
-    private authKey = "626ba912-8cbd-4aa8-ae8a-1cbd4832f5cb"
+    private productGetAllUrl = "https://shopapi.stepacademy.ge/api/products?Take=40&Page=1"
+    private categoryGetAllUrl = "https://shopapi.stepacademy.ge/api/categories"
+    private authKey = "a083ac06-16f1-445e-8574-90c2eb0e764f"
 
   getProducts() {
     const headers = new HttpHeaders({
       'X-Api-Key': `${this.authKey}`
     });
-    return this.api.get(this.baseUrl, { headers });
+    return this.api.get(this.productGetAllUrl, { headers });
+  }
+  getCategories(){
+    const headers = new HttpHeaders({
+      'X-Api-Key': `${this.authKey}`
+    });
+    return this.api.get(this.categoryGetAllUrl, { headers })
   }
 }
 
