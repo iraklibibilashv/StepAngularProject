@@ -1,0 +1,130 @@
+<header class="ev-header">
+
+  <!-- Top Bar -->
+  <div class="ev-topbar">
+
+    <a class="ev-logo" routerLink="/">
+      <div class="ev-logo-icon">ST</div>
+      <span class="ev-logo-text">STEP TECH</span>
+    </a>
+
+    <div class="ev-search-wrap">
+      <input type="text" placeholder="Search products..." />
+      <svg class="ev-search-icon" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/>
+      </svg>
+    </div>
+
+    <nav class="ev-nav">
+      <a routerLink="/" routerLinkActive="active">Home</a>
+      <a routerLink="/products" routerLinkActive="active">Products</a>
+      <a routerLink="/brands" routerLinkActive="active">Brands</a>
+      <a routerLink="/deals" routerLinkActive="active">Deals</a>
+      <a routerLink="/contact" routerLinkActive="active">Contact</a>
+    </nav>
+
+    <div class="ev-icon-btns">
+      <button class="ev-icon-btn" title="Wishlist">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+        </svg>
+      </button>
+
+      <button class="ev-icon-btn" title="Cart">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+          <path d="M1 1h4l2.68 13.39a2 2 0 001.99 1.61h9.72a2 2 0 001.99-1.61L23 6H6"/>
+        </svg>
+      </button>
+
+      <button class="ev-icon-btn" title="Account">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+      </button>
+
+      <button class="ev-icon-btn ev-burger" title="Menu" >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="ev-mobile-menu" >
+    <a routerLink="/home" routerLinkActive="active">Home</a>
+    <a routerLink="products" routerLinkActive="active">Products</a>
+    <a routerLink="/brands" routerLinkActive="active">Brands</a>
+    <a routerLink="/deals" routerLinkActive="active" >Deals</a>
+    <a routerLink="/contact" routerLinkActive="active">Contact</a>
+  </div>
+
+  <!-- Filter Bar -->
+  <div class="ev-filterbar">
+
+    <div class="ev-filter-group">
+      <span class="ev-filter-label">Category</span>
+      <select class="ev-filter-select">
+        <option value="">All Categories</option>
+        @for (cat of categoriesArr; track $index) {
+            <option value="cat">{{cat.name}}</option>
+        }
+      </select>
+    </div>
+
+    <div class="ev-filter-group">
+      <span class="ev-filter-label">Brand</span>
+      <select class="ev-filter-select">
+        <option value="">All Brands</option>
+        @for (item of brandsArr; track $index) {
+            <option value="item">{{item}}</option>
+        }
+      </select>
+    </div>
+
+    <div class="ev-filter-group">
+      <span class="ev-filter-label">Rating</span>
+      <div class="ev-rating-wrap">
+        <span class="ev-star">★</span>
+        <select>
+          <option value="">Any</option>
+          <option value="4">4+</option>
+          <option value="3">3+</option>
+          <option value="2">2+</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="ev-filter-group">
+      <span class="ev-filter-label">Price</span>
+      <div class="ev-price-range">
+        <input class="ev-price-input" type="number" placeholder="Min $" />
+        <span class="ev-price-sep">—</span>
+        <input class="ev-price-input" type="number" placeholder="Max $" />
+      </div>
+    </div>
+    <div class="ev-filter-group">
+      <button class="ev-filter-label">Filter</button>
+    </div>
+
+    <div class="ev-filter-group ev-filter-group--sort">
+      <span class="ev-filter-label">Sort</span>
+      <select class="ev-filter-select">
+        <option value="">Default</option>
+        <option value="price_asc">Price: Low to High</option>
+        <option value="price_desc">Price: High to Low</option>
+        <option value="rating_desc">Top Rated</option>
+        <option value="name_asc">Name: A–Z</option>
+      </select>
+    </div>
+
+    <button class="ev-clear-btn">Clear all</button>
+
+  </div>
+
+</header>

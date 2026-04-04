@@ -1,0 +1,404 @@
+/* ─── Header ─── */
+.ev-header {
+  background: #FF6B00;
+  border-bottom: 1px solid #FF6B00;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* ─── Top Bar ─── */
+.ev-topbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 24px;
+  height: 60px;
+  border-bottom: 1px solid #1e2535;
+}
+
+/* ─── Logo ─── */
+.ev-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.ev-logo-icon {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #e63946, #c1121f);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.ev-logo-text {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* ─── Search ─── */
+.ev-search-wrap {
+  flex: 1;
+  position: relative;
+}
+
+.ev-search-wrap input {
+  width: 100%;
+  height: 38px;
+  background: #1a1f2e;
+  border: 1px solid #2a3045;
+  border-radius: 8px;
+  padding: 0 40px 0 14px;
+  font-size: 14px;
+  color: #e2e8f0;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.ev-search-wrap input:focus {
+  border-color: #e63946;
+}
+
+.ev-search-wrap input::placeholder {
+  color: #4a5568;
+}
+
+.ev-search-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: #4a5568;
+  pointer-events: none;
+}
+
+/* ─── Nav ─── */
+.ev-nav {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.ev-nav a {
+  padding: 8px 13px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+
+.ev-nav a:hover {
+  background: #1e2535;
+  color: #fff;
+}
+
+.ev-nav a.active {
+  color: #e63946;
+}
+
+/* ─── Icon Buttons ─── */
+.ev-icon-btns {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.ev-icon-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+  transition: all 0.15s;
+}
+
+.ev-icon-btn:hover {
+  background: #1e2535;
+  color: #fff;
+}
+
+.ev-burger {
+  display: none;
+}
+
+/* ─── Mobile Menu ─── */
+.ev-mobile-menu {
+  display: flex;
+  flex-direction: column;
+  background: #13161f;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.ev-mobile-menu.open {
+  max-height: 400px;
+  padding: 8px 0;
+  border-bottom: 1px solid #1e2535;
+}
+
+.ev-mobile-menu a {
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: all 0.15s;
+}
+
+.ev-mobile-menu a:hover {
+  background: #1e2535;
+  color: #fff;
+}
+
+.ev-mobile-menu a.active {
+  color: #e63946;
+}
+
+/* ─── Filter Bar ─── */
+.ev-filterbar {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  padding: 10px 24px;
+  flex-wrap: wrap;
+}
+
+.ev-filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ev-filter-group--sort {
+  margin-left: auto;
+}
+
+.ev-filter-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.ev-filter-select {
+  height: 32px;
+  background: #1a1f2e;
+  border: 1px solid #2a3045;
+  border-radius: 6px;
+  padding: 0 28px 0 10px;
+  font-size: 13px;
+  color: #cbd5e1;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%234a5568' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-color: #1a1f2e;
+  transition: border-color 0.2s;
+}
+
+.ev-filter-select:focus {
+  border-color: #e63946;
+}
+
+/* ─── Rating ─── */
+.ev-rating-wrap {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 32px;
+  background: #1a1f2e;
+  border: 1px solid #2a3045;
+  border-radius: 6px;
+  padding: 0 10px;
+}
+
+.ev-rating-wrap select {
+  background: none;
+  border: none;
+  font-size: 13px;
+  color: #cbd5e1;
+  outline: none;
+  cursor: pointer;
+}
+
+.ev-star {
+  color: #f59e0b;
+  font-size: 14px;
+}
+
+/* ─── Price ─── */
+.ev-price-range {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ev-price-input {
+  width: 80px;
+  height: 32px;
+  background: #1a1f2e;
+  border: 1px solid #2a3045;
+  border-radius: 6px;
+  padding: 0 10px;
+  font-size: 13px;
+  color: #cbd5e1;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.ev-price-input:focus {
+  border-color: #e63946;
+}
+
+.ev-price-input::placeholder {
+  color: #4a5568;
+}
+
+.ev-price-sep {
+  font-size: 12px;
+  color: #4a5568;
+}
+
+/* ─── Clear ─── */
+.ev-clear-btn {
+  height: 32px;
+  padding: 0 14px;
+  background: none;
+  border: 1px solid #2a3045;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #64748b;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s;
+  align-self: flex-end;
+}
+
+.ev-clear-btn:hover {
+  border-color: #e63946;
+  color: #e63946;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 1024px) {
+  .ev-nav {
+    display: none;
+  }
+
+  .ev-burger {
+    display: flex;
+  }
+}
+
+@media (max-width: 768px) {
+  .ev-topbar {
+    padding: 0 16px;
+    gap: 10px;
+  }
+
+  .ev-filterbar {
+    padding: 10px 16px;
+    gap: 8px;
+  }
+
+  .ev-filter-group {
+    flex: 1 1 calc(50% - 4px);
+  }
+
+  .ev-filter-group--sort {
+    margin-left: 0;
+    flex: 1 1 calc(50% - 4px);
+  }
+
+  .ev-filter-select {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .ev-rating-wrap {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .ev-rating-wrap select {
+    width: 100%;
+  }
+
+  .ev-price-range {
+    width: 100%;
+  }
+
+  .ev-price-input {
+    flex: 1;
+    width: 0;
+    min-width: 0;
+  }
+
+  .ev-clear-btn {
+    flex: 1 1 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .ev-topbar {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 12px 16px;
+    gap: 10px;
+  }
+
+  .ev-logo {
+    order: 1;
+  }
+
+  .ev-icon-btns {
+    order: 2;
+    margin-left: auto;
+  }
+
+  .ev-search-wrap {
+    order: 3;
+    width: 100%;
+    flex: 0 0 100%;
+  }
+
+  .ev-search-wrap input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .ev-filter-group {
+    flex: 1 1 100%;
+  }
+
+  .ev-filter-group--sort {
+    flex: 1 1 100%;
+  }
+}

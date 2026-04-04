@@ -1,0 +1,145 @@
+<main class="home">
+
+  <!-- ─── Hero Slider ─── -->
+  <section class="hero">
+    <div class="hero__slides">
+
+      <div class="hero__slide hero__slide--1 active">
+        <div class="hero__content">
+          <span class="hero__tag">New Arrival</span>
+          <h1 class="hero__title">Latest Laptops<br/>& Ultrabooks</h1>
+          <p class="hero__sub">Discover the most powerful machines of 2024</p>
+          <a class="hero__btn" routerLink="/products">Shop Now</a>
+        </div>
+      </div>
+
+      <div class="hero__slide hero__slide--2">
+        <div class="hero__content">
+          <span class="hero__tag">Best Sellers</span>
+          <h1 class="hero__title">Top Smartphones<br/>of the Year</h1>
+          <p class="hero__sub">iPhone, Samsung, Xiaomi — all in one place</p>
+          <a class="hero__btn" routerLink="/products">Shop Now</a>
+        </div>
+      </div>
+
+      <div class="hero__slide hero__slide--3">
+        <div class="hero__content">
+          <span class="hero__tag">Special Offer</span>
+          <h1 class="hero__title">Big Sale<br/>Up to 40% Off</h1>
+          <p class="hero__sub">Limited time deals on premium electronics</p>
+          <a class="hero__btn" routerLink="/products">Shop Now</a>
+        </div>
+      </div>
+
+    </div>
+
+    <button class="hero__arrow hero__arrow--prev" id="heroPrev">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+    </button>
+    <button class="hero__arrow hero__arrow--next" id="heroNext">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="9 18 15 12 9 6"/>
+      </svg>
+    </button>
+
+    <div class="hero__dots">
+      <span class="hero__dot active" data-index="0"></span>
+      <span class="hero__dot" data-index="1"></span>
+      <span class="hero__dot" data-index="2"></span>
+    </div>
+  </section>
+
+  <!-- ─── Categories Grid ─── -->
+  <section class="section">
+    <div class="section__head">
+      <h2 class="section__title">Shop by Category</h2>
+      <a class="section__link" routerLink="/products">View all</a>
+    </div>
+    <div class="categories">
+      <a class="category-card" routerLink="/products">
+        <div class="category-card__icon">💻</div>
+        <span class="category-card__name">Laptops</span>
+      </a>
+      <a class="category-card" routerLink="/products">
+        <div class="category-card__icon">📱</div>
+        <span class="category-card__name">Phones</span>
+      </a>
+      <a class="category-card" routerLink="/products">
+        <div class="category-card__icon">📺</div>
+        <span class="category-card__name">TVs</span>
+      </a>
+      <a class="category-card" routerLink="/products">
+        <div class="category-card__icon">🎧</div>
+        <span class="category-card__name">Audio</span>
+      </a>
+      <a class="category-card" routerLink="/products">
+        <div class="category-card__icon">🖥️</div>
+        <span class="category-card__name">Monitors</span>
+      </a>
+      <a class="category-card" routerLink="/products">
+        <div class="category-card__icon">🎮</div>
+        <span class="category-card__name">Gaming</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ─── Special Offers ─── -->
+  <section class="section">
+    <div class="section__head">
+      <h2 class="section__title">Special Offers</h2>
+      <a class="section__link" routerLink="/deals">View all</a>
+    </div>
+    <div class="offers">
+
+      <div class="offer-card offer-card--red">
+        <div class="offer-card__body">
+          <span class="offer-card__tag">Limited Deal</span>
+          <h3 class="offer-card__title">Up to 40% off<br/>on Laptops</h3>
+          <p class="offer-card__sub">Ends in 2 days</p>
+          <a class="offer-card__btn" routerLink="/products">Shop Now</a>
+        </div>
+        <div class="offer-card__image">💻</div>
+      </div>
+
+      <div class="offer-card offer-card--dark">
+        <div class="offer-card__body">
+          <span class="offer-card__tag">New Arrival</span>
+          <h3 class="offer-card__title">Latest iPhones<br/>in Stock</h3>
+          <p class="offer-card__sub">Free shipping included</p>
+          <a class="offer-card__btn" routerLink="/products">Shop Now</a>
+        </div>
+        <div class="offer-card__image">📱</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── Featured Products ─── -->
+  <section class="section">
+    <div class="section__head">
+      <h2 class="section__title">Featured Products</h2>
+      <a class="section__link" routerLink="/products">View all</a>
+    </div>
+    <div class="products-grid">
+      <!-- app-product-card components აქ -->
+    </div>
+  </section>
+
+  <!-- ─── Brands ─── -->
+  <section class="section">
+    <div class="section__head">
+      <h2 class="section__title">Top Brands</h2>
+    </div>
+    <div class="brands">
+      <div class="brand-card">Apple</div>
+      <div class="brand-card">Samsung</div>
+      <div class="brand-card">Sony</div>
+      <div class="brand-card">LG</div>
+      <div class="brand-card">Xiaomi</div>
+      <div class="brand-card">Lenovo</div>
+    </div>
+  </section>
+
+</main>
