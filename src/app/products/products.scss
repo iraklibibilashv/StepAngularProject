@@ -17,6 +17,7 @@
 
 .card:hover {
   border-color: #FF6B00;
+  border-width: 2px;
   box-shadow: 0 4px 24px rgba(34, 197, 94, 0.1);
 }
 
@@ -184,6 +185,6 @@
 
 .card-add:hover {
   background: #FF6B00;
-  border-color: #FF6B00;
+  border-color:#FF6B00;
   color: #fff;
 }
