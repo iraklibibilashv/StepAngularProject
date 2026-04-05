@@ -1,8 +1,6 @@
 <header class="ev-header">
-
   <!-- Top Bar -->
   <div class="ev-topbar">
-
     <a class="ev-logo" routerLink="/">
       <div class="ev-logo-box"><span class="ev-logo-letters">ST</span></div>
       <span class="ev-logo-name">Step Tech</span>
@@ -17,15 +15,20 @@
       />
       <button class="ev-search-btn">
         <svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/>
+          <path
+            fill-rule="evenodd"
+            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+            clip-rule="evenodd"
+          />
         </svg>
       </button>
     </div>
 
     <nav class="ev-nav">
-
       <div class="ev-nav-item">
-        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Home</a>
+        <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+          >Home</a
+        >
       </div>
 
       <div class="ev-nav-item">
@@ -35,29 +38,41 @@
       <div class="ev-nav-item">
         <button class="ev-nav-btn">
           Categories
-          <svg class="ev-nav-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M1 1l4 4 4-4"/>
+          <svg
+            class="ev-nav-chevron"
+            viewBox="0 0 10 6"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
+            <path d="M1 1l4 4 4-4" />
           </svg>
         </button>
         <div class="ev-dropdown">
           @for (item of categoriesArr; track $index) {
-          <a routerLink="/products"> {{item.name}} {{item.productCount}} {{item.brand}}</a>
+            <a routerLink="/products"> {{ item.name }} {{ item.productCount }} {{ item.brand }}</a>
           } @empty {
-  <span>Loading or No Categories Found...</span>
-}
+            <span>Loading or No Categories Found...</span>
+          }
         </div>
       </div>
 
       <div class="ev-nav-item">
         <button class="ev-nav-btn">
           Brands
-          <svg class="ev-nav-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M1 1l4 4 4-4"/>
+          <svg
+            class="ev-nav-chevron"
+            viewBox="0 0 10 6"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
+            <path d="M1 1l4 4 4-4" />
           </svg>
         </button>
         <div class="ev-dropdown">
           @for (br of brandsArr; track $index) {
-          <a routerLink="/products">{{br}}</a>
+            <a routerLink="/products">{{ br }}</a>
           }
         </div>
       </div>
@@ -65,47 +80,81 @@
       <div class="ev-nav-item">
         <a routerLink="/contact" routerLinkActive="active">Contact</a>
       </div>
-
     </nav>
 
     <div class="ev-actions">
-
       <button class="ev-act-btn" routerLink="/wishlist" title="Wishlist">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-          <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+        <svg
+          width="17"
+          height="17"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+        >
+          <path
+            d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"
+          />
         </svg>
         <span class="ev-badge">{{ wishlistCount }}</span>
       </button>
 
       <button class="ev-act-btn" routerLink="/cart" title="Cart">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-          <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
-          <path d="M1 1h4l2.68 13.39a2 2 0 001.99 1.61h9.72a2 2 0 001.99-1.61L23 6H6"/>
+        <svg
+          width="17"
+          height="17"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+        >
+          <circle cx="9" cy="21" r="1" />
+          <circle cx="20" cy="21" r="1" />
+          <path d="M1 1h4l2.68 13.39a2 2 0 001.99 1.61h9.72a2 2 0 001.99-1.61L23 6H6" />
         </svg>
         <span class="ev-badge">{{ cartCount }}</span>
       </button>
 
-      <button class="ev-act-btn" routerLink="/account" title="Account">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-          <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
-          <circle cx="12" cy="7" r="4"/>
+      <button class="ev-act-btn" routerLink="/login" title="Account">
+        <svg
+          width="17"
+          height="17"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+        >
+          <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+          <circle cx="12" cy="7" r="4" />
         </svg>
       </button>
 
       <button class="ev-act-btn ev-burger" (click)="menuOpen = !menuOpen" title="Menu">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-          <line x1="3" y1="6" x2="21" y2="6"/>
-          <line x1="3" y1="12" x2="21" y2="12"/>
-          <line x1="3" y1="18" x2="21" y2="18"/>
+        <svg
+          width="17"
+          height="17"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+        >
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <line x1="3" y1="12" x2="21" y2="12" />
+          <line x1="3" y1="18" x2="21" y2="18" />
         </svg>
       </button>
-
     </div>
   </div>
 
   <!-- Mobile Menu -->
   <div class="ev-mobile-menu" [class.open]="menuOpen">
-    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" (click)="menuOpen = false">Home</a>
+    <a
+      routerLink="/"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      (click)="menuOpen = false"
+      >Home</a
+    >
     <a routerLink="/products" routerLinkActive="active" (click)="menuOpen = false">Products</a>
     <a routerLink="/products" routerLinkActive="active" (click)="menuOpen = false">Categories</a>
     <a routerLink="/products" routerLinkActive="active" (click)="menuOpen = false">Brands</a>
@@ -113,33 +162,48 @@
   </div>
 
   <!-- Filter Bar -->
-  <div class="ev-fbar ">
-
-    <div class="ev-fg" >
-      <span class="ev-fl ">Rating</span>
-      <div class="ev-rating-sel">
-        <span class="ev-star">★</span>
-        <select [(ngModel)]="filters.rating" (ngModelChange)="onFilterChange()">
-          <option [ngValue]="null">Any</option>
-          <option [ngValue]="4">4+</option>
-          <option [ngValue]="3">3+</option>
-          <option [ngValue]="2">2+</option>
-        </select>
-      </div>
-    </div>
+  <div class="ev-fbar">
+<div class="ev-fg ev-nav-item">
+  <span class="ev-fl">Rating</span>
+  <button class="ev-nav-btn ev-rating-btn">
+    <span class="ev-star">★</span>
+    {{ filters.rating ? filters.rating + '+' : 'Any' }}  <!-- ← ეს -->
+    <svg class="ev-nav-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M1 1l4 4 4-4"/>
+    </svg>
+  </button>
+  <div class="ev-dropdown ev-rating-dropdown">
+    <a (click)="filters.rating = null; onFilterChange()">Any</a>
+    <a (click)="filters.rating = 4; onFilterChange()">★★★★☆ 4+</a>
+    <a (click)="filters.rating = 3; onFilterChange()">★★★☆☆ 3+</a>
+    <a (click)="filters.rating = 2; onFilterChange()">★★☆☆☆ 2+</a>
+  </div>
+</div>
 
     <div class="ev-fg">
       <span class="ev-fl">Price</span>
       <div class="ev-price-w">
-        <input class="ev-pinput" type="number" placeholder="Min $" [(ngModel)]="filters.priceMin" (ngModelChange)="onFilterChange()"/>
+        <input
+          class="ev-pinput"
+          type="number"
+          placeholder="Min $"
+          [(ngModel)]="filters.priceMin"
+          (ngModelChange)="onFilterChange()"
+        />
         <span class="ev-psep">—</span>
-        <input class="ev-pinput" type="number" placeholder="Max $" [(ngModel)]="filters.priceMax" (ngModelChange)="onFilterChange()"/>
+        <input
+          class="ev-pinput"
+          type="number"
+          placeholder="Max $"
+          [(ngModel)]="filters.priceMax"
+          (ngModelChange)="onFilterChange()"
+        />
       </div>
     </div>
 
     <div class="ev-fg">
       <label class="ev-instock-wrap">
-        <input type="checkbox" [(ngModel)]="filters.inStock" (ngModelChange)="onFilterChange()"/>
+        <input type="checkbox" [(ngModel)]="filters.inStock" (ngModelChange)="onFilterChange()" />
         <div class="ev-toggle"></div>
         <span class="ev-instock-label">In Stock only</span>
       </label>
@@ -157,15 +221,5 @@
     </div>
 
     <button class="ev-clear-btn" (click)="clearFilters()">Clear all</button>
-
   </div>
-
 </header>
-          <!-- <a routerLink="/products">💻📱 Laptops</a>
-          <a routerLink="/products">📺 TVs</a>
-          <a routerLink="/products">🎧 Audio</a>
-          <a routerLink="/products">🖥️ Monitors</a>
-          <div class="ev-dropdown-divider"></div>
-          <a routerLink="/products">🎮 Gaming</a>
-          <a routerLink="/products">📷 Cameras</a>
-          <a routerLink="/products">🔌 Accessories</a> -->

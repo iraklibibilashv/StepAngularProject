@@ -1,0 +1,262 @@
+/* ─── Page ─── */
+.login-page,
+.register-page {
+  background: #0a0a0f;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 16px;
+}
+
+/* ─── Card ─── */
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  background: #0d0d14;
+  border: 1px solid rgba(255, 107, 0, 0.12);
+  border-radius: 16px;
+  padding: 36px;
+}
+
+/* ─── Logo ─── */
+.card-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.logo-box {
+  height: 32px;
+  padding: 0 8px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.logo-box::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1.5px solid #FF6B00;
+  border-radius: 7px;
+  opacity: 0.6;
+}
+
+.logo-box::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  background: #FF6B00;
+  border-radius: 4px;
+  opacity: 0.15;
+}
+
+.logo-letters {
+  font-size: 14px;
+  font-weight: 900;
+  color: #FF6B00;
+  position: relative;
+  z-index: 1;
+  font-style: italic;
+}
+
+.logo-name {
+  font-size: 14px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+}
+
+/* ─── Title ─── */
+.card-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.card-sub {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.3);
+  margin-bottom: 28px;
+}
+
+/* ─── Form ─── */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.form-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255, 107, 0, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.form-input {
+  height: 42px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 107, 0, 0.15);
+  border-radius: 8px;
+  padding: 0 14px;
+  font-size: 13px;
+  color: #e8e8e8;
+  outline: none;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.form-input:focus {
+  border-color: rgba(255, 107, 0, 0.5);
+  background: rgba(255, 107, 0, 0.04);
+}
+
+.form-input::placeholder {
+  color: rgba(255, 255, 255, 0.15);
+}
+
+/* ─── Forgot ─── */
+.form-forgot {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -8px;
+  margin-bottom: 8px;
+}
+
+.form-forgot a {
+  font-size: 12px;
+  color: rgba(255, 107, 0, 0.6);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.form-forgot a:hover {
+  color: #FF6B00;
+}
+
+/* ─── Submit ─── */
+.submit-btn {
+  width: 100%;
+  height: 44px;
+  background: #FF6B00;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  letter-spacing: 0.3px;
+  margin-top: 4px;
+}
+
+.submit-btn:hover {
+  background: #e05a00;
+  box-shadow: 0 0 20px rgba(255, 107, 0, 0.3);
+}
+
+/* ─── Divider ─── */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.divider-text {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.2);
+  white-space: nowrap;
+}
+
+/* ─── Social ─── */
+.social-btn {
+  width: 100%;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.social-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+/* ─── Footer ─── */
+.card-footer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.card-footer a {
+  color: #FF6B00;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.card-footer a:hover {
+  opacity: 0.8;
+}
+
+/* ─── Terms ─── */
+.terms {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.2);
+  text-align: center;
+  margin-top: 12px;
+  line-height: 1.6;
+}
+
+.terms a {
+  color: rgba(255, 107, 0, 0.5);
+  text-decoration: none;
+}
+
+.terms a:hover {
+  color: #FF6B00;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 24px 20px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}

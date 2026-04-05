@@ -15,14 +15,14 @@ export class Header {
     
   } 
   ngOnInit(){
-        this.api.getCategories().subscribe({
+        this.api.getCategories("categories").subscribe({
       next: (data: any) => {
         this.categoriesArr = data.data
         console.log(this.categoriesArr);
       },
       error: (err) => console.error(err)
     });
-        this.api.getProducts().subscribe({
+        this.api.getProducts("products?Take=40&Page=1").subscribe({
       next: (data: any) => {
         this.filterBrandsArr = data.data.items;
         this.brandsArr = [...new Set(this.filterBrandsArr.map((p: any) => p.brand))];
@@ -30,12 +30,11 @@ export class Header {
       },
       error: (err) => console.error(err)
     });
-
   }
   menuOpen = false;
 searchQuery = '';
 filters = {
-  rating: null,
+  rating: null as number | null,
   priceMin: null,
   priceMax: null,
   inStock: false,

@@ -1,3 +1,11 @@
+@if (loading) {
+    <div class="loading">
+    <div class="loading-spinner"></div>
+    <span class="loading-text">Loading products...</span>
+  </div>
+} @else {
+  
+
 <div class="products-grid">
     @for (item of productArr; track item.id) {
   <div class="card">
@@ -42,3 +50,4 @@
 }
 
 </div>
+}

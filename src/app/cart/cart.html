@@ -1,0 +1,204 @@
+<div class="cart-page">
+  <div class="cart-container">
+    <!-- ─── Left: Cart Items ─── -->
+    <div class="cart-left">
+      <div class="cart-header">
+        <h1 class="cart-title">Shopping Cart</h1>
+        <span class="cart-count">3 items</span>
+      </div>
+
+      <!-- Item -->
+      <div class="cart-item">
+        <div class="cart-item__img">
+          <img src="" alt="" />
+        </div>
+        <div class="cart-item__info">
+          <span class="cart-item__cat">Laptops</span>
+          <p class="cart-item__name">ASUS Vivobook Go 15 Thin & Light Laptop Computer</p>
+          <span class="cart-item__brand">ASUS</span>
+          <div class="cart-item__bottom">
+            <div class="cart-item__qty">
+              <button class="qty-btn">−</button>
+              <span class="qty-val">1</span>
+              <button class="qty-btn">+</button>
+            </div>
+            <button class="cart-item__remove">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polyline points="3 6 5 6 21 6" />
+                <path d="M19 6l-1 14H6L5 6" />
+                <path d="M10 11v6M14 11v6" />
+                <path d="M9 6V4h6v2" />
+              </svg>
+              Remove
+            </button>
+          </div>
+        </div>
+        <div class="cart-item__price">
+          <span class="cart-item__current">$299</span>
+          <span class="cart-item__old">$399</span>
+        </div>
+      </div>
+
+      <!-- Item -->
+      <div class="cart-item">
+        <div class="cart-item__img">
+          <img src="" alt="" />
+        </div>
+        <div class="cart-item__info">
+          <span class="cart-item__cat">Phones</span>
+          <p class="cart-item__name">Apple iPhone 12 Mini, 64GB Blue</p>
+          <span class="cart-item__brand">Apple</span>
+          <div class="cart-item__bottom">
+            <div class="cart-item__qty">
+              <button class="qty-btn">−</button>
+              <span class="qty-val">2</span>
+              <button class="qty-btn">+</button>
+            </div>
+            <button class="cart-item__remove">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polyline points="3 6 5 6 21 6" />
+                <path d="M19 6l-1 14H6L5 6" />
+                <path d="M10 11v6M14 11v6" />
+                <path d="M9 6V4h6v2" />
+              </svg>
+              Remove
+            </button>
+          </div>
+        </div>
+        <div class="cart-item__price">
+          <span class="cart-item__current">$415</span>
+          <span class="cart-item__old">$499</span>
+        </div>
+      </div>
+
+      <!-- Item -->
+      <div class="cart-item">
+        <div class="cart-item__img">
+          <img src="" alt="" />
+        </div>
+        <div class="cart-item__info">
+          <span class="cart-item__cat">Audio</span>
+          <p class="cart-item__name">Sony WH-1000XM5 Wireless Noise Canceling Headphones</p>
+          <span class="cart-item__brand">Sony</span>
+          <div class="cart-item__bottom">
+            <div class="cart-item__qty">
+              <button class="qty-btn">−</button>
+              <span class="qty-val">1</span>
+              <button class="qty-btn">+</button>
+            </div>
+            <button class="cart-item__remove">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polyline points="3 6 5 6 21 6" />
+                <path d="M19 6l-1 14H6L5 6" />
+                <path d="M10 11v6M14 11v6" />
+                <path d="M9 6V4h6v2" />
+              </svg>
+              Remove
+            </button>
+          </div>
+        </div>
+        <div class="cart-item__price">
+          <span class="cart-item__current">$279</span>
+          <span class="cart-item__old">$349</span>
+        </div>
+      </div>
+
+      <a class="cart-continue" routerLink="/products">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <polyline points="15 18 9 12 15 6" />
+        </svg>
+        Continue Shopping
+      </a>
+    </div>
+
+    <!-- ─── Right: Order Summary ─── -->
+    <div class="cart-right">
+      <div class="summary">
+        <h2 class="summary__title">Order Summary</h2>
+
+        <div class="summary__rows">
+          <div class="summary__row">
+            <span>Subtotal (4 items)</span>
+            <span>$1,408</span>
+          </div>
+          <div class="summary__row">
+            <span>Discount</span>
+            <span class="summary__discount">−$235</span>
+          </div>
+          <div class="summary__row">
+            <span>Shipping</span>
+            <span class="summary__free">Free</span>
+          </div>
+        </div>
+
+        <div class="summary__divider"></div>
+
+        <div class="summary__total">
+          <span>Total</span>
+          <span>$1,173</span>
+        </div>
+
+        <div class="summary__coupon">
+          <input type="text" placeholder="Coupon code" class="coupon-input" />
+          <button class="coupon-btn">Apply</button>
+        </div>
+
+        <button class="summary__checkout">
+          Proceed to Checkout
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+        </button>
+
+        <div class="summary__secure">
+          <svg
+            width="13"
+            height="13"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+          </svg>
+          Secure checkout
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
