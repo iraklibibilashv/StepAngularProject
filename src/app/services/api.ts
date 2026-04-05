@@ -9,7 +9,7 @@ export class Api {
     
 
     private baseUrl = "https://shopapi.stepacademy.ge/api/"
-    private authKey = "a3e05c86-9152-467a-a8d4-4af7d4490213"
+    private authKey = "aff2cecc-08c5-4e48-9f8d-fb4524c91b7b"
     getHeaders() {
   return new HttpHeaders({
     'X-API-KEY': this.authKey
