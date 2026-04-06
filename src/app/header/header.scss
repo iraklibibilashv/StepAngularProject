@@ -55,7 +55,7 @@
 }
 
 .ev-logo-letters {
-  font-size: 16px;
+  font-size: 26px;
   font-weight: 900;
   color: #ff6b00;
   position: relative;
@@ -65,7 +65,7 @@
 }
 
 .ev-logo-name {
-  font-size: 15px;
+  font-size: 26px;
   font-weight: 800;
   color: #fff;
   letter-spacing: 3px;
@@ -73,6 +73,8 @@
 }
 
 /* ─── Search ─── */
+
+
 .ev-search {
   flex: 1;
   max-width: 500px;
@@ -128,6 +130,7 @@
 .ev-nav {
   display: flex;
   align-items: center;
+  justify-content: center;
   margin-left: auto;
 }
 
@@ -324,6 +327,10 @@
 }
 
 /* ─── Filter Bar ─── */
+
+
+
+
 .ev-rating-btn {
   height: 44px;
   color: rgba(255, 255, 255, 0.75);
@@ -451,6 +458,9 @@
 }
 
 /* ─── Price ─── */
+
+
+
 .ev-price-w {
   display: flex;
   align-items: center;
@@ -484,7 +494,11 @@
   color: rgba(255, 255, 255, 0.2);
 }
 
+
+
 /* ─── In Stock Toggle ─── */
+
+
 .ev-instock-wrap {
   display: flex;
   align-items: center;
@@ -534,6 +548,8 @@
 }
 
 /* ─── Clear ─── */
+
+
 .ev-clear-btn {
   height: 26px;
   padding: 0 12px;
@@ -565,6 +581,10 @@
 .ev-nav-item:hover {
   z-index: 200;
 }
+
+ --- LOADING ----
+
+
 .loading {
   display: flex;
   flex-direction: column;
@@ -596,6 +616,9 @@
 
 
 /* ─── Responsive ─── */
+
+
+
 @media (max-width: 1024px) {
   .ev-nav {
     display: none;

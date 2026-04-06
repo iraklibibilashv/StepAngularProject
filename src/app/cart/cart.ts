@@ -12,7 +12,7 @@ export class Cart {
 
   } 
   ngOnInit(){
-    this.api.getCart("cart?Take=30&Page=1").subscribe({
+    this.api.getAll("cart?Take=30&Page=1").subscribe({
       next : (data : any) => {
         this.cartArr = data
         console.log(this.cartArr);

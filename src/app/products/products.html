@@ -4,6 +4,66 @@
     <span class="loading-text">Loading products...</span>
   </div>
 } @else {
+  <div class="ev-topbar">
+   <div class="ev-search">
+      <input
+        type="text"
+        placeholder="Search products, brands..."
+      />
+      <button class="ev-search-btn">
+        <svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor">
+          <path
+            fill-rule="evenodd"
+            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </button>
+    </div>
+    <nav class="filter-nav ">
+    <div class="filter-nav-item">
+        <button class="filter-nav-btn change-display">
+          Categories
+          <svg
+            class="filter-nav-chevron"
+            viewBox="0 0 10 6"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
+            <path d="M1 1l4 4 4-4" />
+          </svg>
+        </button>
+        <div class="filter-dropdown">
+          <a>All Categories</a>
+          @for (item of categoriesArr; track $index) {
+            <a value = "">{{item.name}} {{item.productCount}} {{item.brand}}</a>
+          }
+        </div>
+      </div>
+
+      <div class="filter-nav-item">
+        <button class="filter-nav-btn change-display">
+          Brands
+          <svg
+            class="filter-nav-chevron"
+            viewBox="0 0 10 6"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
+            <path d="M1 1l4 4 4-4" />
+          </svg>
+        </button>
+        <div class="filter-dropdown">
+            <a>All Brands</a>
+            @for (item of brandsArr; track $index) {
+              <a value = "">{{item}}</a>
+            }
+        </div>
+      </div>
+      </nav>
+      </div>
   
 
 <div class="products-grid">
@@ -51,3 +111,7 @@
 
 </div>
 }
+
+
+        <!-- [(ngModel)]="searchQuery" -->
+        <!-- (ngModelChange)="onSearchChange()" -->

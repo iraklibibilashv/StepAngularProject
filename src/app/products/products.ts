@@ -14,6 +14,8 @@ import { FilterService } from '../services/filter-service';
 export class Products implements OnInit {
   productArr: any[] = [];
   filterCategory: any[] = [];
+  brandsArr: any[] = [];
+  categoriesArr: any[] = [];
   loading = true;
   price = 0;
   currentCategoryId: any = 'All';
@@ -25,22 +27,12 @@ export class Products implements OnInit {
     private filterService: FilterService,
   ) {}
   ngOnInit() {
-    this.api.getProducts('products?Take=40&Page=1').subscribe({
+    this.api.getAll('products?Take=40&Page=1').subscribe({
       next: (data: any) => {
         this.productArr = data.data.items;
         this.filterCategory = data.data.items;
-        console.log(this.productArr);
+         this.brandsArr = [...new Set(this.productArr.map((p: any) => p.brand))];
         this.loading = false;
-
-        this.filterService.selectedCategory$.subscribe(idFromHeader => {
-          console.log('სერვისიდან მოვიდა მნიშვნელობა:', idFromHeader);
-          this.currentCategoryId = idFromHeader;
-          this.combinedFilter()
-        });
-        this.filterService.selectedPrice$.subscribe(range => {
-          this.currentPriceRange = range;
-          this.combinedFilter(); 
-        });
         this.cdr.detectChanges();
       },
       error: (err) => {
@@ -49,55 +41,61 @@ export class Products implements OnInit {
         this.cdr.detectChanges();
       },
     });
-  }
-  filterByCategory(id: any) {
-    if (id === 'All') {
-      this.filterCategory = this.productArr;
-    } else if (typeof id === `string`) {
-      this.filterCategory = this.productArr.filter((el: any) => el.brand === id);
-    } else {
-      this.filterCategory = this.productArr.filter((el: any) => el.category.id === id);
-    }
-  }
-  filterByPrice(min: number | null, max: number | null) {
-    this.filterCategory = this.productArr.filter((el: any) => {
-      this.price = el.price;
-      const minPrice = min === null || this.price >= min;
-      const maxPrice = max === null || this.price <= max;
-      return minPrice && maxPrice;
+    this.api.getAll("categories").subscribe({
+      next: (data: any) => {
+        this.categoriesArr = data.data
+      },
+      error: (err) => console.error(err)
     });
   }
- combinedFilter() {
-  console.log('ფილტრაცია დაიწყო. კატეგორია:', this.currentCategoryId);
+//   filterByCategory(id: any) {
+//     if (id === 'All') {
+//       this.filterCategory = this.productArr;
+//     } else if (typeof id === `string`) {
+//       this.filterCategory = this.productArr.filter((el: any) => el.brand === id);
+//     } else {
+//       this.filterCategory = this.productArr.filter((el: any) => el.category.id === id);
+//     }
+//   }
+//   filterByPrice(min: number | null, max: number | null) {
+//     this.filterCategory = this.productArr.filter((el: any) => {
+//       this.price = el.price;
+//       const minPrice = min === null || this.price >= min;
+//       const maxPrice = max === null || this.price <= max;
+//       return minPrice && maxPrice;
+//     });
+//   }
+//  combinedFilter() {
+//   console.log('ფილტრაცია დაიწყო. კატეგორია:', this.currentCategoryId);
   
-  this.filterCategory = this.productArr.filter((el: any) => {
+//   this.filterCategory = this.productArr.filter((el: any) => {
     
-    // 1. კატეგორიის/ბრენდის შემოწმება
-    let catMatch = true;
-    if (this.currentCategoryId && this.currentCategoryId !== 'All') {
+//     // 1. კატეგორიის/ბრენდის შემოწმება
+//     let catMatch = true;
+//     if (this.currentCategoryId && this.currentCategoryId !== 'All') {
       
-      // ვამოწმებთ ბრენდს (თუ ტექსტია)
-      const isBrand = typeof this.currentCategoryId === 'string' && isNaN(Number(this.currentCategoryId));
+//       // ვამოწმებთ ბრენდს (თუ ტექსტია)
+//       const isBrand = typeof this.currentCategoryId === 'string' && isNaN(Number(this.currentCategoryId));
 
-      if (isBrand) {
-        // ბრენდის შედარება (უსაფრთხოდ)
-        catMatch = el.brand?.toString().toLowerCase().includes(this.currentCategoryId.toLowerCase());
-      } else {
-        // კატეგორიის შედარება (ვამოწმებთ el.category.id-საც და el.categoryId-საც)
-        const prodCatId = el.category?.id || el.categoryId; 
-        catMatch = prodCatId?.toString() === this.currentCategoryId.toString();
-      }
-    }
+//       if (isBrand) {
+//         // ბრენდის შედარება (უსაფრთხოდ)
+//         catMatch = el.brand?.toString().toLowerCase().includes(this.currentCategoryId.toLowerCase());
+//       } else {
+//         // კატეგორიის შედარება (ვამოწმებთ el.category.id-საც და el.categoryId-საც)
+//         const prodCatId = el.category?.id || el.categoryId; 
+//         catMatch = prodCatId?.toString() === this.currentCategoryId.toString();
+//       }
+//     }
 
-    // 2. ფასის შემოწმება (რადგან გიმუშავებს, უცვლელია)
-    const price = el.price;
-    const minMatch = this.currentPriceRange.min === null || price >= this.currentPriceRange.min;
-    const maxMatch = this.currentPriceRange.max === null || price <= this.currentPriceRange.max;
+//     // 2. ფასის შემოწმება (რადგან გიმუშავებს, უცვლელია)
+//     const price = el.price;
+//     const minMatch = this.currentPriceRange.min === null || price >= this.currentPriceRange.min;
+//     const maxMatch = this.currentPriceRange.max === null || price <= this.currentPriceRange.max;
 
-    return catMatch && minMatch && maxMatch;
-  });
+//     return catMatch && minMatch && maxMatch;
+//   });
 
-  console.log('გაფილტრული პროდუქტების რაოდენობა:', this.filterCategory.length);
-  this.cdr.detectChanges();
-}
+//   console.log('გაფილტრული პროდუქტების რაოდენობა:', this.filterCategory.length);
+//   this.cdr.detectChanges();
+// }
 }

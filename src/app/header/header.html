@@ -5,7 +5,8 @@
       <div class="ev-logo-box"><span class="ev-logo-letters">ST</span></div>
       <span class="ev-logo-name">Step Tech</span>
     </a>
-
+    
+<!-- 
     <div class="ev-search">
       <input
         type="text"
@@ -22,7 +23,7 @@
           />
         </svg>
       </button>
-    </div>
+    </div> -->
 
     <nav class="ev-nav">
       <div class="ev-nav-item">
@@ -35,7 +36,7 @@
         <a routerLink="/products" routerLinkActive="active">Products</a>
       </div>
 
-      <div class="ev-nav-item">
+      <!-- <div class="ev-nav-item">
         <button class="ev-nav-btn">
           Categories
           <svg
@@ -56,9 +57,9 @@
             <span>Loading or No Categories Found...</span>
           }
         </div>
-      </div>
+      </div> -->
 
-      <div class="ev-nav-item">
+      <!-- <div class="ev-nav-item">
         <button class="ev-nav-btn">
           Brands
           <svg
@@ -76,7 +77,7 @@
             <a (click)="onCategoryClick(br)">{{ br }}</a>
           }
         </div>
-      </div>
+      </div> -->
 
       <div class="ev-nav-item">
         <a routerLink="/contact" routerLinkActive="active">Contact</a>
@@ -157,18 +158,18 @@
       >Home</a
     >
     <a routerLink="/products" routerLinkActive="active" (click)="menuOpen = false">Products</a>
-    <a routerLink="/products" routerLinkActive="active" (click)="menuOpen = false">Categories</a>
-    <a routerLink="/products" routerLinkActive="active" (click)="menuOpen = false">Brands</a>
+    <!-- <a routerLink="/products" routerLinkActive="active" (click)="menuOpen = false">Categories</a>
+    <a routerLink="/products" routerLinkActive="active" (click)="menuOpen = false">Brands</a> -->
     <a routerLink="/contact" routerLinkActive="active" (click)="menuOpen = false">Contact</a>
   </div>
 
   <!-- Filter Bar -->
-  <div class="ev-fbar">
+  <!-- <div class="ev-fbar">
 <div class="ev-fg ev-nav-item">
   <span class="ev-fl">Rating</span>
   <button class="ev-nav-btn ev-rating-btn">
     <span class="ev-star">★</span>
-    {{ filters.rating ? filters.rating + '+' : 'Any' }}  <!-- ← ეს -->
+    {{ filters.rating ? filters.rating + '+' : 'Any' }} 
     <svg class="ev-nav-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5">
       <path d="M1 1l4 4 4-4"/>
     </svg>
@@ -222,5 +223,5 @@
     </div>
 
     <button class="ev-clear-btn" (click)="clearFilters()">Clear all</button>
-  </div>
+  </div> -->
 </header>

@@ -18,14 +18,14 @@ export class Header {
     
   } 
   ngOnInit(){
-        this.api.getCategories("categories").subscribe({
+        this.api.getAll("categories").subscribe({
       next: (data: any) => {
         this.categoriesArr = data.data
         console.log(this.categoriesArr);
       },
       error: (err) => console.error(err)
     });
-        this.api.getProducts("products?Take=40&Page=1").subscribe({
+        this.api.getAll("products?Take=40&Page=1").subscribe({
       next: (data: any) => {
         this.allProduct = data.data.items
         this.filterBrandsArr = data.data.items;
@@ -35,6 +35,11 @@ export class Header {
       error: (err) => console.error(err)
     });
   }
+  // xayipat339@kobace.com
+  // Ii123@123
+  
+  
+
   menuOpen = false;
 searchQuery = '';
 filters = {

@@ -9,24 +9,16 @@ export class Api {
     
 
     private baseUrl = "https://shopapi.stepacademy.ge/api/"
-    private authKey = "aff2cecc-08c5-4e48-9f8d-fb4524c91b7b"
+    private authKey = "6e0445ab-3680-46e9-b7d3-6a8e339175c4"
     getHeaders() {
   return new HttpHeaders({
     'X-API-KEY': this.authKey
   });
 }
 
-  getProducts(url : string) {
+  getAll(url : string) {
     return this.api.get(this.baseUrl + url, { 
       headers : this.getHeaders()});
-  }
-  getCategories(url : string){
-    return this.api.get(this.baseUrl + url, {
-       headers : this.getHeaders()})
-  }
-  getCart(url : string) {
-    return this.api.get(this.baseUrl + url, {
-       headers : this.getHeaders()})
   }
 }
 
