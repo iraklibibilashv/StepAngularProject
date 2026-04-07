@@ -1,0 +1,108 @@
+<div class="verify-page">
+  <div class="verify-bg">
+    <div class="verify-grid"></div>
+    <div class="verify-glow"></div>
+  </div>
+
+  <div class="verify-card">
+    <div class="verify-icon">
+      <svg
+        width="36"
+        height="36"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+      >
+        <path
+          d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+        />
+      </svg>
+    </div>
+
+    <h1 class="verify-title">Verify Your Email</h1>
+    <p class="verify-sub">Enter the code sent to your email address</p>
+
+    <div class="verify-form">
+      <div class="verify-field">
+        <label>Email Address</label>
+        <input
+          type="email"
+          [(ngModel)]="verify.email"
+          placeholder="your@email.com"
+          [class.has-value]="verify.email"
+        />
+      </div>
+
+      <div class="verify-field">
+        <label>Verification Code</label>
+        <input
+          type="text"
+          [(ngModel)]="verify.code"
+          placeholder="Enter your code"
+          [class.has-value]="verify.code"
+          maxlength="10"
+        />
+      </div>
+
+      @if (errorMsg) {
+        <div class="verify-error">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
+          </svg>
+          {{ errorMsg }}
+        </div>
+      }
+
+      @if (successMsg) {
+        <div class="verify-success">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+            <polyline points="22 4 12 14.01 9 11.01" />
+          </svg>
+          {{ successMsg }}
+        </div>
+      }
+
+      <button class="verify-btn" (click)="onVerify()" [disabled]="loading">
+        @if (loading) {
+          <span class="verify-spinner"></span>
+          Verifying...
+        } @else {
+          Verify Email
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        }
+      </button>
+    </div>
+
+    <div class="verify-footer">
+      Already verified?
+      <a routerLink="/login">Sign in</a>
+    </div>
+  </div>
+</div>

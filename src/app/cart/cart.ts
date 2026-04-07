@@ -8,20 +8,18 @@ import { Api } from '../services/api';
   styleUrl: './cart.scss',
 })
 export class Cart {
-  constructor(private api : Api){
-
-  } 
-  ngOnInit(){
-    this.api.getAll("cart?Take=30&Page=1").subscribe({
-      next : (data : any) => {
-        this.cartArr = data
+  constructor(private api: Api) {}
+  ngOnInit() {
+    this.api.getAll('cart?Take=30&Page=1').subscribe({
+      next: (data: any) => {
+        this.cartArr = data;
         console.log(this.cartArr);
       },
-      error : (err) => {
+      error: (err) => {
         console.error(err);
-      }
-    })
+      },
+    });
   }
 
-  cartArr : any[] = []
+  cartArr: any[] = [];
 }

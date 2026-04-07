@@ -74,7 +74,6 @@
 
 /* ─── Search ─── */
 
-
 .ev-search {
   flex: 1;
   max-width: 500px;
@@ -328,9 +327,6 @@
 
 /* ─── Filter Bar ─── */
 
-
-
-
 .ev-rating-btn {
   height: 44px;
   color: rgba(255, 255, 255, 0.75);
@@ -354,7 +350,7 @@
 .ev-fbar {
   display: flex;
   align-items: center;
-    z-index: 99;
+  z-index: 99;
   gap: 0;
   padding: 0 28px;
   height: 44px;
@@ -459,8 +455,6 @@
 
 /* ─── Price ─── */
 
-
-
 .ev-price-w {
   display: flex;
   align-items: center;
@@ -494,10 +488,7 @@
   color: rgba(255, 255, 255, 0.2);
 }
 
-
-
 /* ─── In Stock Toggle ─── */
-
 
 .ev-instock-wrap {
   display: flex;
@@ -549,7 +540,6 @@
 
 /* ─── Clear ─── */
 
-
 .ev-clear-btn {
   height: 26px;
   padding: 0 12px;
@@ -582,10 +572,7 @@
   z-index: 200;
 }
 
- --- LOADING ----
-
-
-.loading {
+--- LOADING ---- .loading {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -598,7 +585,7 @@
   width: 48px;
   height: 48px;
   border: 3px solid rgba(255, 107, 0, 0.15);
-  border-top-color: #FF6B00;
+  border-top-color: #ff6b00;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -611,13 +598,12 @@
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-
 /* ─── Responsive ─── */
-
-
 
 @media (max-width: 1024px) {
   .ev-nav {

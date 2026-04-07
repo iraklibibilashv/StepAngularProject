@@ -1,13 +1,11 @@
 <main class="home">
-
   <!-- ─── Hero Slider ─── -->
   <section class="hero">
     <div class="hero__slides">
-
       <div class="hero__slide hero__slide--1 active">
         <div class="hero__content">
           <span class="hero__tag">New Arrival</span>
-          <h1 class="hero__title">Latest Laptops<br/>& Ultrabooks</h1>
+          <h1 class="hero__title">Latest Laptops<br />& Ultrabooks</h1>
           <p class="hero__sub">Discover the most powerful machines of 2024</p>
           <a class="hero__btn" routerLink="/products">Shop Now</a>
         </div>
@@ -16,7 +14,7 @@
       <div class="hero__slide hero__slide--2">
         <div class="hero__content">
           <span class="hero__tag">Best Sellers</span>
-          <h1 class="hero__title">Top Smartphones<br/>of the Year</h1>
+          <h1 class="hero__title">Top Smartphones<br />of the Year</h1>
           <p class="hero__sub">iPhone, Samsung, Xiaomi — all in one place</p>
           <a class="hero__btn" routerLink="/products">Shop Now</a>
         </div>
@@ -25,22 +23,35 @@
       <div class="hero__slide hero__slide--3">
         <div class="hero__content">
           <span class="hero__tag">Special Offer</span>
-          <h1 class="hero__title">Big Sale<br/>Up to 40% Off</h1>
+          <h1 class="hero__title">Big Sale<br />Up to 40% Off</h1>
           <p class="hero__sub">Limited time deals on premium electronics</p>
           <a class="hero__btn" routerLink="/products">Shop Now</a>
         </div>
       </div>
-
     </div>
 
     <button class="hero__arrow hero__arrow--prev" id="heroPrev">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <polyline points="15 18 9 12 15 6"/>
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <polyline points="15 18 9 12 15 6" />
       </svg>
     </button>
     <button class="hero__arrow hero__arrow--next" id="heroNext">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <polyline points="9 18 15 12 9 6"/>
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <polyline points="9 18 15 12 9 6" />
       </svg>
     </button>
 
@@ -64,23 +75,23 @@
       </a>
       <a class="category-card" routerLink="/products">
         <div class="category-card__icon">📱</div>
-        <span class="category-card__name">Phones</span>
-      </a>
-      <a class="category-card" routerLink="/products">
-        <div class="category-card__icon">📺</div>
-        <span class="category-card__name">TVs</span>
-      </a>
-      <a class="category-card" routerLink="/products">
-        <div class="category-card__icon">🎧</div>
-        <span class="category-card__name">Audio</span>
+        <span class="category-card__name">Smartphones</span>
       </a>
       <a class="category-card" routerLink="/products">
         <div class="category-card__icon">🖥️</div>
         <span class="category-card__name">Monitors</span>
       </a>
       <a class="category-card" routerLink="/products">
+        <div class="category-card__icon">🎧</div>
+        <span class="category-card__name">Headphones</span>🖥️
+      </a>
+      <a class="category-card" routerLink="/products">
+        <div class="category-card__icon">📺</div>
+        <span class="category-card__name">Monitors</span>
+      </a>
+      <a class="category-card" routerLink="/products">
         <div class="category-card__icon">🎮</div>
-        <span class="category-card__name">Gaming</span>
+        <span class="category-card__name">Graphic Cards</span>
       </a>
     </div>
   </section>
@@ -89,14 +100,13 @@
   <section class="section">
     <div class="section__head">
       <h2 class="section__title">Special Offers</h2>
-      <a class="section__link" routerLink="/deals">View all</a>
+      <a class="section__link" routerLink="/products">View all</a>
     </div>
     <div class="offers">
-
       <div class="offer-card offer-card--red">
         <div class="offer-card__body">
           <span class="offer-card__tag">Limited Deal</span>
-          <h3 class="offer-card__title">Up to 40% off<br/>on Laptops</h3>
+          <h3 class="offer-card__title">Up to 40% off<br />on Laptops</h3>
           <p class="offer-card__sub">Ends in 2 days</p>
           <a class="offer-card__btn" routerLink="/products">Shop Now</a>
         </div>
@@ -106,13 +116,12 @@
       <div class="offer-card offer-card--dark">
         <div class="offer-card__body">
           <span class="offer-card__tag">New Arrival</span>
-          <h3 class="offer-card__title">Latest iPhones<br/>in Stock</h3>
+          <h3 class="offer-card__title">Latest Smartphones<br />in Stock</h3>
           <p class="offer-card__sub">Free shipping included</p>
           <a class="offer-card__btn" routerLink="/products">Shop Now</a>
         </div>
         <div class="offer-card__image">📱</div>
       </div>
-
     </div>
   </section>
 
@@ -123,7 +132,206 @@
       <a class="section__link" routerLink="/products">View all</a>
     </div>
     <div class="products-grid">
-      <!-- app-product-card components აქ -->
+      <div class="card">
+        <div class="card-img">
+          <img
+            src="https://elements-resized.envatousercontent.com/envato-dam-assets-production/EVA/TRX/76/68/7e/21/0f/v1_E10/E106PW13.jpg?w=1600&cf_fit=scale-down&q=85&format=auto&s=9a024fe910d98ec9f6f6e4cbfe4a26e71ae50c552412cd88cc1e73d900a5db08"
+            alt=""
+          />
+          <div class="card-actions">
+            <button class="card-action-btn" title="Wishlist">
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"
+                />
+              </svg>
+            </button>
+            <button class="card-action-btn view" title="Quick view">
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-cat">"Graphics Cards"</span>
+            <span class="card-dot">•</span>
+            <span class="card-brand">"NVIDIA"</span>
+          </div>
+          <p class="card-name">"NVIDIA GeForce RTX 4070 Ti Super"</p>
+          <div class="card-rating">
+            <span class="card-cat">In Stock 36</span>
+          </div>
+          <div class="card-price"><span>₾</span>2199</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img">
+          <img
+            src="https://elements-resized.envatousercontent.com/envato-dam-assets-production/EVA/TRX/87/d0/eb/b0/04/v1_E10/E10IBDJX.jpg?w=1600&cf_fit=scale-down&q=85&format=auto&s=b9fcae705f017b4f3c889feffa3d27cf7bc4178e4ad0fb1dfa705bf734968974"
+            alt=""
+          />
+          <div class="card-actions">
+            <button class="card-action-btn" title="Wishlist">
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"
+                />
+              </svg>
+            </button>
+            <button class="card-action-btn view" title="Quick view">
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-cat">"Monitors"</span>
+            <span class="card-dot">•</span>
+            <span class="card-brand">"Samsung"</span>
+          </div>
+          <p class="card-name">"Samsung Odyssey G9 49-inch"</p>
+          <div class="card-rating">
+            <span class="card-cat">In Stock 67</span>
+          </div>
+          <div class="card-price"><span>₾</span>3599</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img">
+          <img
+            src="https://elements-resized.envatousercontent.com/envato-dam-assets-production/EVA/TRX/97/49/0e/7d/4c/v1_E10/E105QHL0.jpeg?w=1600&cf_fit=scale-down&q=85&format=auto&s=690c271bb457b0623787ef8b73347fb1164bc4ff24206859277b4d33730aa5c5"
+            alt=""
+          />
+          <div class="card-actions">
+            <button class="card-action-btn" title="Wishlist">
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"
+                />
+              </svg>
+            </button>
+            <button class="card-action-btn view" title="Quick view">
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-cat">"Laptops"</span>
+            <span class="card-dot">•</span>
+            <span class="card-brand">"Apple"</span>
+          </div>
+          <p class="card-name">"MacBook Air 15-inch M2"</p>
+          <div class="card-rating">
+            <span class="card-cat">In Stock 55</span>
+          </div>
+          <div class="card-price"><span>₾</span>3799</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img">
+          <img
+            src="https://elements-resized.envatousercontent.com/envato-dam-assets-production/EVA/TRX/93/e1/a7/32/3e/v1_E10/E10HJFP4.jpg?w=1600&cf_fit=scale-down&q=85&format=auto&s=069172b9bfba8175d5b57463c0496e73c867cd44973c036d51fe51af61bbc9ed"
+            alt=""
+          />
+          <div class="card-actions">
+            <button class="card-action-btn" title="Wishlist">
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"
+                />
+              </svg>
+            </button>
+            <button class="card-action-btn view" title="Quick view">
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-cat">"Networking"</span>
+            <span class="card-dot">•</span>
+            <span class="card-brand">"Netgear"</span>
+          </div>
+          <p class="card-name">"Netgear Nighthawk RS700S Wi-Fi 7"</p>
+          <div class="card-rating">
+            <span class="card-cat">In Stock 83</span>
+          </div>
+          <div class="card-price"><span>₾</span>1499</div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -133,13 +341,12 @@
       <h2 class="section__title">Top Brands</h2>
     </div>
     <div class="brands">
+      <div class="brand-card">SteelSeries</div>
+      <div class="brand-card">NVIDIA</div>
+      <div class="brand-card">AMD</div>
+      <div class="brand-card">Razer</div>
       <div class="brand-card">Apple</div>
-      <div class="brand-card">Samsung</div>
-      <div class="brand-card">Sony</div>
-      <div class="brand-card">LG</div>
-      <div class="brand-card">Xiaomi</div>
-      <div class="brand-card">Lenovo</div>
+      <div class="brand-card">ASUS</div>
     </div>
   </section>
-
 </main>

@@ -1,6 +1,5 @@
 <div class="register-page">
   <div class="auth-card">
-
     <div class="card-logo">
       <div class="logo-box"><span class="logo-letters">ST</span></div>
       <span class="logo-name">Step Tech</span>
@@ -12,34 +11,41 @@
     <div class="form-row">
       <div class="form-group">
         <label class="form-label">First Name</label>
-        <input class="form-input" type="text" placeholder="John" />
+        <input class="form-input" type="text" [(ngModel)]="user.firstName" placeholder="John" />
       </div>
       <div class="form-group">
         <label class="form-label">Last Name</label>
-        <input class="form-input" type="text" placeholder="Doe" />
+        <input class="form-input" type="text" [(ngModel)]="user.lastName" placeholder="Doe" />
       </div>
     </div>
 
     <div class="form-group">
       <label class="form-label">Email</label>
-      <input class="form-input" type="email" placeholder="you@example.com" />
+      <input
+        class="form-input"
+        type="email"
+        [(ngModel)]="user.email"
+        placeholder="you@example.com"
+      />
     </div>
 
     <div class="form-group">
       <label class="form-label">Password</label>
-      <input class="form-input" type="password" placeholder="Min 8 characters" />
+      <input
+        class="form-input"
+        type="password"
+        [(ngModel)]="user.password"
+        placeholder="Min 8 characters"
+      />
     </div>
-    
-    <button class="submit-btn">Create Account</button>
+
+    <button class="submit-btn" (click)="onRegister()">Create Account</button>
 
     <p class="terms">
       By creating an account you agree to our
       <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
     </p>
 
-    <div class="card-footer">
-      Already have an account? <a routerLink="/login">Sign in</a>
-    </div>
-
+    <div class="card-footer">Already have an account? <a routerLink="/login">Sign in</a></div>
   </div>
 </div>

@@ -25,6 +25,14 @@ export const routes: Routes = [
 {
   path: 'register',
   loadComponent: () => import('./register/register').then(m => m.Register),
+},
+{
+  path: 'verify',
+  loadComponent: () => import('./verify/verify').then(m => m.Verify),
+},
+{
+  path: 'forgotpassword',
+  loadComponent: () => import('./forgotpassword/forgotpassword').then(m => m.Forgotpassword),
 }
 
 ];
