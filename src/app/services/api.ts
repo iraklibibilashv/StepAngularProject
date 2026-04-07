@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -19,6 +19,29 @@ export class Api {
   getAll(url : string) {
     return this.api.get(this.baseUrl + url, { 
       headers : this.getHeaders()});
+  }
+
+
+  getFilteredProducts(filters : any){
+    let params = new HttpParams();
+    if (filters.search) {
+      params = params.set('Search', filters.search);
+    }
+    if (filters.categoryId) {
+      params = params.set('CategoryId', filters.categoryId);
+    }
+    if (filters.minPrice) {
+      params = params.set('MinPrice', filters.minPrice);
+    }
+    if (filters.maxPrice) {
+      params = params.set('MaxPrice', filters.maxPrice);
+    }
+    return this.api.get(this.baseUrl + `products/filter`,
+      {
+        headers: this.getHeaders(),
+        params: params
+      }
+    )
   }
 }
 

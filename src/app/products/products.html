@@ -1,9 +1,4 @@
-@if (loading) {
-    <div class="loading">
-    <div class="loading-spinner"></div>
-    <span class="loading-text">Loading products...</span>
-  </div>
-} @else {
+  <div class="ev-header">  
   <div class="ev-topbar">
    <div class="ev-search">
       <input
@@ -20,8 +15,48 @@
         </svg>
       </button>
     </div>
+    </div>
     <nav class="filter-nav ">
-    <div class="filter-nav-item">
+      
+<div class="ev-fbar">
+<div class="ev-fg ev-nav-item">
+  <span class="ev-fl">Rating</span>
+  <button class="ev-nav-btn ev-rating-btn">
+    <span class="ev-star">★</span>
+    {{ filters.rating ? filters.rating + '+' : 'Any' }} 
+    <svg class="ev-nav-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M1 1l4 4 4-4"/>
+    </svg>
+  </button>
+  <div class="ev-dropdown ev-rating-dropdown">
+    <a (click)="filters.rating = null;">Any</a>
+    <a (click)="filters.rating = 4;">★★★★☆ 4+</a>
+    <a (click)="filters.rating = 3;">★★★☆☆ 3+</a>
+    <a (click)="filters.rating = 2;">★★☆☆☆ 2+</a>
+  </div>
+</div>
+
+    <div class="ev-fg">
+      <span class="ev-fl">Price</span>
+      <div class="ev-price-w">
+        <input
+          class="ev-pinput"
+          type="number"
+          placeholder="Min $"
+          [(ngModel)]="filters.priceMin"
+          (ngModelChange)="onFilterChange()"
+        />
+        <span class="ev-psep">—</span>
+        <input
+          class="ev-pinput"
+          type="number"
+          placeholder="Max $"
+          [(ngModel)]="filters.priceMax"
+          (ngModelChange)="onFilterChange()"
+        />
+      </div>
+    </div>
+     <div class="filter-nav-item">
         <button class="filter-nav-btn change-display">
           Categories
           <svg
@@ -41,8 +76,7 @@
           }
         </div>
       </div>
-
-      <div class="filter-nav-item">
+          <div class="filter-nav-item">
         <button class="filter-nav-btn change-display">
           Brands
           <svg
@@ -62,10 +96,43 @@
             }
         </div>
       </div>
-      </nav>
-      </div>
-  
 
+    <div class="ev-fg">
+      <label class="ev-instock-wrap">
+        <input type="checkbox" [(ngModel)]="filters.inStock" (ngModelChange)="onFilterChange()" />
+        <div class="ev-toggle"></div>
+        <span class="ev-instock-label">In Stock only</span>
+      </label>
+    </div>
+
+    <div class="ev-fg ev-fg--sort">
+      <span class="ev-fl">Sort by</span>
+      <select class="ev-fsel" [(ngModel)]="filters.sortBy" (ngModelChange)="onFilterChange()">
+        <option value="">Default</option>
+        <option value="price_asc">Price: Low to High</option>
+        <option value="price_desc">Price: High to Low</option>
+        <option value="rating_desc">Top Rated</option>
+        <option value="name_asc">Name: A–Z</option>
+      </select>
+    </div>
+
+    <button class="ev-clear-btn" (click)="clearFilters()">Clear all</button>
+  </div>
+
+      
+   
+
+
+      </nav>
+
+      
+  
+@if (loading) {
+    <div class="loading">
+    <div class="loading-spinner"></div>
+    <span class="loading-text">Loading products...</span>
+  </div>
+} @else {
 <div class="products-grid">
     @for (item of filterCategory; track item.id) {
   <div class="card">

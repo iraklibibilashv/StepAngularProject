@@ -5,26 +5,6 @@
       <div class="ev-logo-box"><span class="ev-logo-letters">ST</span></div>
       <span class="ev-logo-name">Step Tech</span>
     </a>
-    
-<!-- 
-    <div class="ev-search">
-      <input
-        type="text"
-        placeholder="Search products, brands..."
-        [(ngModel)]="searchQuery"
-        (ngModelChange)="onSearchChange()"
-      />
-      <button class="ev-search-btn">
-        <svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor">
-          <path
-            fill-rule="evenodd"
-            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-            clip-rule="evenodd"
-          />
-        </svg>
-      </button>
-    </div> -->
-
     <nav class="ev-nav">
       <div class="ev-nav-item">
         <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
@@ -35,51 +15,7 @@
       <div class="ev-nav-item">
         <a routerLink="/products" routerLinkActive="active">Products</a>
       </div>
-
-      <!-- <div class="ev-nav-item">
-        <button class="ev-nav-btn">
-          Categories
-          <svg
-            class="ev-nav-chevron"
-            viewBox="0 0 10 6"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-          >
-            <path d="M1 1l4 4 4-4" />
-          </svg>
-        </button>
-        <div class="ev-dropdown">
-          <a (click)="onCategoryClick('All')">All Categories</a>
-          @for (item of categoriesArr; track $index) {
-            <a (click)="onCategoryClick(item.id)"> {{ item.name }} {{ item.productCount }} {{ item.brand }}</a>
-          } @empty {
-            <span>Loading or No Categories Found...</span>
-          }
-        </div>
-      </div> -->
-
-      <!-- <div class="ev-nav-item">
-        <button class="ev-nav-btn">
-          Brands
-          <svg
-            class="ev-nav-chevron"
-            viewBox="0 0 10 6"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-          >
-            <path d="M1 1l4 4 4-4" />
-          </svg>
-        </button>
-        <div class="ev-dropdown">
-          @for (br of brandsArr; track $index) {
-            <a (click)="onCategoryClick(br)">{{ br }}</a>
-          }
-        </div>
-      </div> -->
-
-      <div class="ev-nav-item">
+   <div class="ev-nav-item">
         <a routerLink="/contact" routerLinkActive="active">Contact</a>
       </div>
     </nav>
@@ -158,70 +94,6 @@
       >Home</a
     >
     <a routerLink="/products" routerLinkActive="active" (click)="menuOpen = false">Products</a>
-    <!-- <a routerLink="/products" routerLinkActive="active" (click)="menuOpen = false">Categories</a>
-    <a routerLink="/products" routerLinkActive="active" (click)="menuOpen = false">Brands</a> -->
     <a routerLink="/contact" routerLinkActive="active" (click)="menuOpen = false">Contact</a>
   </div>
-
-  <!-- Filter Bar -->
-  <!-- <div class="ev-fbar">
-<div class="ev-fg ev-nav-item">
-  <span class="ev-fl">Rating</span>
-  <button class="ev-nav-btn ev-rating-btn">
-    <span class="ev-star">★</span>
-    {{ filters.rating ? filters.rating + '+' : 'Any' }} 
-    <svg class="ev-nav-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5">
-      <path d="M1 1l4 4 4-4"/>
-    </svg>
-  </button>
-  <div class="ev-dropdown ev-rating-dropdown">
-    <a (click)="filters.rating = null; onFilterChange()">Any</a>
-    <a (click)="filters.rating = 4; onFilterChange()">★★★★☆ 4+</a>
-    <a (click)="filters.rating = 3; onFilterChange()">★★★☆☆ 3+</a>
-    <a (click)="filters.rating = 2; onFilterChange()">★★☆☆☆ 2+</a>
-  </div>
-</div>
-
-    <div class="ev-fg">
-      <span class="ev-fl">Price</span>
-      <div class="ev-price-w">
-        <input
-          class="ev-pinput"
-          type="number"
-          placeholder="Min $"
-          [(ngModel)]="filters.priceMin"
-          (ngModelChange)="onFilterChange()"
-        />
-        <span class="ev-psep">—</span>
-        <input
-          class="ev-pinput"
-          type="number"
-          placeholder="Max $"
-          [(ngModel)]="filters.priceMax"
-          (ngModelChange)="onFilterChange()"
-        />
-      </div>
-    </div>
-
-    <div class="ev-fg">
-      <label class="ev-instock-wrap">
-        <input type="checkbox" [(ngModel)]="filters.inStock" (ngModelChange)="onFilterChange()" />
-        <div class="ev-toggle"></div>
-        <span class="ev-instock-label">In Stock only</span>
-      </label>
-    </div>
-
-    <div class="ev-fg ev-fg--sort">
-      <span class="ev-fl">Sort by</span>
-      <select class="ev-fsel" [(ngModel)]="filters.sortBy" (ngModelChange)="onFilterChange()">
-        <option value="">Default</option>
-        <option value="price_asc">Price: Low to High</option>
-        <option value="price_desc">Price: High to Low</option>
-        <option value="rating_desc">Top Rated</option>
-        <option value="name_asc">Name: A–Z</option>
-      </select>
-    </div>
-
-    <button class="ev-clear-btn" (click)="clearFilters()">Clear all</button>
-  </div> -->
 </header>

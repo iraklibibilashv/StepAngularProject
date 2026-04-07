@@ -1,3 +1,4 @@
+import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 @Injectable({
@@ -18,5 +19,8 @@ export class FilterService {
   setPriceRange(min : number | null, max : number | null) {
     this.priceSource.next({ min, max });
   }
+
+
+  
 
 }
