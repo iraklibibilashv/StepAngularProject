@@ -25,9 +25,11 @@ export class Details {
  
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
+    console.log(`product id:`, id);
+    
     this.api.getProductById(+id!).subscribe({
       next: (data: any) => {
-        this.product = data.data.items;
+        this.product = data.data;
         this.loading = false;
         this.cdr.detectChanges();
       },

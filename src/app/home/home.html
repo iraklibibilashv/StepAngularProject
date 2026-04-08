@@ -69,27 +69,27 @@
       <a class="section__link" routerLink="/products">View all</a>
     </div>
     <div class="categories">
-      <a class="category-card" routerLink="/products">
+      <a class="category-card" routerLink="/products"[queryParams]="{id:1,name:'Laptops'}">
         <div class="category-card__icon">💻</div>
         <span class="category-card__name">Laptops</span>
       </a>
-      <a class="category-card" routerLink="/products">
+      <a class="category-card" routerLink="/products"[queryParams]="{id:2,name:'Smartphones'}">
         <div class="category-card__icon">📱</div>
         <span class="category-card__name">Smartphones</span>
       </a>
-      <a class="category-card" routerLink="/products">
+      <a class="category-card" routerLink="/products"[queryParams]="{id:3 ,name:`Monitors`}">
         <div class="category-card__icon">🖥️</div>
         <span class="category-card__name">Monitors</span>
       </a>
-      <a class="category-card" routerLink="/products">
+      <a class="category-card" routerLink="/products"[queryParams]="{id:5,name:`Headphones & Audio`}">
         <div class="category-card__icon">🎧</div>
-        <span class="category-card__name">Headphones</span>🖥️
+        <span class="category-card__name">Headphones</span>
       </a>
-      <a class="category-card" routerLink="/products">
-        <div class="category-card__icon">📺</div>
-        <span class="category-card__name">Monitors</span>
+      <a class="category-card" routerLink="/products"[queryParams]="{id:8,name:`Networking`}">
+        <div class="category-card__icon">🌐</div>
+        <span class="category-card__name">Networking</span>
       </a>
-      <a class="category-card" routerLink="/products">
+      <a class="category-card" routerLink="/products" [queryParams]="{id:6,name:`Graphics Cards`}">
         <div class="category-card__icon">🎮</div>
         <span class="category-card__name">Graphic Cards</span>
       </a>
@@ -341,7 +341,7 @@
       <h2 class="section__title" >Top Brands</h2>
     </div>
     <div class="brands">
-      <div class="brand-card" routerLink="/products">SteelSeries</div>
+      <div class="brand-card" routerLink="/products"[queryParams]="{name:`SteelSeries`}">SteelSeries</div>
       <div class="brand-card" routerLink="/products">NVIDIA</div>
       <div class="brand-card" routerLink="/products">AMD</div>
       <div class="brand-card" routerLink="/products">Razer</div>

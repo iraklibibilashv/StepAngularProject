@@ -17,13 +17,14 @@ export class Login {
     private cdr: ChangeDetectorRef,
   ) {}
   user = {
-    email: '',
-    password: '',
+    email: 'iraklibibilashvili99@gmail.com',
+    password: 'Ema@ema123',
   };
   onLogin() {
     this.api.postLogin(this.user).subscribe({
       next: (data: any) => {
         localStorage.setItem('token', data.data.accessToken)
+        localStorage.setItem('refreshToken', data.data.refreshToken)
         console.log(data);
         
         this.router.navigate(['/home']);

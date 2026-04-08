@@ -76,7 +76,7 @@
         </button>
         <div class="filter-dropdown">
           <a
-            [class.active]="filters.CategoryId === null"
+            [class.active]="filters.CategoryId === null "
             (click)="selectCategory(null, 'Categories')"
             >All Categories</a
           >
@@ -143,7 +143,7 @@
   } @else {
     <div class="products-grid">
       @for (item of allProducts; track item.id) {
-        <div class="card" [routerLink]="['/products', item.id]" style="cursor:pointer">
+        <div class="card">
           <div class="card-img">
             <img [src]="item.imageUrl" alt="" />
             <div class="card-actions">
@@ -161,7 +161,7 @@
                   />
                 </svg>
               </button>
-              <button class="card-action-btn view" title="Quick view">
+              <button class="card-action-btn view"  (click)="goToDetails(item.id)" style="cursor:pointer" title="Quick view">
                 <svg
                   width="15"
                   height="15"
@@ -183,7 +183,7 @@
               <span class="card-dot">•</span>
               <span class="card-brand">{{ item.brand }}</span>
             </div>
-            <p class="card-name">{{ item.name }}</p>
+            <p class="card-name">{{ item.name }} {{item.rating}}</p>
             <div class="card-rating">
               <span class="card-cat">In Stock {{ item.stock }}</span>
             </div>

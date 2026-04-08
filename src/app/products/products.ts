@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Api } from '../services/api';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -34,7 +34,17 @@ export class Products implements OnInit {
   constructor(
     private api: Api,
     private cdr: ChangeDetectorRef,
-  ) {}
+    private router: ActivatedRoute,
+    private route : Router
+
+  ) {
+   this.router.queryParams.subscribe((data : any)=> {
+    if(data.id && data.name) {
+      this.filters.CategoryId = data.id
+      this.selectedCategoryName = data.name
+}
+    })
+  }
 
   ngOnInit() {
     this.api.getAll('products?Take=100&Page=1').subscribe({
@@ -67,6 +77,8 @@ export class Products implements OnInit {
     this.api.getFilteredProducts(this.filters).subscribe({
       next: (data: any) => {
         this.allProducts = data.data.items;
+        console.log(this.allProducts);
+        
         this.loading = false;
         this.cdr.detectChanges();
       },
@@ -161,7 +173,11 @@ export class Products implements OnInit {
         console.error(err);
       }
     })
+
   }
+  goToDetails(id: number) {
+  this.route.navigate(['/details', id]);
+}
 
 
 }
