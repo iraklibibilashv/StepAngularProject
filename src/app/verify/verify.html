@@ -98,6 +98,9 @@
           </svg>
         }
       </button>
+      <button class="verify-btn verify-btn--outline" (click)="onResend()" [disabled]="resendCooldown > 0">
+        {{ resendCooldown > 0 ? 'Resend in ' + resendCooldown + 's' : 'Resend Code' }}
+      </button>
     </div>
 
     <div class="verify-footer">

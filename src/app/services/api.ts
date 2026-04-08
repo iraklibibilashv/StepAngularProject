@@ -10,11 +10,12 @@ export class Api {
   private baseUrl = 'https://shopapi.stepacademy.ge/api/';
   private authKey = '6e0445ab-3680-46e9-b7d3-6a8e339175c4';
   getHeaders() {
+    const token = localStorage.getItem('token');
     return new HttpHeaders({
       'X-API-KEY': this.authKey,
+      ...(token && { Authorization: `Bearer ${token}` }),
     });
   }
-
   postRegister(userData: any) {
     return this.api.post(this.baseUrl + 'auth/register', userData, {
       headers: this.getHeaders(),
@@ -27,17 +28,36 @@ export class Api {
   }
   postForgotPassword(email: any) {
     return this.api.post(
-      this.baseUrl + 'auth/forgot-password',
-      { email },
+      this.baseUrl + `auth/forget-password/${email}`,
+      {},
       {
         headers: this.getHeaders(),
       },
     );
   }
+  postResendVerification(email: any) {
+    return this.api.post(
+      this.baseUrl + 'auth/resend-email-verification/${email}',
+      {},
+      {
+        headers: this.getHeaders(),
+      },
+    );
+  }
+
   putVerify(email: any, code: any) {
     return this.api.put(
       this.baseUrl + 'auth/verify-email',
       { email, code },
+      {
+        headers: this.getHeaders(),
+      },
+    );
+  }
+  putResetPassword(token: any, password: any) {
+    return this.api.put(
+      this.baseUrl + 'auth/reset-password',
+      { token, password },
       {
         headers: this.getHeaders(),
       },
@@ -49,6 +69,35 @@ export class Api {
       headers: this.getHeaders(),
     });
   }
+  getCart() {
+    return this.api.get(this.baseUrl + 'cart?Take=40&Page=1', {
+      headers: this.getHeaders(),
+    });
+  }
+  addToCart(productId: number, quantity: number) {
+    return this.api.post(
+      this.baseUrl + 'cart/add-to-cart',
+      { productId, quantity },
+      {
+        headers: this.getHeaders(),
+      },
+    );
+  }
+  removeFromCart(productId: number) {
+    return this.api.delete(this.baseUrl + `cart/remove-from-cart/${productId}`, {
+      headers: this.getHeaders(),
+    });
+  }
+  editQuantity(itemId: number, quantity: number) {
+    return this.api.put(
+      this.baseUrl + 'cart/edit-quantity',
+      { itemId, quantity },
+      {
+        headers: this.getHeaders(),
+      },
+    );
+  }
+
   getFilteredProducts(filters: any) {
     let params = new HttpParams();
 
@@ -69,4 +118,9 @@ export class Api {
       params: params,
     });
   }
+  getProductById(id: number) {
+  return this.api.get(this.baseUrl + `products/${id}`, {
+    headers: this.getHeaders()
+  });
+}
 }

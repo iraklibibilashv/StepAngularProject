@@ -23,6 +23,9 @@ export class Login {
   onLogin() {
     this.api.postLogin(this.user).subscribe({
       next: (data: any) => {
+        localStorage.setItem('token', data.data.accessToken)
+        console.log(data);
+        
         this.router.navigate(['/home']);
       },
       error: (err) => console.error(err),

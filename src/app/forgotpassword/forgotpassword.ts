@@ -31,12 +31,14 @@ export class Forgotpassword {
     this.loading = true;
     this.errorMsg = '';
     this.successMsg = '';
+    
 
     this.api.postForgotPassword(this.email).subscribe({
       next: (data: any) => {
         this.successMsg = 'Reset code sent! Check your email.';
         this.loading = false;
         this.cdr.detectChanges();
+        setTimeout(() => this.router.navigate(['/resetpassword']), 2000);
       },
       error: (err) => {
         this.errorMsg = err?.error?.message || 'Something went wrong. Try again.';

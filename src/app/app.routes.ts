@@ -34,5 +34,13 @@ export const routes: Routes = [
   path: 'forgotpassword',
   loadComponent: () => import('./forgotpassword/forgotpassword').then(m => m.Forgotpassword),
 },
+{
+  path: 'resetpassword',
+  loadComponent: () => import('./resetpassword/resetpassword').then(m => m.Resetpassword),
+},
+{
+  path: 'details/:id',
+  loadComponent: () => import('./details/details').then(m => m.Details),
+}
 
 ];

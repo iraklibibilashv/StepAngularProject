@@ -1,25 +1,62 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { Api } from '../services/api';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-cart',
-  imports: [],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './cart.html',
   styleUrl: './cart.scss',
 })
 export class Cart {
-  constructor(private api: Api) {}
+  cartArr: any[] = [];
+  loading = true;
+
+  constructor(
+    private api: Api,
+    private cdr: ChangeDetectorRef
+  ) {}
+
   ngOnInit() {
+    this.loadCart();
+  }
+
+  loadCart() {
     this.api.getAll('cart?Take=30&Page=1').subscribe({
       next: (data: any) => {
-        this.cartArr = data;
-        console.log(this.cartArr);
+        this.cartArr = data.data.items;
+        this.loading = false;
+        this.cdr.detectChanges();
       },
       error: (err) => {
         console.error(err);
+        this.loading = false;
+        this.cdr.detectChanges();
       },
     });
   }
 
-  cartArr: any[] = [];
+  removeFromCart(productId: number) {
+    this.api.removeFromCart(productId).subscribe({
+      next: () => {this.loadCart(),
+      this.cdr.detectChanges()
+      },
+      error: (err) => console.error(err)
+    });
+  }
+
+  editQuantity(itemId: number, quantity: number) {
+    if (quantity < 1) return;
+    this.api.editQuantity(itemId, quantity).subscribe({
+      next: () =>{ this.loadCart(),
+        this.cdr.detectChanges()
+      },
+      error: (err) => console.error(err)
+    });
+  }
+  get total(): number {
+  return this.cartArr.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
+}
 }
