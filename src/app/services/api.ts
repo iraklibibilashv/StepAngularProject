@@ -49,7 +49,6 @@ export class Api {
       headers: this.getHeaders(),
     });
   }
-
   getFilteredProducts(filters: any) {
     let params = new HttpParams();
 
