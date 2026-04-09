@@ -103,7 +103,7 @@
       <a class="section__link" routerLink="/products">View all</a>
     </div>
     <div class="offers">
-      <div class="offer-card offer-card--red">
+      <div class="offer-card offer-card--red" routerLink="/products"[queryParams]="{id:1,name:'Laptops'}">
         <div class="offer-card__body">
           <span class="offer-card__tag">Limited Deal</span>
           <h3 class="offer-card__title">Up to 40% off<br />on Laptops</h3>
@@ -113,7 +113,7 @@
         <div class="offer-card__image">💻</div>
       </div>
 
-      <div class="offer-card offer-card--dark">
+      <div class="offer-card offer-card--dark" routerLink="/products"[queryParams]="{id:2,name:'Smartphones'}">
         <div class="offer-card__body">
           <span class="offer-card__tag">New Arrival</span>
           <h3 class="offer-card__title">Latest Smartphones<br />in Stock</h3>
