@@ -49,6 +49,11 @@ export class Products implements OnInit {
         this.selectedCategoryName = data.name;
       }
     });
+    this.router.queryParams.subscribe((data: any) => {
+      if (data.brand) {
+        this.filters.Brand = data.brand;
+      }
+    });
   }
   get isLoggedIn() {
     return this.auth.isLoggedIn();

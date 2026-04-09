@@ -110,5 +110,8 @@ export class Myaccount {
   logout() {
     this.auth.logout();
     this.router.navigate(['/login']);
+    localStorage.removeItem('refreshToken')
+    localStorage.removeItem('token')
+    
   }
 }
