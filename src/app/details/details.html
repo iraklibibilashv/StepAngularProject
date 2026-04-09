@@ -16,7 +16,7 @@
     <nav class="pd-breadcrumb">
       <a routerLink="/products">Products</a>
       <span>/</span>
-      <span>{{ product.category?.name }}</span>
+      <a routerLink="/products"[queryParams]="{id:product.category.id,name:product.category.name}">{{ product.category?.name }}</a>
       <span>/</span>
       <span class="pd-breadcrumb__current">{{ product.name }}</span>
     </nav>
