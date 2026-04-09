@@ -5,7 +5,9 @@
       <div class="cart-header">
         <h1 class="cart-title">Shopping Cart</h1>
         <span class="cart-count">{{ cartArr.length }} items</span>
+        <button class="cart-clear-btn" (click)="clearCart()">Clear Cart</button>
       </div>
+      
 
       @for (item of cartArr; track item.id) {
         <div class="cart-item">
@@ -39,12 +41,16 @@
         </div>
       }
 
-      @if (cartArr.length === 0 && !loading) {
-        <div class="cart-empty">
-          <p>Your cart is empty</p>
-          <a routerLink="/products">Browse Products</a>
-        </div>
-      }
+    @if (cartArr.length === 0 && !loading) {
+  <div class="cart-empty">
+    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+      <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+      <path d="M1 1h4l2.68 13.39a2 2 0 001.99 1.61h9.72a2 2 0 001.99-1.61L23 6H6"/>
+    </svg>
+    <p>Your cart is empty</p>
+    <a routerLink="/products">Browse Products</a>
+  </div>
+}
 
       <a class="cart-continue" routerLink="/products">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -82,7 +88,7 @@
           <button class="coupon-btn">Apply</button>
         </div>
 
-        <button class="summary__checkout">
+        <button class="summary__checkout" (click)="onCheckout()">
           Proceed to Checkout
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="9 18 15 12 9 6" />

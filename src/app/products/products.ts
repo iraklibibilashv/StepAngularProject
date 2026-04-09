@@ -3,6 +3,9 @@ import { Api } from '../services/api';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { Toast } from '../toast/toast';
+import { ToastService } from '../services/toast';
+import { AuthService } from '../services/auth-service';
 
 @Component({
   selector: 'app-products',
@@ -30,21 +33,27 @@ export class Products implements OnInit {
     Take: 40,
     Page: 1,
   };
+  favoriteIds: number[] = [];
 
   constructor(
     private api: Api,
     private cdr: ChangeDetectorRef,
     private router: ActivatedRoute,
-    private route : Router
-
+    private route: Router,
+    private toast: ToastService,
+    private auth : AuthService
   ) {
-   this.router.queryParams.subscribe((data : any)=> {
-    if(data.id && data.name) {
-      this.filters.CategoryId = data.id
-      this.selectedCategoryName = data.name
-}
-    })
+    this.router.queryParams.subscribe((data: any) => {
+      if (data.id && data.name) {
+        this.filters.CategoryId = data.id;
+        this.selectedCategoryName = data.name;
+      }
+    });
   }
+  get isLoggedIn() {
+    return this.auth.isLoggedIn();
+  }
+
 
   ngOnInit() {
     this.api.getAll('products?Take=100&Page=1').subscribe({
@@ -70,6 +79,7 @@ export class Products implements OnInit {
     });
 
     this.loadProducts();
+    this.loadFavorites();
   }
 
   loadProducts() {
@@ -78,7 +88,7 @@ export class Products implements OnInit {
       next: (data: any) => {
         this.allProducts = data.data.items;
         console.log(this.allProducts);
-        
+
         this.loading = false;
         this.cdr.detectChanges();
       },
@@ -164,20 +174,52 @@ export class Products implements OnInit {
     this.filters.MaxPrice = value;
     this.loadProducts();
   }
-  addToCart(productId: number){
-    this.api.addToCart(productId,1).subscribe({
-      next: (data : any) => {
-        console.log('Added to cart' , data);
+  addToCart(productId: number) {
+    this.api.addToCart(productId, 1).subscribe({
+      next: (data: any) => {
+        this.toast.show('Added to cart', 'success');
+        console.log('Added to cart', data);
       },
-      error : (err) => {
+      error: (err) => {
         console.error(err);
-      }
-    })
-
+      },
+    });
   }
   goToDetails(id: number) {
-  this.route.navigate(['/details', id]);
+    this.route.navigate(['/details', id]);
+  }
+
+loadFavorites() {
+  if (!this.auth.isLoggedIn()) return;
+  this.api.getFavorites().subscribe({
+    next: (data: any) => {
+      this.favoriteIds = data.data.items.map((item: any) => item.id);
+      console.log('favoriteIds:', this.favoriteIds);
+      this.cdr.detectChanges();
+    },
+    error: (err) => console.error(err)
+  });
 }
-
-
+  
+addToWishlist(productId: number) {
+  if (this.favoriteIds.includes(productId)) {
+    this.api.removeFromFavorites(productId).subscribe({
+      next: () => {
+        this.toast.show('Removed from wishlist!', 'warning');
+        this.favoriteIds = this.favoriteIds.filter(id => id !== productId);
+        this.cdr.detectChanges();
+      },
+      error: () => this.toast.show('Failed to remove.', 'error')
+    });
+  } else {
+    this.api.addToFavorites(productId).subscribe({
+      next: () => {
+        this.toast.show('Added to wishlist!', 'success');
+        this.favoriteIds = [...this.favoriteIds, productId];
+        this.cdr.detectChanges();
+      },
+      error: () => this.toast.show('Failed to add.', 'error')
+    });
+  }
+}
 }

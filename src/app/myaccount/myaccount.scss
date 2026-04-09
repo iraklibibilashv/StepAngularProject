@@ -1,0 +1,435 @@
+$accent: #FF6B00;
+$dark: #0a0a0f;
+$card-bg: #111118;
+$border: rgba(255, 107, 0, 0.15);
+$text: #e8e8f0;
+$muted: #5a5a7a;
+
+.ma-page {
+  min-height: 100vh;
+  background: $dark;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Rajdhani', 'Segoe UI', sans-serif;
+  padding: 40px 20px;
+}
+
+.ma-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ma-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 107, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 107, 0, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.ma-glow {
+  position: absolute;
+  top: 0;
+  left: 30%;
+  width: 600px;
+  height: 400px;
+  background: radial-gradient(ellipse, rgba(255, 107, 0, 0.06) 0%, transparent 70%);
+  filter: blur(60px);
+}
+
+.ma-loading {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  color: $muted;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+}
+
+.ma-spinner {
+  width: 36px;
+  height: 36px;
+  border: 2px solid rgba(255,107,0,0.2);
+  border-top-color: $accent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.ma-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 24px;
+  animation: fadeUp 0.5s ease both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+// Sidebar
+.ma-sidebar {
+  background: $card-bg;
+  border: 1px solid $border;
+  padding: 32px 24px;
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);
+  position: relative;
+  height: fit-content;
+  position: sticky;
+  top: 100px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, $accent, transparent);
+  }
+}
+
+.ma-avatar {
+  width: 72px;
+  height: 72px;
+  background: rgba(255,107,0,0.1);
+  border: 1px solid $border;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
+
+  span {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: $accent;
+    text-transform: uppercase;
+  }
+}
+
+.ma-sidebar-name {
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: $text;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.ma-sidebar-email {
+  text-align: center;
+  font-size: 0.8rem;
+  color: $muted;
+  margin-bottom: 28px;
+  word-break: break-all;
+}
+
+.ma-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ma-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  color: $muted;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s, background 0.2s;
+  border-left: 2px solid transparent;
+
+  &:hover { color: $text; background: rgba(255,255,255,0.03); }
+
+  &.active {
+    color: $accent;
+    border-left-color: $accent;
+    background: rgba(255,107,0,0.05);
+  }
+
+  &.logout {
+    margin-top: 16px;
+    color: #ff4444;
+    border-top: 1px solid rgba(255,68,68,0.1);
+    padding-top: 16px;
+    &:hover { background: rgba(255,68,68,0.05); }
+  }
+}
+
+// Main
+.ma-main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ma-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ma-section-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ma-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: $text;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.ma-title-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, $border, transparent);
+}
+
+.ma-edit-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,107,0,0.1);
+  border: 1px solid rgba(255,107,0,0.3);
+  color: $accent;
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  font-family: inherit;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 0 100%);
+  transition: background 0.2s;
+  white-space: nowrap;
+
+  &:hover { background: rgba(255,107,0,0.2); }
+}
+
+// Cards
+.ma-card {
+  background: $card-bg;
+  border: 1px solid $border;
+  padding: 28px 32px;
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, $accent, transparent);
+  }
+}
+
+.ma-card-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: $accent;
+  margin-bottom: 20px;
+  font-weight: 700;
+
+  &.danger { color: #ff4444; }
+}
+
+.ma-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+
+  @media (max-width: 600px) { grid-template-columns: 1fr; }
+}
+
+.ma-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px 16px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,107,0,0.08);
+}
+
+.ma-field-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: $muted;
+}
+
+.ma-field-value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: $text;
+}
+
+.ma-badge {
+  display: inline-block;
+  background: rgba(255,107,0,0.1);
+  border: 1px solid rgba(255,107,0,0.3);
+  color: $accent;
+  padding: 2px 10px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  width: fit-content;
+}
+
+// Edit form
+.ma-edit-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+
+  @media (max-width: 600px) { grid-template-columns: 1fr; }
+}
+
+.ma-edit-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: $muted;
+  }
+
+  input {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,107,0,0.15);
+    color: $text;
+    padding: 10px 14px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+    clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 0 100%);
+
+    &::placeholder { color: $muted; }
+    &:focus { border-color: rgba(255,107,0,0.5); }
+  }
+}
+
+.ma-edit-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.ma-save-btn {
+  background: $accent;
+  color: #fff;
+  border: none;
+  padding: 10px 24px;
+  font-size: 0.85rem;
+  font-family: inherit;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+  transition: opacity 0.2s;
+
+  &:hover { opacity: 0.9; }
+}
+
+.ma-cancel-btn {
+  background: transparent;
+  color: $muted;
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 10px 24px;
+  font-size: 0.85rem;
+  font-family: inherit;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+  transition: color 0.2s;
+
+  &:hover { color: $text; }
+}
+
+// Danger zone
+.ma-danger-zone {
+  background: $card-bg;
+  border: 1px solid rgba(255,68,68,0.2);
+  padding: 24px 32px;
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, #ff4444, transparent);
+  }
+}
+
+.ma-delete-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,68,68,0.1);
+  border: 1px solid rgba(255,68,68,0.3);
+  color: #ff4444;
+  padding: 10px 20px;
+  font-size: 0.85rem;
+  font-family: inherit;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+  transition: background 0.2s;
+
+  &:hover { background: rgba(255,68,68,0.2); }
+}
+
+.ma-delete-confirm {
+  p {
+    color: $text;
+    font-size: 0.9rem;
+    margin: 0 0 16px;
+  }
+}
+
+.ma-delete-confirm-actions {
+  display: flex;
+  gap: 12px;
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .ma-container { grid-template-columns: 1fr; }
+  .ma-sidebar { position: static; }
+}

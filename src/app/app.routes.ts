@@ -45,5 +45,15 @@ export const routes: Routes = [
   path: 'details/:id',
   loadComponent: () => import('./details/details').then(m => m.Details),
 },
+{
+  path: 'myaccount',
+  loadComponent: () => import('./myaccount/myaccount').then(m => m.Myaccount),
+  canActivate: [authGuard]
+},
+{
+  path: 'wishlist',
+  loadComponent: () => import('./wishlist/wishlist').then(m => m.Wishlist),
+  canActivate: [authGuard]
+},
 
 ];

@@ -147,20 +147,18 @@
           <div class="card-img">
             <img [src]="item.imageUrl" alt="" />
             <div class="card-actions">
-              <button class="card-action-btn" title="Wishlist">
-                <svg
-                  width="15"
-                  height="15"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path
-                    d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"
-                  />
-                </svg>
-              </button>
+              @if (isLoggedIn) {
+              <button class="card-action-btn" 
+  [class.favorited]="favoriteIds.includes(item.id)"
+  title="Wishlist" 
+  (click)="addToWishlist(item.id)">
+  <svg width="15" height="15" viewBox="0 0 24 24" 
+    [attr.fill]="favoriteIds.includes(item.id) ? '#FF6B00' : 'none'"
+    stroke="currentColor" stroke-width="2">
+    <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+  </svg>
+</button>
+            }
               <button class="card-action-btn view"  (click)="goToDetails(item.id)" style="cursor:pointer" title="Quick view">
                 <svg
                   width="15"
@@ -188,6 +186,7 @@
               <span class="card-cat">In Stock {{ item.stock }}</span>
             </div>
             <div class="card-price"><span>₾</span>{{ item.price }}</div>
+            @if (isLoggedIn){
             <button class="card-add" (click)="addToCart(item.id)">
               <svg
                 width="15"
@@ -203,6 +202,7 @@
               </svg>
               Add to Cart
             </button>
+            }
           </div>
         </div>
       }

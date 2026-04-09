@@ -3,6 +3,8 @@ import { Api } from '../services/api';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { Toast } from '../toast/toast';
+import { ToastService } from '../services/toast';
 
 @Component({
   selector: 'app-cart',
@@ -16,7 +18,8 @@ export class Cart {
 
   constructor(
     private api: Api,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private toastService : ToastService
   ) {}
 
   ngOnInit() {
@@ -59,4 +62,26 @@ export class Cart {
   get total(): number {
   return this.cartArr.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
 }
+   onCheckout() {
+  this.api.checkout().subscribe({
+    next: () => {
+      this.toastService.show('Order placed!', 'success');
+      this.loadCart();
+    },
+    error: () => this.toastService.show('Checkout failed.', 'error')
+  });
+}
+clearCart() {
+  const deleteAll = this.cartArr.map((item: any) => 
+    this.api.removeFromCart(item.id).toPromise()
+  );
+  Promise.all(deleteAll).then(() => {
+    this.cartArr = [];
+    this.toastService.show('Cart cleared!', 'warning');
+    this.cdr.detectChanges();
+  }).catch(() => {
+    this.toastService.show('Failed to clear cart.', 'error');
+  });
+}
+
 }

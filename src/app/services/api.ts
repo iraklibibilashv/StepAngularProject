@@ -123,4 +123,46 @@ export class Api {
     headers: this.getHeaders()
   });
 }
+getMe() {
+  return this.api.get(this.baseUrl + 'users/me', {
+    headers: this.getHeaders()
+  });
+}
+updateUser(userData: any) {
+  return this.api.put(this.baseUrl + 'users', userData, {
+    headers: this.getHeaders()
+  });
+}
+changePassword(currentPassword: string, newPassword: string) {
+  return this.api.put(this.baseUrl + 'users/change-password', { currentPassword, newPassword }, {
+    headers: this.getHeaders()
+  });
+}
+deleteProfile() {
+  return this.api.delete(this.baseUrl + 'users/delete-profile', {
+    headers: this.getHeaders()
+  });
+}
+checkout() {
+  return this.api.post(this.baseUrl + 'users/checkout', {}, {
+    headers: this.getHeaders()
+  });
+}
+getFavorites() {
+  return this.api.get(this.baseUrl + 'favorites?Take=30&Page=1', {
+    headers: this.getHeaders()
+  });
+}
+addToFavorites(productId: number) {
+  return this.api.post(this.baseUrl + `favorites/${productId}`, {}, {
+    headers: this.getHeaders()
+  });
+}
+removeFromFavorites(productId: number) {
+  return this.api.delete(this.baseUrl + `favorites/${productId}`, {
+    headers: this.getHeaders()
+  });
+}
+
+
 }

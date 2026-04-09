@@ -701,6 +701,16 @@
 .filter-dropdown a.active {
   color: #ff6b00;
 }
+.card-action-btn.active {
+  color: #FF6B00;
+  border-color: rgba(255, 107, 0, 0.4);
+  background: rgba(255, 107, 0, 0.1);
+}
+.card-action-btn.favorited {
+  color: #FF6B00;
+  border-color: rgba(255, 107, 0, 0.4);
+  background: rgba(255, 107, 0, 0.1);
+}
 
 /* ─── Responsive ─── */
 

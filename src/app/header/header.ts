@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { Api } from '../services/api';
 import { RouterLink, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../services/auth-service';
+import { ToastService } from '../services/toast';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +13,15 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './header.scss',
 })
 export class Header {
-  constructor(private api: Api) {}
+  constructor(private api: Api,
+    private auth : AuthService,
+    private cdr: ChangeDetectorRef,
+    private toastService: ToastService,
+  ) {}
+  get isLoggedIn() {
+    return this.auth.isLoggedIn();
+  }
+
   ngOnInit() {
     this.api.getAll('categories').subscribe({
       next: (data: any) => {
@@ -29,10 +39,11 @@ export class Header {
       },
       error: (err) => console.error(err),
     });
+    this.loadCounts();
   }
   // xayipat339@kobace.com
   // Ii123@123
-
+   
   menuOpen = false;
   searchQuery = '';
   filters = {
@@ -47,6 +58,25 @@ export class Header {
   onCategoryClick(id: any) {
     console.log('category clicked', id);
   }
+  loadCounts() {
+  if (!this.auth.isLoggedIn()) return;
+  
+  this.api.getAll('cart?Take=30&Page=1').subscribe({
+    next: (data: any) => {
+      this.cartCount = data.data.items.length;
+      this.cdr.detectChanges();
+    },
+    error: (err) => console.error(err)
+  });
+
+  this.api.getFavorites().subscribe({
+    next: (data: any) => {
+      this.wishlistCount = data.data.items.length;
+      this.cdr.detectChanges();
+    },
+    error: (err) => console.error(err)
+  });
+}
   onSearchChange(): void {}
   onFilterChange(): void {}
   clearFilters(): void {

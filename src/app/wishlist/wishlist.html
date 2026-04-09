@@ -1,0 +1,64 @@
+<div class="wl-page">
+  <div class="wl-bg">
+    <div class="wl-grid"></div>
+    <div class="wl-glow"></div>
+  </div>
+
+  <div class="wl-container">
+    <div class="wl-header">
+      <h1 class="wl-title">Wishlist</h1>
+      <div class="wl-title-line"></div>
+      <span class="wl-count">{{ wishlistArr.length }} items</span>
+      <button class="wl-clear-btn" (click)="clearAll()">Clear All</button>
+    </div>
+    
+
+    @if (loading) {
+      <div class="wl-loading">
+        <div class="wl-spinner"></div>
+        <span>Loading wishlist...</span>
+      </div>
+    } @else if (wishlistArr.length === 0) {
+      <div class="wl-empty">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+          <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+        </svg>
+        <p>Your wishlist is empty</p>
+        <a routerLink="/products" class="wl-browse-btn">Browse Products</a>
+      </div>
+    } @else {
+      <div class="wl-grid-products">
+        @for (item of wishlistArr; track item.id) {
+          <div class="wl-card">
+            <div class="wl-card-img">
+              <img [src]="item.imageUrl" [alt]="item.name" />
+              <button class="wl-remove-btn" (click)="removeFromWishlist(item.id)" title="Remove">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+              </button>
+            </div>
+            <div class="wl-card-body">
+              <div class="wl-card-meta">
+                <span class="wl-card-cat">{{ item.category.name }}</span>
+                <span class="wl-card-dot">•</span>
+                <span class="wl-card-brand">{{ item.brand }}</span>
+              </div>
+              <p class="wl-card-name" [routerLink]="['/details', item.id]">{{ item.name }}</p>
+              <div class="wl-card-bottom">
+                <span class="wl-card-price">₾{{ item.price }}</span>
+                <button class="wl-cart-btn" (click)="addToCart(item.id)">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 001.99 1.61h9.72a2 2 0 001.99-1.61L23 6H6"/>
+                  </svg>
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</div>
