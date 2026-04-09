@@ -181,8 +181,8 @@ updateReview(reviewId: number, rate: number) {
   });
 }
 
-deleteReview(productId: number) {
-  return this.api.delete(this.baseUrl + `reviews/${productId}`, {
+deleteReview(reviewId: number) {
+  return this.api.delete(this.baseUrl + `reviews/${reviewId}`, {
     headers: this.getHeaders()
   });
 }

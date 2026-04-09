@@ -21,6 +21,7 @@ export class Details {
 userReview: any = null;
 selectedRate = 0;
 hoverRate = 0;
+currentUserId: number | null = null;
  
   constructor(
     private api: Api,
@@ -32,6 +33,13 @@ hoverRate = 0;
   ) {}
  
   ngOnInit() {
+     this.api.getMe().subscribe({
+    next: (data: any) => {
+      this.currentUserId = data.data.id;
+      this.cdr.detectChanges();
+    },
+    error: (err) => console.error(err)
+  });
     const id = this.route.snapshot.paramMap.get('id');
     console.log(`product id:`, id);
     
@@ -79,7 +87,7 @@ hoverRate = 0;
   this.api.getReviews(+id!).subscribe({
     next: (data: any) => {
       this.reviews = data.data.items;
-      this.userReview = this.reviews.find((r: any) => r.isOwner);
+      this.userReview = this.reviews.find((r: any) => r.user?.id === this.currentUserId);
       console.log('reviews:', this.reviews);
       if (this.userReview) this.selectedRate = this.userReview.rating;
       this.cdr.detectChanges();
@@ -112,7 +120,7 @@ submitReview() {
 }
 
 deleteReview() {
-  this.api.deleteReview(this.product.id).subscribe({
+  this.api.deleteReview(this.userReview.id).subscribe({
     next: () => {
       this.toastService.show('Review deleted!', 'warning');
       this.userReview = null;

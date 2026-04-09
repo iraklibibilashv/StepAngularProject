@@ -154,7 +154,7 @@
                 <div class="pd-review-user">
                   <span class="pd-review-avatar">{{ review.user?.firstName?.charAt(0) }}</span>
                   <span class="pd-review-name">{{ review.user?.firstName }} {{ review.user?.lastName }}</span>
-                  @if (review.isOwner) {
+                  @if (review.user?.id === currentUserId) {
                     <span class="pd-review-badge">You</span>
                   }
                 </div>
