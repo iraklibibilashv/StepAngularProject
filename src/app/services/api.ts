@@ -163,6 +163,31 @@ removeFromFavorites(productId: number) {
     headers: this.getHeaders()
   });
 }
+getReviews(productId: number) {
+  return this.api.get(this.baseUrl + `reviews/${productId}?Take=10&Page=1`, {
+    headers: this.getHeaders()
+  });
+}
+
+addReview(productId: number, rate: number) {
+  return this.api.post(this.baseUrl + 'reviews', { productId, rate }, {
+    headers: this.getHeaders()
+  });
+}
+
+updateReview(reviewId: number, rate: number) {
+  return this.api.put(this.baseUrl + 'reviews', { reviewId, rate }, {
+    headers: this.getHeaders()
+  });
+}
+
+deleteReview(productId: number) {
+  return this.api.delete(this.baseUrl + `reviews/${productId}`, {
+    headers: this.getHeaders()
+  });
+}
+
+
 
 
 }

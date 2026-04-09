@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { Toast } from '../toast/toast';
 import { ToastService } from '../services/toast';
 import { AuthService } from '../services/auth-service';
+import { CartCountService } from '../services/cart-count-service';
 
 @Component({
   selector: 'app-products',
@@ -41,7 +42,8 @@ export class Products implements OnInit {
     private router: ActivatedRoute,
     private route: Router,
     private toast: ToastService,
-    private auth : AuthService
+    private auth : AuthService,
+    private cartCountService : CartCountService
   ) {
     this.router.queryParams.subscribe((data: any) => {
       if (data.id && data.name) {
@@ -183,6 +185,7 @@ export class Products implements OnInit {
     this.api.addToCart(productId, 1).subscribe({
       next: (data: any) => {
         this.toast.show('Added to cart', 'success');
+        this.cartCountService.incrementCart()
         console.log('Added to cart', data);
       },
       error: (err) => {
@@ -212,6 +215,7 @@ addToWishlist(productId: number) {
       next: () => {
         this.toast.show('Removed from wishlist!', 'warning');
         this.favoriteIds = this.favoriteIds.filter(id => id !== productId);
+        this.cartCountService.decrementWishlist()
         this.cdr.detectChanges();
       },
       error: () => this.toast.show('Failed to remove.', 'error')
@@ -221,6 +225,7 @@ addToWishlist(productId: number) {
       next: () => {
         this.toast.show('Added to wishlist!', 'success');
         this.favoriteIds = [...this.favoriteIds, productId];
+        this.cartCountService.incrementWishlist()
         this.cdr.detectChanges();
       },
       error: () => this.toast.show('Failed to add.', 'error')

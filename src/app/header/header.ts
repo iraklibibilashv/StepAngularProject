@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../services/auth-service';
 import { ToastService } from '../services/toast';
+import { CartCountService } from '../services/cart-count-service';
 
 @Component({
   selector: 'app-header',
@@ -17,6 +18,7 @@ export class Header {
     private auth : AuthService,
     private cdr: ChangeDetectorRef,
     private toastService: ToastService,
+    private cartCountService : CartCountService
   ) {}
   get isLoggedIn() {
     return this.auth.isLoggedIn();
@@ -39,6 +41,14 @@ export class Header {
       },
       error: (err) => console.error(err),
     });
+      this.cartCountService.cartCount.subscribe(c => {
+    this.cartCount = c;
+    this.cdr.detectChanges();
+  });
+  this.cartCountService.wishlistCount.subscribe(c => {
+    this.wishlistCount = c;
+    this.cdr.detectChanges();
+  });
     this.loadCounts();
   }
   // xayipat339@kobace.com

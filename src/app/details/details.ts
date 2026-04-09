@@ -3,6 +3,8 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Api } from '../services/api';
+import { ToastService } from '../services/toast';
+import { AuthService } from '../services/auth-service';
 
 @Component({
   selector: 'app-details',
@@ -15,12 +17,18 @@ export class Details {
   loading = true;
   quantity = 1;
   addedToCart = false;
+  reviews: any[] = [];
+userReview: any = null;
+selectedRate = 0;
+hoverRate = 0;
  
   constructor(
     private api: Api,
     private route: ActivatedRoute,
     private router: Router,
     private cdr: ChangeDetectorRef,
+    private toastService: ToastService,
+    private auth: AuthService
   ) {}
  
   ngOnInit() {
@@ -39,6 +47,10 @@ export class Details {
         this.cdr.detectChanges();
       },
     });
+    this.loadReviews();
+  }
+  get isLoggedIn() {
+    return this.auth.isLoggedIn();
   }
  
   increaseQty() {
@@ -62,4 +74,52 @@ export class Details {
       error: (err) => console.error(err),
     });
   }
+  loadReviews() {
+  const id = this.route.snapshot.paramMap.get('id');
+  this.api.getReviews(+id!).subscribe({
+    next: (data: any) => {
+      this.reviews = data.data.items;
+      this.userReview = this.reviews.find((r: any) => r.isOwner);
+      console.log('reviews:', this.reviews);
+      if (this.userReview) this.selectedRate = this.userReview.rating;
+      this.cdr.detectChanges();
+    },
+    error: (err) => console.error(err)
+  });
+}
+setRate(rate: number) {
+  this.selectedRate = rate;
+}
+
+submitReview() {
+  if (this.userReview) {
+    this.api.updateReview(this.userReview.id, this.selectedRate).subscribe({
+      next: () => {
+        this.toastService.show('Review updated!', 'success');
+        this.loadReviews();
+      },
+      error: () => this.toastService.show('Failed to update review.', 'error')
+    });
+  } else {
+    this.api.addReview(this.product.id, this.selectedRate).subscribe({
+      next: () => {
+        this.toastService.show('Review added!', 'success');
+        this.loadReviews();
+      },
+      error: () => this.toastService.show('Failed to add review.', 'error')
+    });
+  }
+}
+
+deleteReview() {
+  this.api.deleteReview(this.product.id).subscribe({
+    next: () => {
+      this.toastService.show('Review deleted!', 'warning');
+      this.userReview = null;
+      this.selectedRate = 0;
+      this.loadReviews();
+    },
+    error: () => this.toastService.show('Failed to delete review.', 'error')
+  });
+}
 }

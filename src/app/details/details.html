@@ -16,7 +16,7 @@
     <nav class="pd-breadcrumb">
       <a routerLink="/products">Products</a>
       <span>/</span>
-      <a routerLink="/products"[queryParams]="{id:product.category.id,name:product.category.name}">{{ product.category?.name }}</a>
+      <a routerLink="/products" [queryParams]="{id:product.category.id,name:product.category.name}">{{ product.category?.name }}</a>
       <span>/</span>
       <span class="pd-breadcrumb__current">{{ product.name }}</span>
     </nav>
@@ -111,6 +111,63 @@
         </div>
 
       </div>
+    </div>
+
+    <!-- Reviews -->
+    <div class="pd-reviews">
+      <div class="pd-reviews-header">
+        <h2 class="pd-reviews-title">Reviews</h2>
+        <div class="pd-title-line"></div>
+        <span class="pd-reviews-count">{{ reviews.length }} reviews</span>
+      </div>
+
+      @if (isLoggedIn) {
+        <div class="pd-review-form">
+          <div class="pd-form-label">{{ userReview ? 'Update your rating' : 'Rate this product' }}</div>
+          <div class="pd-stars">
+            @for (star of [1,2,3,4,5]; track star) {
+              <span class="pd-star-input"
+                [class.active]="star <= (hoverRate || selectedRate)"
+                (mouseenter)="hoverRate = star"
+                (mouseleave)="hoverRate = 0"
+                (click)="setRate(star)">★</span>
+            }
+          </div>
+          <div class="pd-form-actions">
+            <button class="pd-review-btn" (click)="submitReview()" [disabled]="selectedRate === 0">
+              {{ userReview ? 'Update' : 'Submit' }}
+            </button>
+            @if (userReview) {
+              <button class="pd-review-delete-btn" (click)="deleteReview()">Delete</button>
+            }
+          </div>
+        </div>
+      }
+
+      @if (reviews.length === 0) {
+        <div class="pd-no-reviews">No reviews yet. Be the first to review!</div>
+      } @else {
+        <div class="pd-reviews-list">
+          @for (review of reviews; track review.id) {
+            <div class="pd-review-item" [class.owner]="review.isOwner">
+              <div class="pd-review-top">
+                <div class="pd-review-user">
+                  <span class="pd-review-avatar">{{ review.user?.firstName?.charAt(0) }}</span>
+                  <span class="pd-review-name">{{ review.user?.firstName }} {{ review.user?.lastName }}</span>
+                  @if (review.isOwner) {
+                    <span class="pd-review-badge">You</span>
+                  }
+                </div>
+                <div class="pd-review-stars">
+                  @for (star of [1,2,3,4,5]; track star) {
+                    <span [class.active]="star <= review.rating">★</span>
+                  }
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      }
     </div>
 
   </div>

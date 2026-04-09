@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { Api } from '../services/api';
 import { ToastService } from '../services/toast';
+import { CartCountService } from '../services/cart-count-service';
 
 @Component({
   selector: 'app-wishlist',
@@ -19,6 +20,7 @@ export class Wishlist {
     private api: Api,
     private toastService: ToastService,
     private cdr: ChangeDetectorRef,
+    private cartCountService: CartCountService
   ) {}
  
   ngOnInit() {
@@ -46,6 +48,7 @@ removeFromWishlist(itemId: number) {
     next: () => {
       this.toastService.show('Removed from wishlist!', 'warning');
       this.wishlistArr = this.wishlistArr.filter(item => item.id !== itemId);
+      this.cartCountService.decrementWishlist();
       this.cdr.detectChanges();
     },
     error: () => this.toastService.show('Failed to remove.', 'error'),

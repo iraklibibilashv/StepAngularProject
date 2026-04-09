@@ -368,3 +368,190 @@ $muted: #5a5a7a;
   border: 1px solid rgba(255,255,255,0.06);
   letter-spacing: 0.05em;
 }
+.pd-reviews {
+  margin-top: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.pd-reviews-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.pd-reviews-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: $text;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.pd-title-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, $border, transparent);
+}
+
+.pd-reviews-count {
+  font-size: 0.8rem;
+  color: $accent;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+// Form
+.pd-review-form {
+  background: $card-bg;
+  border: 1px solid $border;
+  padding: 20px 24px;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pd-form-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: $muted;
+}
+
+.pd-stars {
+  display: flex;
+  gap: 4px;
+}
+
+.pd-star-input {
+  font-size: 1.8rem;
+  color: rgba(255,255,255,0.15);
+  cursor: pointer;
+  transition: color 0.1s;
+
+  &.active { color: $accent; }
+}
+
+.pd-form-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.pd-review-btn {
+  background: $accent;
+  color: #fff;
+  border: none;
+  padding: 8px 20px;
+  font-size: 0.8rem;
+  font-family: inherit;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 0 100%);
+  transition: opacity 0.2s;
+
+  &:disabled { opacity: 0.4; cursor: not-allowed; }
+  &:hover:not(:disabled) { opacity: 0.9; }
+}
+
+.pd-review-delete-btn {
+  background: transparent;
+  color: #ff4444;
+  border: 1px solid rgba(255,68,68,0.3);
+  padding: 8px 20px;
+  font-size: 0.8rem;
+  font-family: inherit;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 0 100%);
+  transition: background 0.2s;
+
+  &:hover { background: rgba(255,68,68,0.1); }
+}
+
+// Reviews list
+.pd-no-reviews {
+  text-align: center;
+  color: $muted;
+  padding: 40px;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+}
+
+.pd-reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pd-review-item {
+  background: $card-bg;
+  border: 1px solid $border;
+  padding: 16px 20px;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+
+  &.owner {
+    border-color: rgba(255,107,0,0.3);
+  }
+}
+
+.pd-review-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pd-review-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pd-review-avatar {
+  width: 32px;
+  height: 32px;
+  background: rgba(255,107,0,0.1);
+  border: 1px solid $border;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: $accent;
+  text-transform: uppercase;
+}
+
+.pd-review-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: $text;
+}
+
+.pd-review-badge {
+  background: rgba(255,107,0,0.1);
+  border: 1px solid rgba(255,107,0,0.3);
+  color: $accent;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 2px 8px;
+}
+
+.pd-review-stars {
+  display: flex;
+  gap: 2px;
+  font-size: 1rem;
+  color: rgba(255,255,255,0.15);
+
+  span.active { color: $accent; }
+}

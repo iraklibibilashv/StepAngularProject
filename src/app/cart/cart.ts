@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Toast } from '../toast/toast';
 import { ToastService } from '../services/toast';
+import { CartCountService } from '../services/cart-count-service';
 
 @Component({
   selector: 'app-cart',
@@ -19,7 +20,8 @@ export class Cart {
   constructor(
     private api: Api,
     private cdr: ChangeDetectorRef,
-    private toastService : ToastService
+    private toastService : ToastService,
+    private cartCountService: CartCountService
   ) {}
 
   ngOnInit() {
@@ -43,8 +45,10 @@ export class Cart {
 
   removeFromCart(productId: number) {
     this.api.removeFromCart(productId).subscribe({
-      next: () => {this.loadCart(),
-      this.cdr.detectChanges()
+      next: () => {
+                this.cartCountService.decrementCart();
+        this.loadCart();
+      this.cdr.detectChanges();
       },
       error: (err) => console.error(err)
     });
