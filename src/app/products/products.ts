@@ -20,6 +20,7 @@ export class Products implements OnInit {
   categoriesArr: any[] = [];
   loading = true;
   selectedCategoryName = 'Categories';
+  selectedSortName = 'Sort By';
 
   filters: any = {
     Search: '',
@@ -119,7 +120,10 @@ export class Products implements OnInit {
       SortDescending: false,
       Take: 40,
       Page: 1,
+      
     };
+      this.selectedCategoryName = 'Categories'; 
+  this.selectedSortName = 'Sort By';        
     this.loadProducts();
   }
 
@@ -135,31 +139,34 @@ export class Products implements OnInit {
     this.filters.InStock = value;
     this.loadProducts();
   }
-  onSortBy(value: string) {
-    if (value === 'price_asc') {
-      this.filters.SortBy = 'price';
-      this.filters.SortDescending = false;
-    } else if (value === 'price_desc') {
-      this.filters.SortBy = 'price';
-      this.filters.SortDescending = true;
-    } else if (value === 'name_asc') {
-      this.filters.SortBy = 'name';
-      this.filters.SortDescending = false;
-    } else if (value === 'name_desc') {
-      this.filters.SortBy = 'name';
-      this.filters.SortDescending = true;
-    } else if (value === 'rating_desc') {
-      this.filters.SortBy = 'rating';
-      this.filters.SortDescending = true;
-    } else if (value === `nulldefault`) {
-      this.filters.SortBy = null;
-      this.filters.SortDescending = false;
-    } else {
-      this.filters.SortBy = 'name_desc';
-      this.filters.SortDescending = false;
-    }
-    this.loadProducts();
+ onSortBy(value: string) {
+  if (value === 'price_asc') {
+    this.filters.SortBy = 'price';
+    this.filters.SortDescending = false;
+    this.selectedSortName = 'Price: Low to High';
+  } else if (value === 'price_desc') {
+    this.filters.SortBy = 'price';
+    this.filters.SortDescending = true;
+    this.selectedSortName = 'Price: High to Low';
+  } else if (value === 'name_asc') {
+    this.filters.SortBy = 'name';
+    this.filters.SortDescending = false;
+    this.selectedSortName = 'Name: A–Z';
+  } else if (value === 'name_desc') {
+    this.filters.SortBy = 'name';
+    this.filters.SortDescending = true;
+    this.selectedSortName = 'Name: Z–A';
+  } else if (value === 'rating_desc') {
+    this.filters.SortBy = 'rating';
+    this.filters.SortDescending = true;
+    this.selectedSortName = 'Top Rated';
+  } else {
+    this.filters.SortBy = null;
+    this.filters.SortDescending = false;
+    this.selectedSortName = 'Sort By';
   }
+  this.loadProducts();
+}
   selectCategory(id: number | null, name: string = 'Categories') {
     this.filters.CategoryId = id;
     this.selectedCategoryName = name;

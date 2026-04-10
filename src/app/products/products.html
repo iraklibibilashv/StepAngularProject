@@ -117,19 +117,22 @@
           <span class="ev-instock-label">In Stock only</span>
         </label>
       </div>
-
-      <div class="ev-fg ev-fg--sort">
-        <span class="ev-fl">Sort by</span>
-        <select class="ev-fsel" (change)="onSortBy($any($event.target).value)">
-          <option value="nulldefault">Default</option>
-          <option value="price_asc">Price: Low to High</option>
-          <option value="price_desc">Price: High to Low</option>
-          <option value="rating_desc">Top Rated</option>
-          <option value="name_asc">Name: A–Z</option>
-          <option value="name_desc">Name: Z–A</option>
-          option>
-        </select>
-      </div>
+<div class="filter-nav-item">
+  <button class="filter-nav-btn change-display">
+    {{ selectedSortName }}
+    <svg class="filter-nav-chevron" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M1 1l4 4 4-4" />
+    </svg>
+  </button>
+  <div class="filter-dropdown">
+    <a [class.active]="filters.SortBy === null" (click)="onSortBy('')">Default</a>
+    <a [class.active]="filters.SortBy === 'price' && !filters.SortDescending" (click)="onSortBy('price_asc')">Price: Low to High</a>
+    <a [class.active]="filters.SortBy === 'price' && filters.SortDescending" (click)="onSortBy('price_desc')">Price: High to Low</a>
+    <a [class.active]="filters.SortBy === 'rating'" (click)="onSortBy('rating_desc')">Top Rated</a>
+    <a [class.active]="filters.SortBy === 'name' && !filters.SortDescending" (click)="onSortBy('name_asc')">Name: A–Z</a>
+    <a [class.active]="filters.SortBy === 'name' && filters.SortDescending" (click)="onSortBy('name_desc')">Name: Z–A</a>
+  </div>
+</div>
 
       <button class="ev-clear-btn" (click)="clearFilters()">Clear all</button>
     </div>

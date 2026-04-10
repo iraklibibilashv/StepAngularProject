@@ -612,6 +612,9 @@
   .ev-burger {
     display: flex;
   }
+  .ev-topbar {
+    justify-content: space-between;
+  }
 }
 
 @media (max-width: 840px) {
