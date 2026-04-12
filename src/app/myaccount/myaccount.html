@@ -1,4 +1,3 @@
-
 <div class="ma-page">
   <div class="ma-bg">
     <div class="ma-grid"></div>
@@ -11,184 +10,335 @@
       <span>Loading account...</span>
     </div>
   } @else {
-  <div class="ma-container">
+    <div class="ma-container">
 
-    <!-- Sidebar -->
-    <aside class="ma-sidebar">
-      <div class="ma-avatar">
-        <span>{{ user?.firstName?.charAt(0) }}{{ user?.lastName?.charAt(0) }}</span>
-      </div>
-      <div class="ma-sidebar-name">{{ user?.firstName }} {{ user?.lastName }}</div>
-      <div class="ma-sidebar-email">{{ user?.email }}</div>
+      <!-- Sidebar -->
+      <aside class="ma-sidebar">
+        <div class="ma-avatar">
+          <span>{{ user?.firstName?.charAt(0) }}{{ user?.lastName?.charAt(0) }}</span>
+        </div>
+        <div class="ma-sidebar-name">{{ user?.firstName }} {{ user?.lastName }}</div>
+        <div class="ma-sidebar-email">{{ user?.email }}</div>
 
-      <nav class="ma-nav">
-        <a class="ma-nav-item" [class.active]="activeTab === 'profile'" (click)="activeTab = 'profile'">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>
-          </svg>
-          My Profile
-        </a>
-        <a class="ma-nav-item" [class.active]="activeTab === 'password'" (click)="activeTab = 'password'">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>
-          </svg>
-          Change Password
-        </a>
-        <a class="ma-nav-item" routerLink="/cart">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
-            <path d="M1 1h4l2.68 13.39a2 2 0 001.99 1.61h9.72a2 2 0 001.99-1.61L23 6H6"/>
-          </svg>
-          My Cart
-        </a>
-        <a class="ma-nav-item logout" (click)="logout()">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>
-          </svg>
-          Sign Out
-        </a>
-      </nav>
-    </aside>
+        <nav class="ma-nav">
+          <a class="ma-nav-item" [class.active]="activeTab === 'profile'" (click)="activeTab = 'profile'">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+            My Profile
+          </a>
 
-    <!-- Main -->
-    <main class="ma-main">
+          <a class="ma-nav-item" [class.active]="activeTab === 'password'" (click)="activeTab = 'password'">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2"/>
+              <path d="M7 11V7a5 5 0 0110 0v4"/>
+            </svg>
+            Change Password
+          </a>
 
-      <!-- Profile Tab -->
-      @if (activeTab === 'profile') {
-        <div class="ma-section">
-          <div class="ma-section-header">
-            <h1 class="ma-title">My Profile</h1>
-            <div class="ma-title-line"></div>
+          <a class="ma-nav-item" routerLink="/cart">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+              <path d="M1 1h4l2.68 13.39a2 2 0 001.99 1.61h9.72a2 2 0 001.99-1.61L23 6H6"/>
+            </svg>
+            My Cart
+          </a>
+
+          @if (isAdmin) {
+            <div class="ma-admin-divider"></div>
+            <a class="ma-nav-item admin" [class.active]="activeTab === 'add-product'" (click)="activeTab = 'add-product'">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19"/>
+                <line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+              Add Product
+            </a>
+            <a class="ma-nav-item admin" [class.active]="activeTab === 'add-category'" (click)="activeTab = 'add-category'">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19"/>
+                <line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+              Add Category
+            </a>
+            <a class="ma-nav-item admin" [class.active]="activeTab === 'manage-products'" (click)="activeTab = 'manage-products'; loadAllProducts()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="3" width="20" height="14" rx="2"/>
+                <line x1="8" y1="21" x2="16" y2="21"/>
+                <line x1="12" y1="17" x2="12" y2="21"/>
+              </svg>
+              Manage Products
+            </a>
+          }
+
+          <a class="ma-nav-item logout" (click)="logout()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/>
+              <polyline points="16 17 21 12 16 7"/>
+              <line x1="21" y1="12" x2="9" y2="12"/>
+            </svg>
+            Sign Out
+          </a>
+        </nav>
+      </aside>
+
+      <!-- Main -->
+      <main class="ma-main">
+
+        <!-- Profile Tab -->
+        @if (activeTab === 'profile') {
+          <div class="ma-section">
+            <div class="ma-section-header">
+              <h1 class="ma-title">My Profile</h1>
+              <div class="ma-title-line"></div>
+              @if (!editMode) {
+                <button class="ma-edit-btn" (click)="editMode = true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
+                    <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                  </svg>
+                  Edit
+                </button>
+              }
+            </div>
+
             @if (!editMode) {
-              <button class="ma-edit-btn" (click)="editMode = true">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
-                  <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                </svg>
-                Edit
-              </button>
-            }
-          </div>
-
-          @if (!editMode) {
-            <div class="ma-cards">
-              <div class="ma-card">
-                <div class="ma-card-label">Personal Info</div>
-                <div class="ma-fields">
-                  <div class="ma-field">
-                    <span class="ma-field-label">First Name</span>
-                    <span class="ma-field-value">{{ user?.firstName || '—' }}</span>
-                  </div>
-                  <div class="ma-field">
-                    <span class="ma-field-label">Last Name</span>
-                    <span class="ma-field-value">{{ user?.lastName || '—' }}</span>
-                  </div>
-                  <div class="ma-field">
-                    <span class="ma-field-label">Email</span>
-                    <span class="ma-field-value">{{ user?.email || '—' }}</span>
-                  </div>
-                  <div class="ma-field">
-                    <span class="ma-field-label">Role</span>
-                    <span class="ma-field-value ma-badge">{{ user?.role || 'User' }}</span>
-                  </div>
-                  <div class="ma-field">
-                    <span class="ma-field-label">Phone</span>
-                    <span class="ma-field-value">{{ user?.details?.phoneNumber || '—' }}</span>
-                  </div>
-                  <div class="ma-field">
-                    <span class="ma-field-label">Address</span>
-                    <span class="ma-field-value">{{ user?.details?.address || '—' }}</span>
+              <div class="ma-cards">
+                <div class="ma-card">
+                  <div class="ma-card-label">Personal Info</div>
+                  <div class="ma-fields">
+                    <div class="ma-field">
+                      <span class="ma-field-label">First Name</span>
+                      <span class="ma-field-value">{{ user?.firstName || '—' }}</span>
+                    </div>
+                    <div class="ma-field">
+                      <span class="ma-field-label">Last Name</span>
+                      <span class="ma-field-value">{{ user?.lastName || '—' }}</span>
+                    </div>
+                    <div class="ma-field">
+                      <span class="ma-field-label">Email</span>
+                      <span class="ma-field-value">{{ user?.email || '—' }}</span>
+                    </div>
+                    <div class="ma-field">
+                      <span class="ma-field-label">Role</span>
+                      <span class="ma-field-value ma-badge">{{ user?.role || 'User' }}</span>
+                    </div>
+                    <div class="ma-field">
+                      <span class="ma-field-label">Phone</span>
+                      <span class="ma-field-value">{{ user?.details?.phoneNumber || '—' }}</span>
+                    </div>
+                    <div class="ma-field">
+                      <span class="ma-field-label">Address</span>
+                      <span class="ma-field-value">{{ user?.details?.address || '—' }}</span>
+                    </div>
                   </div>
                 </div>
               </div>
+            } @else {
+              <div class="ma-card">
+                <div class="ma-card-label">Edit Profile</div>
+                <div class="ma-edit-form">
+                  <div class="ma-edit-field">
+                    <label>First Name</label>
+                    <input type="text" [(ngModel)]="editData.firstName" />
+                  </div>
+                  <div class="ma-edit-field">
+                    <label>Last Name</label>
+                    <input type="text" [(ngModel)]="editData.lastName" />
+                  </div>
+                  <div class="ma-edit-field">
+                    <label>Email</label>
+                    <input type="email" [(ngModel)]="editData.email" />
+                  </div>
+                  <div class="ma-edit-field">
+                    <label>Phone</label>
+                    <input type="text" [(ngModel)]="editData.phoneNumber" />
+                  </div>
+                  <div class="ma-edit-field">
+                    <label>Address</label>
+                    <input type="text" [(ngModel)]="editData.address" />
+                  </div>
+                </div>
+                <div class="ma-edit-actions">
+                  <button class="ma-save-btn" (click)="saveProfile()">Save Changes</button>
+                  <button class="ma-cancel-btn" (click)="editMode = false">Cancel</button>
+                </div>
+              </div>
+            }
+
+            <!-- Danger Zone -->
+            <div class="ma-danger-zone">
+              <div class="ma-card-label danger">Danger Zone</div>
+              @if (!showDeleteConfirm) {
+                <button class="ma-delete-btn" (click)="showDeleteConfirm = true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="3 6 5 6 21 6"/>
+                    <path d="M19 6l-1 14H6L5 6"/>
+                    <path d="M10 11v6M14 11v6"/>
+                    <path d="M9 6V4h6v2"/>
+                  </svg>
+                  Delete Account
+                </button>
+              } @else {
+                <div class="ma-delete-confirm">
+                  <p>Are you sure? This action cannot be undone.</p>
+                  <div class="ma-delete-confirm-actions">
+                    <button class="ma-delete-btn" (click)="deleteProfile()">Yes, Delete</button>
+                    <button class="ma-cancel-btn" (click)="showDeleteConfirm = false">Cancel</button>
+                  </div>
+                </div>
+              }
             </div>
-          } @else {
+          </div>
+        }
+
+        <!-- Password Tab -->
+        @if (activeTab === 'password') {
+          <div class="ma-section">
+            <div class="ma-section-header">
+              <h1 class="ma-title">Change Password</h1>
+              <div class="ma-title-line"></div>
+            </div>
             <div class="ma-card">
-              <div class="ma-card-label">Edit Profile</div>
+              <div class="ma-card-label">Update Password</div>
               <div class="ma-edit-form">
                 <div class="ma-edit-field">
-                  <label>First Name</label>
-                  <input type="text" [(ngModel)]="editData.firstName" />
+                  <label>Current Password</label>
+                  <input type="password" [(ngModel)]="passwordData.currentPassword" placeholder="••••••••" />
                 </div>
                 <div class="ma-edit-field">
-                  <label>Last Name</label>
-                  <input type="text" [(ngModel)]="editData.lastName" />
+                  <label>New Password</label>
+                  <input type="password" [(ngModel)]="passwordData.newPassword" placeholder="••••••••" />
                 </div>
                 <div class="ma-edit-field">
-                  <label>Email</label>
-                  <input type="email" [(ngModel)]="editData.email" />
-                </div>
-                <div class="ma-edit-field">
-                  <label>Phone</label>
-                  <input type="text" [(ngModel)]="editData.phoneNumber" />
-                </div>
-                <div class="ma-edit-field">
-                  <label>Address</label>
-                  <input type="text" [(ngModel)]="editData.address" />
+                  <label>Confirm New Password</label>
+                  <input type="password" [(ngModel)]="passwordData.confirmPassword" placeholder="••••••••" />
                 </div>
               </div>
               <div class="ma-edit-actions">
-                <button class="ma-save-btn" (click)="saveProfile()">Save Changes</button>
-                <button class="ma-cancel-btn" (click)="editMode = false">Cancel</button>
+                <button class="ma-save-btn" (click)="changePassword()">Update Password</button>
               </div>
             </div>
-          }
+          </div>
+        }
 
-          <!-- Danger Zone -->
-          <div class="ma-danger-zone">
-            <div class="ma-card-label danger">Danger Zone</div>
-            @if (!showDeleteConfirm) {
-              <button class="ma-delete-btn" (click)="showDeleteConfirm = true">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/>
-                  <path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/>
-                </svg>
-                Delete Account
-              </button>
-            } @else {
-              <div class="ma-delete-confirm">
-                <p>Are you sure? This action cannot be undone.</p>
-                <div class="ma-delete-confirm-actions">
-                  <button class="ma-delete-btn" (click)="deleteProfile()">Yes, Delete</button>
-                  <button class="ma-cancel-btn" (click)="showDeleteConfirm = false">Cancel</button>
+        <!-- Add Product Tab -->
+        @if (activeTab === 'add-product') {
+          <div class="ma-section">
+            <div class="ma-section-header">
+              <h1 class="ma-title">Add Product</h1>
+              <div class="ma-title-line"></div>
+            </div>
+            <div class="ma-card">
+              <div class="ma-card-label">Product Info</div>
+              <div class="ma-edit-form">
+                <div class="ma-edit-field">
+                  <label>Name</label>
+                  <input type="text" [(ngModel)]="newProduct.name" placeholder="Product name" />
+                </div>
+                <div class="ma-edit-field">
+                  <label>Brand</label>
+                  <input type="text" [(ngModel)]="newProduct.brand" placeholder="Brand" />
+                </div>
+                <div class="ma-edit-field">
+                  <label>Model</label>
+                  <input type="text" [(ngModel)]="newProduct.model" placeholder="Model" />
+                </div>
+                <div class="ma-edit-field">
+                  <label>Price</label>
+                  <input type="number" [(ngModel)]="newProduct.price" placeholder="0" />
+                </div>
+                <div class="ma-edit-field">
+                  <label>Stock</label>
+                  <input type="number" [(ngModel)]="newProduct.stock" placeholder="0" />
+                </div>
+                <div class="ma-edit-field">
+                  <label>Category ID</label>
+                  <input type="number" [(ngModel)]="newProduct.categoryId" placeholder="0" />
+                </div>
+                <div class="ma-edit-field" style="grid-column: 1 / -1">
+                  <label>Description</label>
+                  <input type="text" [(ngModel)]="newProduct.description" placeholder="Product description" />
+                </div>
+                <div class="ma-edit-field" style="grid-column: 1 / -1">
+                  <label>Image URL</label>
+                  <input type="text" [(ngModel)]="newProduct.imageUrl" placeholder="https://..." />
                 </div>
               </div>
-            }
-          </div>
-        </div>
-      }
-
-      <!-- Password Tab -->
-      @if (activeTab === 'password') {
-        <div class="ma-section">
-          <div class="ma-section-header">
-            <h1 class="ma-title">Change Password</h1>
-            <div class="ma-title-line"></div>
-          </div>
-          <div class="ma-card">
-            <div class="ma-card-label">Update Password</div>
-            <div class="ma-edit-form">
-              <div class="ma-edit-field">
-                <label>Current Password</label>
-                <input type="password" [(ngModel)]="passwordData.currentPassword" placeholder="••••••••" />
-              </div>
-              <div class="ma-edit-field">
-                <label>New Password</label>
-                <input type="password" [(ngModel)]="passwordData.newPassword" placeholder="••••••••" />
-              </div>
-              <div class="ma-edit-field">
-                <label>Confirm New Password</label>
-                <input type="password" [(ngModel)]="passwordData.confirmPassword" placeholder="••••••••" />
+              <div class="ma-edit-actions">
+                <button class="ma-save-btn" (click)="addProduct()">Add Product</button>
+                <button class="ma-cancel-btn" (click)="resetProductForm()">Reset</button>
               </div>
             </div>
-            <div class="ma-edit-actions">
-              <button class="ma-save-btn" (click)="changePassword()">Update Password</button>
+          </div>
+        }
+
+        <!-- Add Category Tab -->
+        @if (activeTab === 'add-category') {
+          <div class="ma-section">
+            <div class="ma-section-header">
+              <h1 class="ma-title">Add Category</h1>
+              <div class="ma-title-line"></div>
+            </div>
+            <div class="ma-card">
+              <div class="ma-card-label">Category Info</div>
+              <div class="ma-edit-form">
+                <div class="ma-edit-field">
+                  <label>Name</label>
+                  <input type="text" [(ngModel)]="newCategory.name" placeholder="Category name" />
+                </div>
+                <div class="ma-edit-field">
+                  <label>Image URL</label>
+                  <input type="text" [(ngModel)]="newCategory.imageUrl" placeholder="https://..." />
+                </div>
+                <div class="ma-edit-field" style="grid-column: 1 / -1">
+                  <label>Description</label>
+                  <input type="text" [(ngModel)]="newCategory.description" placeholder="Category description" />
+                </div>
+              </div>
+              <div class="ma-edit-actions">
+                <button class="ma-save-btn" (click)="addCategory()">Add Category</button>
+                <button class="ma-cancel-btn" (click)="resetCategoryForm()">Reset</button>
+              </div>
             </div>
           </div>
-        </div>
-      }
+        }
 
-    </main>
-  </div>
+        <!-- Manage Products Tab -->
+        @if (activeTab === 'manage-products') {
+          <div class="ma-section">
+            <div class="ma-section-header">
+              <h1 class="ma-title">Manage Products</h1>
+              <div class="ma-title-line"></div>
+              <span class="ma-reviews-count">{{ allProducts.length }} products</span>
+            </div>
+            <div class="ma-card">
+              <div class="ma-card-label">All Products</div>
+              <div class="ma-products-list">
+                @for (product of allProducts; track product.id) {
+                  <div class="ma-product-row">
+                    <img [src]="product.imageUrl" [alt]="product.name" class="ma-product-img" />
+                    <div class="ma-product-info">
+                      <span class="ma-product-name">{{ product.name }}</span>
+                      <span class="ma-product-meta">{{ product.brand }} • ₾{{ product.price }}</span>
+                    </div>
+                    <button class="ma-delete-btn" (click)="deleteProduct(product.id)">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="3 6 5 6 21 6"/>
+                        <path d="M19 6l-1 14H6L5 6"/>
+                        <path d="M10 11v6M14 11v6"/>
+                        <path d="M9 6V4h6v2"/>
+                      </svg>
+                      Delete
+                    </button>
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+        }
+
+      </main>
+    </div>
   }
 </div>

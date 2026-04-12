@@ -427,6 +427,58 @@ $muted: #5a5a7a;
   display: flex;
   gap: 12px;
 }
+.ma-admin-divider {
+  height: 1px;
+  background: rgba(255,107,0,0.15);
+  margin: 8px 0;
+}
+
+.ma-nav-item.admin {
+  color: $accent;
+  &:hover { background: rgba(255,107,0,0.08); }
+}
+.ma-products-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ma-product-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,107,0,0.08);
+
+  &:hover { border-color: rgba(255,107,0,0.2); }
+}
+
+.ma-product-img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  background: rgba(255,255,255,0.03);
+  flex-shrink: 0;
+}
+
+.ma-product-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ma-product-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: $text;
+}
+
+.ma-product-meta {
+  font-size: 0.75rem;
+  color: $muted;
+}
 
 // Responsive
 @media (max-width: 768px) {

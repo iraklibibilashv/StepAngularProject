@@ -9,5 +9,10 @@ export class AuthService {
   }
     logout() {
     localStorage.removeItem('token');
+     localStorage.removeItem('role');
+      localStorage.removeItem('refreshToken');
   }
+  isAdmin(): boolean {
+  return localStorage.getItem('role') === 'Admin';
+}
 }

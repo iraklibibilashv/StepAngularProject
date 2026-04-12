@@ -197,6 +197,22 @@ postAdminRegister(userData: any){
       headers: this.getHeaders(),
     });
   }
+  addProduct(data: any) {
+  return this.api.post(this.baseUrl + 'products', data, {
+    headers: this.getHeaders()
+  });
+}
+
+addCategory(data: any) {
+  return this.api.post(this.baseUrl + 'categories', data, {
+    headers: this.getHeaders()
+  });
+}
+deleteProduct(productId: number) {
+  return this.api.delete(this.baseUrl + `products/${productId}`, {
+    headers: this.getHeaders()
+  });
+}
 
 
 

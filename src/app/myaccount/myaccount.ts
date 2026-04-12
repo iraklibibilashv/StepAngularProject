@@ -35,6 +35,7 @@ export class Myaccount {
 
   ngOnInit() {
     this.loadUser();
+    if (this.isAdmin) this.loadAllProducts();
   }
 
   loadUser() {
@@ -107,6 +108,7 @@ export class Myaccount {
     });
   }
 
+
   logout() {
     this.auth.logout();
     this.router.navigate(['/login']);
@@ -114,4 +116,67 @@ export class Myaccount {
     localStorage.removeItem('token')
     
   }
+  newProduct: any = {
+  name: '', description: '', brand: '', model: '',
+  price: 0, stock: 0, categoryId: 0, imageUrl: ''
+};
+
+newCategory: any = {
+  name: '', description: '', imageUrl: ''
+};
+
+addProduct() {
+  this.api.addProduct(this.newProduct).subscribe({
+    next: () => {
+      this.toastService.show('Product added!', 'success');
+      this.resetProductForm();
+    },
+    error: () => this.toastService.show('Failed to add product.', 'error')
+  });
+}
+
+addCategory() {
+  this.api.addCategory(this.newCategory).subscribe({
+    next: () => {
+      this.toastService.show('Category added!', 'success');
+      this.resetCategoryForm();
+    },
+    error: () => this.toastService.show('Failed to add category.', 'error')
+  });
+}
+
+resetProductForm() {
+  this.newProduct = { name: '', description: '', brand: '', model: '', price: 0, stock: 0, categoryId: 0, imageUrl: '' };
+}
+
+resetCategoryForm() {
+  this.newCategory = { name: '', description: '', imageUrl: '' };
+}
+
+get isAdmin() {
+  return this.auth.isAdmin();
+}
+allProducts: any[] = [];
+
+
+loadAllProducts() {
+  this.api.getAll('products?Take=100&Page=1').subscribe({
+    next: (data: any) => {
+      this.allProducts = data.data.items;
+      this.cdr.detectChanges();
+    },
+    error: (err) => console.error(err)
+  });
+}
+
+deleteProduct(productId: number) {
+  this.api.deleteProduct(productId).subscribe({
+    next: () => {
+      this.toastService.show('Product deleted!', 'warning');
+      this.allProducts = this.allProducts.filter(p => p.id !== productId);
+      this.cdr.detectChanges();
+    },
+    error: () => this.toastService.show('Failed to delete product.', 'error')
+  });
+}
 }
