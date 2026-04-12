@@ -186,6 +186,17 @@ deleteReview(reviewId: number) {
     headers: this.getHeaders()
   });
 }
+postAdminRegister(userData: any){
+      return this.api.post(this.baseUrl + 'admin/register', userData, {
+      headers: this.getHeaders(),
+    });
+  
+}
+  postAdminLogin(userData: any) {
+    return this.api.post(this.baseUrl + 'admin/login', userData, {
+      headers: this.getHeaders(),
+    });
+  }
 
 
 
