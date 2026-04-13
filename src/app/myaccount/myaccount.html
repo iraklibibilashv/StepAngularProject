@@ -45,7 +45,7 @@
             My Cart
           </a>
 
-          <!-- @if (isAdmin) { -->
+          @if (isAdmin) {
             <div class="ma-admin-divider"></div>
             <a class="ma-nav-item admin" [class.active]="activeTab === 'add-product'" (click)="activeTab = 'add-product'">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -78,7 +78,7 @@
               Manage Categories
             </a>
             
-          <!-- } -->
+          }
 
           <a class="ma-nav-item logout" (click)="logout()">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
