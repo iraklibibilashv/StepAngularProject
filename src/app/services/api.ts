@@ -213,6 +213,11 @@ deleteProduct(productId: number) {
     headers: this.getHeaders()
   });
 }
+deleteCategory(categoryId: number) {
+  return this.api.delete(this.baseUrl + `categories/${categoryId}`, {
+    headers: this.getHeaders()
+  });
+}
 
 
 

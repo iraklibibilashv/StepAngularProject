@@ -45,7 +45,7 @@
             My Cart
           </a>
 
-          @if (isAdmin) {
+          <!-- @if (isAdmin) { -->
             <div class="ma-admin-divider"></div>
             <a class="ma-nav-item admin" [class.active]="activeTab === 'add-product'" (click)="activeTab = 'add-product'">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -69,7 +69,16 @@
               </svg>
               Manage Products
             </a>
-          }
+                        <a class="ma-nav-item admin" [class.active]="activeTab === 'manage-categories'" (click)="activeTab = 'manage-categories'; loadAllCategories()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/>
+                <line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/>
+                <line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>
+              </svg>
+              Manage Categories
+            </a>
+            
+          <!-- } -->
 
           <a class="ma-nav-item logout" (click)="logout()">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -337,6 +346,36 @@
             </div>
           </div>
         }
+        @if (activeTab === 'manage-categories') {
+  <div class="ma-section">
+    <div class="ma-section-header">
+      <h1 class="ma-title">Manage Categories</h1>
+      <div class="ma-title-line"></div>
+      <span class="ma-reviews-count">{{ allCategories.length }} categories</span>
+    </div>
+    <div class="ma-card">
+      <div class="ma-card-label">All Categories</div>
+      <div class="ma-products-list">
+        @for (cat of allCategories; track cat.id) {
+          <div class="ma-product-row">
+            <img [src]="cat.imageUrl" [alt]="cat.name" class="ma-product-img" />
+            <div class="ma-product-info">
+              <span class="ma-product-name">{{ cat.name }}</span>
+              <span class="ma-product-meta">{{ cat.productCount }} products</span>
+            </div>
+            <button class="ma-delete-btn" (click)="deleteCategory(cat.id)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/>
+                <path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/>
+              </svg>
+              Delete
+            </button>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+}
 
       </main>
     </div>

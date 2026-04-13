@@ -179,4 +179,28 @@ deleteProduct(productId: number) {
     error: () => this.toastService.show('Failed to delete product.', 'error')
   });
 }
+allCategories: any[] = [];
+
+loadAllCategories() {
+  this.api.getAll('categories').subscribe({
+    next: (data: any) => {
+      this.allCategories = data.data;
+      this.cdr.detectChanges();
+      console.log('categories', this.allCategories);
+      
+    },
+    error: (err) => console.error(err)
+  });
+}
+
+deleteCategory(categoryId: number) {
+  this.api.deleteCategory(categoryId).subscribe({
+    next: () => {
+      this.toastService.show('Category deleted!', 'warning');
+      this.allCategories = this.allCategories.filter(c => c.id !== categoryId);
+      this.cdr.detectChanges();
+    },
+    error: () => this.toastService.show('Failed to delete category.', 'error')
+  });
+}
 }
