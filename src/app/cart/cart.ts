@@ -33,7 +33,7 @@ export class Cart {
       next: (data: any) => {
         this.cartArr = data.data.items;
         this.loading = false;
-        this.cdr.detectChanges();
+        this.cdr.detectChanges(); 
       },
       error: (err) => {
         console.error(err);
