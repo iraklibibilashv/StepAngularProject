@@ -6,10 +6,12 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from '../services/auth-service';
 import { ToastService } from '../services/toast';
 import { CartCountService } from '../services/cart-count-service';
+import { Products } from '../products/products';
+import { Category } from '../models/product';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, CommonModule, FormsModule, RouterModule],
+  imports: [RouterLink, CommonModule, FormsModule, RouterModule, Products],
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })
@@ -73,7 +75,7 @@ export class Header {
   
   this.api.getAll('cart?Take=30&Page=1').subscribe({
     next: (data: any) => {
-      this.cartCount = data.data.items.length;
+      this.cartCountService.setCartCount(data.data.items.length);
       this.cdr.detectChanges();
     },
     error: (err) => console.error(err)
@@ -81,7 +83,7 @@ export class Header {
 
   this.api.getFavorites().subscribe({
     next: (data: any) => {
-      this.wishlistCount = data.data.items.length;
+      this.cartCountService.setWishlistCount(data.data.items.length);
       this.cdr.detectChanges();
     },
     error: (err) => console.error(err)
@@ -97,7 +99,7 @@ export class Header {
   pageSize = 38;
   allProduct: any[] = [];
   filterBrandsArr: any[] = [];
-  categoriesArr: any = [];
+  categoriesArr: any[] = [];
   filterCategory: any = [];
   brandsArr: any = [];
   productArr: any = [];

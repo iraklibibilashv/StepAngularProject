@@ -7,10 +7,11 @@ import { Toast } from '../toast/toast';
 import { ToastService } from '../services/toast';
 import { AuthService } from '../services/auth-service';
 import { CartCountService } from '../services/cart-count-service';
+import { Brands, Category } from '../models/product';
 
 @Component({
   selector: 'app-products',
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule,Products,],
   templateUrl: './products.html',
   styleUrl: './products.scss',
 })
@@ -18,6 +19,7 @@ export class Products implements OnInit {
   allProducts: any[] = [];
   brandsArr: any[] = [];
   categoriesArr: any[] = [];
+  favoriteIds: number[] = [];
   loading = true;
   selectedCategoryName = 'Categories';
   selectedSortName = 'Sort By';
@@ -35,7 +37,7 @@ export class Products implements OnInit {
     Take: 40,
     Page: 1,
   };
-  favoriteIds: number[] = [];
+  
 
   constructor(
     private api: Api,
