@@ -24,6 +24,8 @@ export class Myaccount {
     confirmPassword: '',
   };
   showDeleteConfirm = false;
+  editingProduct: any = null;
+  editingCategory: any = null;
 
   constructor(
     private api: Api,
@@ -63,22 +65,22 @@ export class Myaccount {
   }
 
   saveProfile() {
-  const data = {
-    ...this.editData,
-    address: this.editData.address || null,
-    phoneNumber: this.editData.phoneNumber || null,
-    pictureUrl: this.editData.pictureUrl || null,
-    dateOfBirth: this.editData.dateOfBirth || null,
-  };
-  this.api.updateUser(data).subscribe({
-    next: () => {
-      this.toastService.show('Profile updated!', 'success');
-      this.editMode = false;
-      this.loadUser();
-    },
-    error: () => this.toastService.show('Failed to update profile.', 'error'),
-  });
-}
+    const data = {
+      ...this.editData,
+      address: this.editData.address || null,
+      phoneNumber: this.editData.phoneNumber || null,
+      pictureUrl: this.editData.pictureUrl || null,
+      dateOfBirth: this.editData.dateOfBirth || null,
+    };
+    this.api.updateUser(data).subscribe({
+      next: () => {
+        this.toastService.show('Profile updated!', 'success');
+        this.editMode = false;
+        this.loadUser();
+      },
+      error: () => this.toastService.show('Failed to update profile.', 'error'),
+    });
+  }
 
   changePassword() {
     if (this.passwordData.newPassword !== this.passwordData.confirmPassword) {
@@ -108,99 +110,141 @@ export class Myaccount {
     });
   }
 
-
   logout() {
     this.auth.logout();
     this.router.navigate(['/login']);
-    localStorage.removeItem('refreshToken')
-    localStorage.removeItem('token')
-    
+    localStorage.removeItem('refreshToken');
+    localStorage.removeItem('token');
   }
   newProduct: any = {
-  name: '', description: '', brand: '', model: '',
-  price: 0, stock: 0, categoryId: 0, imageUrl: ''
-};
+    name: '',
+    description: '',
+    brand: '',
+    model: '',
+    price: 0,
+    stock: 0,
+    categoryId: 0,
+    imageUrl: '',
+  };
 
-newCategory: any = {
-  name: '', description: '', imageUrl: ''
-};
+  newCategory: any = {
+    name: '',
+    description: '',
+    imageUrl: '',
+  };
 
-addProduct() {
-  this.api.addProduct(this.newProduct).subscribe({
-    next: () => {
-      this.toastService.show('Product added!', 'success');
-      this.resetProductForm();
-    },
-    error: () => this.toastService.show('Failed to add product.', 'error')
-  });
-}
+  addProduct() {
+    this.api.addProduct(this.newProduct).subscribe({
+      next: () => {
+        this.toastService.show('Product added!', 'success');
+        this.resetProductForm();
+      },
+      error: () => this.toastService.show('Failed to add product.', 'error'),
+    });
+  }
 
-addCategory() {
-  this.api.addCategory(this.newCategory).subscribe({
-    next: () => {
-      this.toastService.show('Category added!', 'success');
-      this.resetCategoryForm();
-    },
-    error: () => this.toastService.show('Failed to add category.', 'error')
-  });
-}
+  addCategory() {
+    this.api.addCategory(this.newCategory).subscribe({
+      next: () => {
+        this.toastService.show('Category added!', 'success');
+        this.resetCategoryForm();
+      },
+      error: () => this.toastService.show('Failed to add category.', 'error'),
+    });
+  }
 
-resetProductForm() {
-  this.newProduct = { name: '', description: '', brand: '', model: '', price: 0, stock: 0, categoryId: 0, imageUrl: '' };
-}
+  resetProductForm() {
+    this.newProduct = {
+      name: '',
+      description: '',
+      brand: '',
+      model: '',
+      price: 0,
+      stock: 0,
+      categoryId: 0,
+      imageUrl: '',
+    };
+  }
 
-resetCategoryForm() {
-  this.newCategory = { name: '', description: '', imageUrl: '' };
-}
+  resetCategoryForm() {
+    this.newCategory = { name: '', description: '', imageUrl: '' };
+  }
 
-get isAdmin() {
-  return this.auth.isAdmin();
-}
-allProducts: any[] = [];
+  get isAdmin() {
+    return this.auth.isAdmin();
+  }
+  allProducts: any[] = [];
 
+  loadAllProducts() {
+    this.api.getAll('products?Take=100&Page=1').subscribe({
+      next: (data: any) => {
+        this.allProducts = data.data.items;
+        this.cdr.detectChanges();
+      },
+      error: (err) => console.error(err),
+    });
+  }
 
-loadAllProducts() {
-  this.api.getAll('products?Take=100&Page=1').subscribe({
-    next: (data: any) => {
-      this.allProducts = data.data.items;
-      this.cdr.detectChanges();
-    },
-    error: (err) => console.error(err)
-  });
-}
+  deleteProduct(productId: number) {
+    this.api.deleteProduct(productId).subscribe({
+      next: () => {
+        this.toastService.show('Product deleted!', 'warning');
+        this.allProducts = this.allProducts.filter((p) => p.id !== productId);
+        this.cdr.detectChanges();
+      },
+      error: () => this.toastService.show('Failed to delete product.', 'error'),
+    });
+  }
+  allCategories: any[] = [];
 
-deleteProduct(productId: number) {
-  this.api.deleteProduct(productId).subscribe({
-    next: () => {
-      this.toastService.show('Product deleted!', 'warning');
-      this.allProducts = this.allProducts.filter(p => p.id !== productId);
-      this.cdr.detectChanges();
-    },
-    error: () => this.toastService.show('Failed to delete product.', 'error')
-  });
-}
-allCategories: any[] = [];
+  loadAllCategories() {
+    this.api.getAll('categories').subscribe({
+      next: (data: any) => {
+        this.allCategories = data.data;
+        this.cdr.detectChanges();
+        console.log('categories', this.allCategories);
+      },
+      error: (err) => console.error(err),
+    });
+  }
 
-loadAllCategories() {
-  this.api.getAll('categories').subscribe({
-    next: (data: any) => {
-      this.allCategories = data.data;
-      this.cdr.detectChanges();
-      console.log('categories', this.allCategories);
-      
-    },
-    error: (err) => console.error(err)
-  });
-}
+  deleteCategory(categoryId: number) {
+    this.api.deleteCategory(categoryId).subscribe({
+      next: () => {
+        this.toastService.show('Category deleted!', 'warning');
+        this.allCategories = this.allCategories.filter((c) => c.id !== categoryId);
+        this.cdr.detectChanges();
+      },
+      error: () => this.toastService.show('Failed to delete category.', 'error'),
+    });
+  }
+  startEditProduct(product: any) {
+    this.editingProduct = { ...product };
+  }
 
-deleteCategory(categoryId: number) {
-  this.api.deleteCategory(categoryId).subscribe({
-    next: () => {
-      this.toastService.show('Category deleted!', 'warning');
-      this.allCategories = this.allCategories.filter(c => c.id !== categoryId);
-      this.cdr.detectChanges();
-    },
-    error: () => this.toastService.show('Failed to delete category.', 'error')
-  });
-}
+  saveEditProduct() {
+    this.api.updateProduct(this.editingProduct.id, this.editingProduct).subscribe({
+      next: () => {
+        this.toastService.show('Product updated!', 'success');
+        this.editingProduct = null;
+        this.loadAllProducts();
+      },
+      error: () => this.toastService.show('Failed to update.', 'error'),
+    });
+  }
+
+  startEditCategory(cat: any) {
+    this.editingCategory = { ...cat };
+  }
+
+  saveEditCategory() {
+    this.api.updateCategory(this.editingCategory.id, this.editingCategory).subscribe({
+      next: () => {
+        this.toastService.show('Category updated!', 'success');
+        this.editingCategory = null;
+        this.loadAllCategories();
+      },
+      error: () => this.toastService.show('Failed to update.', 'error'),
+    });
+  }
 }

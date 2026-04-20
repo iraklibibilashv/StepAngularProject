@@ -218,6 +218,17 @@ deleteCategory(categoryId: number) {
     headers: this.getHeaders()
   });
 }
+updateProduct(productId: number, data: any) {
+  return this.api.put(this.baseUrl + `products/${productId}`, data, {
+    headers: this.getHeaders()
+  });
+}
+
+updateCategory(categoryId: number, data: any) {
+  return this.api.put(this.baseUrl + `categories/${categoryId}`, data, {
+    headers: this.getHeaders()
+  });
+}
 
 
 
