@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-adminregister',
-  imports: [CommonModule,FormsModule,RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './adminregister.html',
   styleUrl: './adminregister.scss',
 })
@@ -23,8 +23,6 @@ export class Adminregister {
   onRegister() {
     this.api.postAdminRegister(this.user).subscribe({
       next: (data: any) => {
-        console.log(data);
-      
       },
       error: (err) => console.error(err),
     });

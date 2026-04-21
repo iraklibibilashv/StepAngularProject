@@ -25,7 +25,6 @@ export class Register {
   onRegister() {
     this.api.postRegister(this.user).subscribe({
       next: (data: any) => {
-        console.log(data);
         this.router.navigate(['/verify']);
       },
       error: (err) => console.error(err),

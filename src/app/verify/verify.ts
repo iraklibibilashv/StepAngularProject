@@ -31,14 +31,11 @@ export class Verify {
     this.startCooldown();
   }
 
-
   onVerify() {
     if (!this.verify.email || !this.verify.code) {
       this.errorMsg = 'Please fill in all fields.';
       return;
     }
-
-
 
     this.loading = true;
     this.errorMsg = '';
@@ -48,7 +45,7 @@ export class Verify {
     this.api.putVerify(this.verify.email, this.verify.code).subscribe({
       next: (data: any) => {
         this.successMsg = 'Email verified! Redirecting to login...';
-         this.loading = false;
+        this.loading = false;
         this.cdr.detectChanges();
         setTimeout(() => {
           this.router.navigate(['/login']);
@@ -61,27 +58,27 @@ export class Verify {
       },
     });
   }
-      onResend(){
-        if (this.resendCooldown > 0) {
-        return;
-      }
-      this.api.postResendVerification(this.verify.email).subscribe({
-        next : () => {
-          this.successMsg = `Code resent! Check Your email,`,
+  onResend() {
+    if (this.resendCooldown > 0) {
+      return;
+    }
+    this.api.postResendVerification(this.verify.email).subscribe({
+      next: () => {
+        ((this.successMsg = `Code resent! Check Your email,`),
           this.startCooldown(),
-          this.cdr.detectChanges();
-        },
-        error : (err) => this.errorMsg = `Failed to resend code.`
-      });
-    }
-    startCooldown() {
-      this.resendCooldown = 30;
-      const interval = setInterval(() => {
-        this.resendCooldown--;
-        this.cdr.detectChanges();
-        if (this.resendCooldown <= 0) {
-          clearInterval(interval);
-        }
-      }, 1000);
-    }
+          this.cdr.detectChanges());
+      },
+      error: (err) => (this.errorMsg = `Failed to resend code.`),
+    });
+  }
+  startCooldown() {
+    this.resendCooldown = 30;
+    const interval = setInterval(() => {
+      this.resendCooldown--;
+      this.cdr.detectChanges();
+      if (this.resendCooldown <= 0) {
+        clearInterval(interval);
+      }
+    }, 1000);
+  }
 }

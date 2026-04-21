@@ -8,25 +8,25 @@ import { CartCountService } from '../services/cart-count-service';
 
 @Component({
   selector: 'app-wishlist',
-  imports: [CommonModule,FormsModule,RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './wishlist.html',
   styleUrl: './wishlist.scss',
 })
 export class Wishlist {
- wishlistArr: any[] = [];
+  wishlistArr: any[] = [];
   loading = true;
- 
+
   constructor(
     private api: Api,
     private toastService: ToastService,
     private cdr: ChangeDetectorRef,
-    private cartCountService: CartCountService
+    private cartCountService: CartCountService,
   ) {}
- 
+
   ngOnInit() {
     this.loadWishlist();
   }
- 
+
   loadWishlist() {
     this.loading = true;
     this.api.getFavorites().subscribe({
@@ -42,19 +42,19 @@ export class Wishlist {
       },
     });
   }
- 
-removeFromWishlist(itemId: number) {
-  this.api.removeFromFavorites(itemId).subscribe({
-    next: () => {
-      this.toastService.show('Removed from wishlist!', 'warning');
-      this.wishlistArr = this.wishlistArr.filter(item => item.id !== itemId);
-      this.cartCountService.decrementWishlist();
-      this.cdr.detectChanges();
-    },
-    error: () => this.toastService.show('Failed to remove.', 'error'),
-  });
-}
- 
+
+  removeFromWishlist(itemId: number) {
+    this.api.removeFromFavorites(itemId).subscribe({
+      next: () => {
+        this.toastService.show('Removed from wishlist!', 'warning');
+        this.wishlistArr = this.wishlistArr.filter((item) => item.id !== itemId);
+        this.cartCountService.decrementWishlist();
+        this.cdr.detectChanges();
+      },
+      error: () => this.toastService.show('Failed to remove.', 'error'),
+    });
+  }
+
   addToCart(productId: number) {
     this.api.addToCart(productId, 1).subscribe({
       next: () => this.toastService.show('Added to cart!', 'success'),
@@ -62,15 +62,17 @@ removeFromWishlist(itemId: number) {
     });
   }
   clearAll() {
-  const deleteAll = this.wishlistArr.map((item: any) => 
-    this.api.removeFromFavorites(item.id).toPromise()
-  );
-  Promise.all(deleteAll).then(() => {
-    this.wishlistArr = [];
-    this.toastService.show('Wishlist cleared!', 'warning');
-    this.cdr.detectChanges();
-  }).catch(() => {
-    this.toastService.show('Failed to clear wishlist.', 'error');
-  });
-}
+    const deleteAll = this.wishlistArr.map((item: any) =>
+      this.api.removeFromFavorites(item.id).toPromise(),
+    );
+    Promise.all(deleteAll)
+      .then(() => {
+        this.wishlistArr = [];
+        this.toastService.show('Wishlist cleared!', 'warning');
+        this.cdr.detectChanges();
+      })
+      .catch(() => {
+        this.toastService.show('Failed to clear wishlist.', 'error');
+      });
+  }
 }

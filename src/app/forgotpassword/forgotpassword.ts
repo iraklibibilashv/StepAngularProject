@@ -31,7 +31,6 @@ export class Forgotpassword {
     this.loading = true;
     this.errorMsg = '';
     this.successMsg = '';
-    
 
     this.api.postForgotPassword(this.email).subscribe({
       next: (data: any) => {

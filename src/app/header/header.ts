@@ -11,16 +11,17 @@ import { Category } from '../models/product';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, CommonModule, FormsModule, RouterModule, Products],
+  imports: [RouterLink, CommonModule, FormsModule, RouterModule],
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })
 export class Header {
-  constructor(private api: Api,
-    private auth : AuthService,
+  constructor(
+    private api: Api,
+    private auth: AuthService,
     private cdr: ChangeDetectorRef,
     private toastService: ToastService,
-    private cartCountService : CartCountService
+    private cartCountService: CartCountService,
   ) {}
   get isLoggedIn() {
     return this.auth.isLoggedIn();
@@ -43,19 +44,19 @@ export class Header {
       },
       error: (err) => console.error(err),
     });
-      this.cartCountService.cartCount.subscribe(c => {
-    this.cartCount = c;
-    this.cdr.detectChanges();
-  });
-  this.cartCountService.wishlistCount.subscribe(c => {
-    this.wishlistCount = c;
-    this.cdr.detectChanges();
-  });
+    this.cartCountService.cartCount.subscribe((c) => {
+      this.cartCount = c;
+      this.cdr.detectChanges();
+    });
+    this.cartCountService.wishlistCount.subscribe((c) => {
+      this.wishlistCount = c;
+      this.cdr.detectChanges();
+    });
     this.loadCounts();
   }
   // xayipat339@kobace.com
   // Ii123@123
-   
+
   menuOpen = false;
   searchQuery = '';
   filters = {
@@ -67,28 +68,26 @@ export class Header {
   };
   wishlistCount = 0;
   cartCount = 0;
-  onCategoryClick(id: any) {
-    console.log('category clicked', id);
-  }
+  onCategoryClick(id: any) {}
   loadCounts() {
-  if (!this.auth.isLoggedIn()) return;
-  
-  this.api.getAll('cart?Take=30&Page=1').subscribe({
-    next: (data: any) => {
-      this.cartCountService.setCartCount(data.data.items.length);
-      this.cdr.detectChanges();
-    },
-    error: (err) => console.error(err)
-  });
+    if (!this.auth.isLoggedIn()) return;
 
-  this.api.getFavorites().subscribe({
-    next: (data: any) => {
-      this.cartCountService.setWishlistCount(data.data.items.length);
-      this.cdr.detectChanges();
-    },
-    error: (err) => console.error(err)
-  });
-}
+    this.api.getAll('cart?Take=30&Page=1').subscribe({
+      next: (data: any) => {
+        this.cartCountService.setCartCount(data.data.items.length);
+        this.cdr.detectChanges();
+      },
+      error: (err) => console.error(err),
+    });
+
+    this.api.getFavorites().subscribe({
+      next: (data: any) => {
+        this.cartCountService.setWishlistCount(data.data.items.length);
+        this.cdr.detectChanges();
+      },
+      error: (err) => console.error(err),
+    });
+  }
   onSearchChange(): void {}
   onFilterChange(): void {}
   clearFilters(): void {

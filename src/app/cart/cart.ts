@@ -20,8 +20,8 @@ export class Cart {
   constructor(
     private api: Api,
     private cdr: ChangeDetectorRef,
-    private toastService : ToastService,
-    private cartCountService: CartCountService
+    private toastService: ToastService,
+    private cartCountService: CartCountService,
   ) {}
 
   ngOnInit() {
@@ -33,7 +33,7 @@ export class Cart {
       next: (data: any) => {
         this.cartArr = data.data.items;
         this.loading = false;
-        this.cdr.detectChanges(); 
+        this.cdr.detectChanges();
       },
       error: (err) => {
         console.error(err);
@@ -46,46 +46,45 @@ export class Cart {
   removeFromCart(productId: number) {
     this.api.removeFromCart(productId).subscribe({
       next: () => {
-                this.cartCountService.decrementCart();
+        this.cartCountService.decrementCart();
         this.loadCart();
-      this.cdr.detectChanges();
+        this.cdr.detectChanges();
       },
-      error: (err) => console.error(err)
+      error: (err) => console.error(err),
     });
   }
 
   editQuantity(itemId: number, quantity: number) {
     if (quantity < 1) return;
     this.api.editQuantity(itemId, quantity).subscribe({
-      next: () =>{ this.loadCart(),
-        this.cdr.detectChanges()
+      next: () => {
+        (this.loadCart(), this.cdr.detectChanges());
       },
-      error: (err) => console.error(err)
+      error: (err) => console.error(err),
     });
   }
   get total(): number {
-  return this.cartArr.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
-}
-   onCheckout() {
-  this.api.checkout().subscribe({
-    next: () => {
-      this.toastService.show('Order placed!', 'success');
-      this.loadCart();
-    },
-    error: () => this.toastService.show('Checkout failed.', 'error')
-  });
-}
-clearCart() {
-  const deleteAll = this.cartArr.map((item: any) => 
-    this.api.removeFromCart(item.id).toPromise()
-  );
-  Promise.all(deleteAll).then(() => {
-    this.cartArr = [];
-    this.toastService.show('Cart cleared!', 'warning');
-    this.cdr.detectChanges();
-  }).catch(() => {
-    this.toastService.show('Failed to clear cart.', 'error');
-  });
-}
-
+    return this.cartArr.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
+  }
+  onCheckout() {
+    this.api.checkout().subscribe({
+      next: () => {
+        this.toastService.show('Order placed!', 'success');
+        this.loadCart();
+      },
+      error: () => this.toastService.show('Checkout failed.', 'error'),
+    });
+  }
+  clearCart() {
+    const deleteAll = this.cartArr.map((item: any) => this.api.removeFromCart(item.id).toPromise());
+    Promise.all(deleteAll)
+      .then(() => {
+        this.cartArr = [];
+        this.toastService.show('Cart cleared!', 'warning');
+        this.cdr.detectChanges();
+      })
+      .catch(() => {
+        this.toastService.show('Failed to clear cart.', 'error');
+      });
+  }
 }

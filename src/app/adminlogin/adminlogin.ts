@@ -6,12 +6,12 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-adminlogin',
-  imports: [CommonModule,FormsModule,RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './adminlogin.html',
   styleUrl: './adminlogin.scss',
 })
 export class Adminlogin {
-   constructor(
+  constructor(
     private api: Api,
     private router: Router,
     private cdr: ChangeDetectorRef,
@@ -23,10 +23,8 @@ export class Adminlogin {
   onLogin() {
     this.api.postAdminLogin(this.user).subscribe({
       next: (data: any) => {
-        localStorage.setItem('token', data.data.accessToken)
-        localStorage.setItem('refreshToken', data.data.refreshToken)
-        console.log(data);
-        
+        localStorage.setItem('token', data.data.accessToken);
+        localStorage.setItem('refreshToken', data.data.refreshToken);
         this.router.navigate(['/home']);
       },
       error: (err) => console.error(err),

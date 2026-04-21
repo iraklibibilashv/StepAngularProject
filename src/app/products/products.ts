@@ -11,7 +11,7 @@ import { Brands, Category } from '../models/product';
 
 @Component({
   selector: 'app-products',
-  imports: [CommonModule, RouterModule, FormsModule,Products,],
+  imports: [CommonModule, RouterModule, FormsModule, Products],
   templateUrl: './products.html',
   styleUrl: './products.scss',
 })
@@ -37,7 +37,6 @@ export class Products implements OnInit {
     Take: 40,
     Page: 1,
   };
-  
 
   constructor(
     private api: Api,
@@ -45,8 +44,8 @@ export class Products implements OnInit {
     private router: ActivatedRoute,
     private route: Router,
     private toast: ToastService,
-    private auth : AuthService,
-    private cartCountService : CartCountService
+    private auth: AuthService,
+    private cartCountService: CartCountService,
   ) {
     this.router.queryParams.subscribe((data: any) => {
       if (data.id && data.name) {
@@ -63,7 +62,6 @@ export class Products implements OnInit {
   get isLoggedIn() {
     return this.auth.isLoggedIn();
   }
-
 
   ngOnInit() {
     this.api.getAll('products?Take=100&Page=1').subscribe({
@@ -97,8 +95,6 @@ export class Products implements OnInit {
     this.api.getFilteredProducts(this.filters).subscribe({
       next: (data: any) => {
         this.allProducts = data.data.items;
-        console.log(this.allProducts);
-
         this.loading = false;
         this.cdr.detectChanges();
       },
@@ -122,10 +118,9 @@ export class Products implements OnInit {
       SortDescending: false,
       Take: 40,
       Page: 1,
-      
     };
-      this.selectedCategoryName = 'Categories'; 
-  this.selectedSortName = 'Sort By';        
+    this.selectedCategoryName = 'Categories';
+    this.selectedSortName = 'Sort By';
     this.loadProducts();
   }
 
@@ -141,34 +136,34 @@ export class Products implements OnInit {
     this.filters.InStock = value;
     this.loadProducts();
   }
- onSortBy(value: string) {
-  if (value === 'price_asc') {
-    this.filters.SortBy = 'price';
-    this.filters.SortDescending = false;
-    this.selectedSortName = 'Price: Low to High';
-  } else if (value === 'price_desc') {
-    this.filters.SortBy = 'price';
-    this.filters.SortDescending = true;
-    this.selectedSortName = 'Price: High to Low';
-  } else if (value === 'name_asc') {
-    this.filters.SortBy = 'name';
-    this.filters.SortDescending = false;
-    this.selectedSortName = 'Name: A–Z';
-  } else if (value === 'name_desc') {
-    this.filters.SortBy = 'name';
-    this.filters.SortDescending = true;
-    this.selectedSortName = 'Name: Z–A';
-  } else if (value === 'rating_desc') {
-    this.filters.SortBy = 'rating';
-    this.filters.SortDescending = true;
-    this.selectedSortName = 'Top Rated';
-  } else {
-    this.filters.SortBy = null;
-    this.filters.SortDescending = false;
-    this.selectedSortName = 'Sort By';
+  onSortBy(value: string) {
+    if (value === 'price_asc') {
+      this.filters.SortBy = 'price';
+      this.filters.SortDescending = false;
+      this.selectedSortName = 'Price: Low to High';
+    } else if (value === 'price_desc') {
+      this.filters.SortBy = 'price';
+      this.filters.SortDescending = true;
+      this.selectedSortName = 'Price: High to Low';
+    } else if (value === 'name_asc') {
+      this.filters.SortBy = 'name';
+      this.filters.SortDescending = false;
+      this.selectedSortName = 'Name: A–Z';
+    } else if (value === 'name_desc') {
+      this.filters.SortBy = 'name';
+      this.filters.SortDescending = true;
+      this.selectedSortName = 'Name: Z–A';
+    } else if (value === 'rating_desc') {
+      this.filters.SortBy = 'rating';
+      this.filters.SortDescending = true;
+      this.selectedSortName = 'Top Rated';
+    } else {
+      this.filters.SortBy = null;
+      this.filters.SortDescending = false;
+      this.selectedSortName = 'Sort By';
+    }
+    this.loadProducts();
   }
-  this.loadProducts();
-}
   selectCategory(id: number | null, name: string = 'Categories') {
     this.filters.CategoryId = id;
     this.selectedCategoryName = name;
@@ -194,8 +189,7 @@ export class Products implements OnInit {
     this.api.addToCart(productId, 1).subscribe({
       next: (data: any) => {
         this.toast.show('Added to cart', 'success');
-        this.cartCountService.incrementCart()
-        console.log('Added to cart', data);
+        this.cartCountService.incrementCart();
       },
       error: (err) => {
         console.error(err);
@@ -206,39 +200,38 @@ export class Products implements OnInit {
     this.route.navigate(['/details', id]);
   }
 
-loadFavorites() {
-  if (!this.auth.isLoggedIn()) return;
-  this.api.getFavorites().subscribe({
-    next: (data: any) => {
-      this.favoriteIds = data.data.items.map((item: any) => item.id);
-      console.log('favoriteIds:', this.favoriteIds);
-      this.cdr.detectChanges();
-    },
-    error: (err) => console.error(err)
-  });
-}
-  
-addToWishlist(productId: number) {
-  if (this.favoriteIds.includes(productId)) {
-    this.api.removeFromFavorites(productId).subscribe({
-      next: () => {
-        this.toast.show('Removed from wishlist!', 'warning');
-        this.favoriteIds = this.favoriteIds.filter(id => id !== productId);
-        this.cartCountService.decrementWishlist()
+  loadFavorites() {
+    if (!this.auth.isLoggedIn()) return;
+    this.api.getFavorites().subscribe({
+      next: (data: any) => {
+        this.favoriteIds = data.data.items.map((item: any) => item.id);
         this.cdr.detectChanges();
       },
-      error: () => this.toast.show('Failed to remove.', 'error')
-    });
-  } else {
-    this.api.addToFavorites(productId).subscribe({
-      next: () => {
-        this.toast.show('Added to wishlist!', 'success');
-        this.favoriteIds = [...this.favoriteIds, productId];
-        this.cartCountService.incrementWishlist()
-        this.cdr.detectChanges();
-      },
-      error: () => this.toast.show('Failed to add.', 'error')
+      error: (err) => console.error(err),
     });
   }
-}
+
+  addToWishlist(productId: number) {
+    if (this.favoriteIds.includes(productId)) {
+      this.api.removeFromFavorites(productId).subscribe({
+        next: () => {
+          this.toast.show('Removed from wishlist!', 'warning');
+          this.favoriteIds = this.favoriteIds.filter((id) => id !== productId);
+          this.cartCountService.decrementWishlist();
+          this.cdr.detectChanges();
+        },
+        error: () => this.toast.show('Failed to remove.', 'error'),
+      });
+    } else {
+      this.api.addToFavorites(productId).subscribe({
+        next: () => {
+          this.toast.show('Added to wishlist!', 'success');
+          this.favoriteIds = [...this.favoriteIds, productId];
+          this.cartCountService.incrementWishlist();
+          this.cdr.detectChanges();
+        },
+        error: () => this.toast.show('Failed to add.', 'error'),
+      });
+    }
+  }
 }

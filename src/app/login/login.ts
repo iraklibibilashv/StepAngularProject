@@ -3,6 +3,7 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { Api } from '../services/api';
+import { ToastService } from '../services/toast';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +16,7 @@ export class Login {
     private api: Api,
     private router: Router,
     private cdr: ChangeDetectorRef,
+    private toast : ToastService
   ) {}
   user = {
     email: 'iraklibibilashvili99@gmail.com',
@@ -25,7 +27,7 @@ onLogin() {
     next: (data: any) => {
       localStorage.setItem('token', data.data.accessToken);
       localStorage.setItem('refreshToken', data.data.refreshToken);
-      
+      this.toast.show('Login Succesfull', 'success')
       this.api.getMe().subscribe({
         next: (me: any) => {
           localStorage.setItem('role', me.data.role);

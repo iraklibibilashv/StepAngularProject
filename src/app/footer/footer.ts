@@ -9,8 +9,8 @@ import { AuthService } from '../services/auth-service';
   styleUrl: './footer.scss',
 })
 export class Footer {
-  constructor(private auth : AuthService) {}
-   get isLoggedIn() {
+  constructor(private auth: AuthService) {}
+  get isLoggedIn() {
     return this.auth.isLoggedIn();
   }
 }

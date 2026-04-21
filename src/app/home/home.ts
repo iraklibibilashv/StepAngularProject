@@ -6,15 +6,13 @@ import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  standalone : true,
-  imports: [CommonModule,FormsModule,RouterModule],
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
 export class Home implements OnInit, OnDestroy {
-  constructor( private api : Api) {
-    
-  }
+  constructor(private api: Api) {}
 
   private currentSlide = 0;
   private slides!: NodeListOf<Element>;

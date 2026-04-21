@@ -202,7 +202,6 @@ export class Myaccount {
       next: (data: any) => {
         this.allCategories = data.data;
         this.cdr.detectChanges();
-        console.log('categories', this.allCategories);
       },
       error: (err) => console.error(err),
     });

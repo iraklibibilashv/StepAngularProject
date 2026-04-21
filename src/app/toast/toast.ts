@@ -5,14 +5,16 @@ import { ToastService } from '../services/toast';
 
 @Component({
   selector: 'app-toast',
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './toast.html',
   styleUrl: './toast.scss',
 })
-export class Toast{
-toasts$;
+export class Toast {
+  toasts$;
   constructor(private toastService: ToastService) {
     this.toasts$ = this.toastService.toasts;
   }
-  remove(id: number) { this.toastService.remove(id); }
+  remove(id: number) {
+    this.toastService.remove(id);
+  }
 }
