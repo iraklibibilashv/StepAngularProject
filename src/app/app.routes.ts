@@ -63,5 +63,9 @@ export const routes: Routes = [
   path: 'adminregister',
   loadComponent: () => import('./adminregister/adminregister').then(m => m.Adminregister),
 },
+{
+  path : "**",
+  loadComponent: () => import('./error/error').then(m => m.Error),
+}
 
 ];
