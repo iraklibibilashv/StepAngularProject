@@ -100,7 +100,6 @@ export class Api {
 
   getFilteredProducts(filters: any) {
     let params = new HttpParams();
-
     if (filters.Search) params = params.set('Search', filters.Search);
     if (filters.Brand) params = params.set('Brand', filters.Brand);
     if (filters.InStock) params = params.set('InStock', filters.InStock);
@@ -112,7 +111,7 @@ export class Api {
     if (filters.MaxPrice) params = params.set('MaxPrice', filters.MaxPrice);
     if (filters.Take) params = params.set('Take', filters.Take);
     if (filters.Page) params = params.set('Page', filters.Page);
-
+    
     return this.api.get(this.baseUrl + 'products/filter', {
       headers: this.getHeaders(),
       params: params,
