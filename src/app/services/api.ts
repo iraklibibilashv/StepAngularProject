@@ -37,7 +37,7 @@ export class Api {
   }
   postResendVerification(email: any) {
     return this.api.post(
-      this.baseUrl + 'auth/resend-email-verification/${email}',
+      this.baseUrl + `auth/resend-email-verification/${encodeURIComponent(email)}`,
       {},
       {
         headers: this.getHeaders(),

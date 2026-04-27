@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { Api } from '../services/api';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -20,7 +20,15 @@ export class Forgotpassword {
     private api: Api,
     private router: Router,
     private cdr: ChangeDetectorRef,
+    private route: ActivatedRoute,
   ) {}
+  ngOnInit() {
+  this.route.queryParams.subscribe(params => {
+    if (params['email']) {
+      this.email = params['email'];
+    }
+  });
+}
 
   onSubmit() {
     if (!this.email) {
@@ -37,7 +45,11 @@ export class Forgotpassword {
         this.successMsg = 'Reset code sent! Check your email.';
         this.loading = false;
         this.cdr.detectChanges();
-        setTimeout(() => this.router.navigate(['/resetpassword']), 2000);
+        setTimeout(() => {
+          this.router.navigate(['/resetpassword'], {
+            queryParams: { email: this.email },
+          });
+        }, 2000);
       },
       error: (err) => {
         this.errorMsg = err?.error?.message || 'Something went wrong. Try again.';

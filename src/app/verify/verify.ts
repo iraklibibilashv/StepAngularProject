@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Api } from '../services/api';
 
 @Component({
@@ -25,9 +25,15 @@ export class Verify {
     private api: Api,
     private router: Router,
     private cdr: ChangeDetectorRef,
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit() {
+      this.route.queryParams.subscribe(params => {
+    if (params['email']) {
+      this.verify.email = params['email'];
+    }
+  });
     this.startCooldown();
   }
 

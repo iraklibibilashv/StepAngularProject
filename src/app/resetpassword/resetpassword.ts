@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { Api } from '../services/api';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -25,7 +25,9 @@ export class Resetpassword {
     private api: Api,
     private router: Router,
     private cdr: ChangeDetectorRef,
+    private route: ActivatedRoute,
   ) {}
+  
 
   onReset() {
     if (!this.data.token || !this.data.password) {
