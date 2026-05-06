@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
@@ -8,7 +8,7 @@ import { ToastService } from '../services/toast';
 
 @Component({
   selector: 'app-myaccount',
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule,DatePipe],
   templateUrl: './myaccount.html',
   styleUrl: './myaccount.scss',
 })
@@ -38,6 +38,7 @@ export class Myaccount {
   ngOnInit() {
     this.loadUser();
     if (this.isAdmin) this.loadAllProducts();
+    this.loadAllCategories()
   }
 
   loadUser() {
