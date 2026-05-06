@@ -19,8 +19,8 @@ export class Login {
     private toast : ToastService
   ) {}
   user = {
-    email: 'iraklibibilashvili99@gmail.com',
-    password: 'Ema@ema123',
+    email: '',
+    password: '',
   };
 onLogin() {
   this.api.postLogin(this.user).subscribe({

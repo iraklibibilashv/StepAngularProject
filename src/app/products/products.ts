@@ -11,7 +11,7 @@ import { Brands, Category } from '../models/product';
 
 @Component({
   selector: 'app-products',
-  imports: [CommonModule, RouterModule, FormsModule, Products],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './products.html',
   styleUrl: './products.scss',
 })
