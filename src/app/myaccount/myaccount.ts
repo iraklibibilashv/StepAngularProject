@@ -39,6 +39,7 @@ export class Myaccount {
     this.loadUser();
     if (this.isAdmin) this.loadAllProducts();
     this.loadAllCategories()
+    localStorage.setItem('name',this.user.firstName)
   }
 
   loadUser() {
@@ -116,6 +117,8 @@ export class Myaccount {
     this.router.navigate(['/login']);
     localStorage.removeItem('refreshToken');
     localStorage.removeItem('token');
+    localStorage.removeItem('email')
+    localStorage.removeItem('name')
   }
   newProduct: any = {
     name: '',

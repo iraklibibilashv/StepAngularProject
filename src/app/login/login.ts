@@ -25,8 +25,11 @@ export class Login {
 onLogin() {
   this.api.postLogin(this.user).subscribe({
     next: (data: any) => {
+      console.log(data);
+      
       localStorage.setItem('token', data.data.accessToken);
       localStorage.setItem('refreshToken', data.data.refreshToken);
+      localStorage.setItem('email',this.user.email)
       this.toast.show('Login Succesfull', 'success')
       this.api.getMe().subscribe({
         next: (me: any) => {
