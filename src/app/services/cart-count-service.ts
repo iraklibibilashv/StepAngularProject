@@ -1,21 +1,18 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartCountService {
-  private cartCount$ = new BehaviorSubject<number>(0);
-  private wishlistCount$ = new BehaviorSubject<number>(0);
+  cartCount = signal(0);
+  wishlistCount = signal(0);
 
-  cartCount = this.cartCount$.asObservable();
-  wishlistCount = this.wishlistCount$.asObservable();
+  setCartCount(count: number) { this.cartCount.set(count); }
+  setWishlistCount(count: number) { this.wishlistCount.set(count); }
 
-  setCartCount(count: number) { this.cartCount$.next(count); }
-  setWishlistCount(count: number) { this.wishlistCount$.next(count); }
-
-  incrementCart() { this.cartCount$.next(this.cartCount$.value + 1); }
-  decrementCart() { this.cartCount$.next(Math.max(0, this.cartCount$.value - 1)); }
-  incrementWishlist() { this.wishlistCount$.next(this.wishlistCount$.value + 1); }
-  decrementWishlist() { this.wishlistCount$.next(Math.max(0, this.wishlistCount$.value - 1)); }
+  incrementCart() { this.cartCount.update(v => v + 1); }
+  decrementCart() { this.cartCount.update(v => Math.max(0, v - 1)); }
+  incrementWishlist() { this.wishlistCount.update(v => v + 1); }
+  decrementWishlist() { this.wishlistCount.update(v => Math.max(0, v - 1)); }
 }

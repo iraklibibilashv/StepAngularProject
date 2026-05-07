@@ -199,6 +199,7 @@ $muted: #5a5a7a;
   display: flex;
   flex-direction: column;
   gap: 20px;
+   min-width: 0;
 }
 
 .ma-section {
@@ -259,6 +260,8 @@ $muted: #5a5a7a;
   padding: 28px 32px;
   clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);
   position: relative;
+   overflow: hidden; // ← დაამატე
+  min-width: 0;     // ← დაამატე
 
   &::before {
     content: '';
@@ -551,7 +554,7 @@ $muted: #5a5a7a;
 }
 
 // Responsive
-@media (max-width: 980px) {
+@media (max-width: 1150px) {
   .ma-container {
     grid-template-columns: 1fr;
   }
@@ -616,5 +619,60 @@ $muted: #5a5a7a;
 
   .ma-danger-zone {
     padding: 16px;
+  }
+}
+@media (max-width: 560px) {
+  .ma-page {
+    padding: 20px 12px;
+  }
+
+  .ma-nav {
+    grid-template-columns: 1fr;
+  }
+
+  .ma-nav-item {
+    font-size: 0.8rem;
+    padding: 10px 12px;
+
+    &.logout {
+      grid-column: 1;
+    }
+  }
+
+  .ma-admin-divider {
+    grid-column: 1;
+  }
+
+  .ma-title {
+    font-size: 1rem;
+  }
+
+  .ma-card {
+    padding: 16px 12px;
+  }
+
+  .ma-danger-zone {
+    padding: 12px;
+  }
+
+  .ma-edit-actions {
+    flex-direction: column;
+  }
+
+  .ma-save-btn,
+  .ma-cancel-btn {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .ma-product-row {
+    flex-wrap: wrap;
+  }
+
+  .ma-delete-btn,
+  .ma-edit-btn {
+    flex: 1;
+    justify-content: center;
   }
 }

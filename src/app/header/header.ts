@@ -28,32 +28,27 @@ export class Header {
   }
 
   ngOnInit() {
-    this.api.getAll('categories').subscribe({
-      next: (data: any) => {
-        this.categoriesArr = data.data;
-        console.log(this.categoriesArr);
-      },
-      error: (err) => console.error(err),
-    });
-    this.api.getAll('products?Take=40&Page=1').subscribe({
-      next: (data: any) => {
-        this.allProduct = data.data.items;
-        this.filterBrandsArr = data.data.items;
-        this.brandsArr = [...new Set(this.filterBrandsArr.map((p: any) => p.brand))];
-        console.log(this.brandsArr);
-      },
-      error: (err) => console.error(err),
-    });
-    this.cartCountService.cartCount.subscribe((c) => {
-      this.cartCount = c;
-      this.cdr.detectChanges();
-    });
-    this.cartCountService.wishlistCount.subscribe((c) => {
-      this.wishlistCount = c;
-      this.cdr.detectChanges();
-    });
-    this.loadCounts();
-  }
+  this.api.getAll('categories').subscribe({
+    next: (data: any) => {
+      this.categoriesArr = data.data;
+      console.log(this.categoriesArr);
+    },
+    error: (err) => console.error(err),
+  });
+  this.api.getAll('products?Take=40&Page=1').subscribe({
+    next: (data: any) => {
+      this.allProduct = data.data.items;
+      this.filterBrandsArr = data.data.items;
+      this.brandsArr = [...new Set(this.filterBrandsArr.map((p: any) => p.brand))];
+      console.log(this.brandsArr);
+    },
+    error: (err) => console.error(err),
+  });
+  this.loadCounts();
+}
+
+get cartCount() { return this.cartCountService.cartCount(); }
+get wishlistCount() { return this.cartCountService.wishlistCount(); }
   // xayipat339@kobace.com
   // Ii123@123
 
@@ -66,8 +61,6 @@ export class Header {
     inStock: false,
     sortBy: '',
   };
-  wishlistCount = 0;
-  cartCount = 0;
   onCategoryClick(id: any) {}
   loadCounts() {
     if (!this.auth.isLoggedIn()) return;
