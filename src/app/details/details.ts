@@ -5,6 +5,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Api } from '../services/api';
 import { ToastService } from '../services/toast';
 import { AuthService } from '../services/auth-service';
+import { CartCountService } from '../services/cart-count-service';
 
 @Component({
   selector: 'app-details',
@@ -30,6 +31,7 @@ export class Details {
     private cdr: ChangeDetectorRef,
     private toastService: ToastService,
     private auth: AuthService,
+    private cartCountService: CartCountService,
   ) {}
 
   ngOnInit() {
@@ -68,19 +70,25 @@ export class Details {
     if (this.quantity > 1) this.quantity--;
   }
 
-  addToCart() {
-    this.api.addToCart(this.product.id, this.quantity).subscribe({
-      next: () => {
-        this.addedToCart = true;
-        this.cdr.detectChanges();
-        setTimeout(() => {
-          this.addedToCart = false;
-          this.cdr.detectChanges();
-        }, 2000);
-      },
-      error: (err) => console.error(err),
-    });
+addToCart() {
+  if (!this.auth.isLoggedIn()) {
+    this.toastService.show('Please login first!', 'error');
+    return;
   }
+  this.api.addToCart(this.product.id, this.quantity).subscribe({
+    next: () => {
+      this.addedToCart = true;
+      this.toastService.show('Added to cart!', 'success');
+      this.cartCountService.incrementCart();
+      this.cdr.detectChanges();
+      setTimeout(() => {
+        this.addedToCart = false;
+        this.cdr.detectChanges();
+      }, 2000);
+    },
+    error: (err) => console.error(err),
+  });
+}
   loadReviews() {
     const id = this.route.snapshot.paramMap.get('id');
     this.api.getReviews(+id!).subscribe({
