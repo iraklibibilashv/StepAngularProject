@@ -228,7 +228,9 @@ updateCategory(categoryId: number, data: any) {
     headers: this.getHeaders()
   });
 }
-
+sendEmail(data : any){
+  return this.api.post("https://iraklibib99.app.n8n.cloud/webhook/checkout",data)
+}
 
 
 

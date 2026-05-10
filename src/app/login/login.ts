@@ -16,30 +16,37 @@ export class Login {
     private api: Api,
     private router: Router,
     private cdr: ChangeDetectorRef,
-    private toast : ToastService
+    private toast: ToastService,
   ) {}
   user = {
     email: '',
     password: '',
   };
-onLogin() {
-  this.api.postLogin(this.user).subscribe({
-    next: (data: any) => {
-      console.log(data);
-      
-      localStorage.setItem('token', data.data.accessToken);
-      localStorage.setItem('refreshToken', data.data.refreshToken);
-      localStorage.setItem('email',this.user.email)
-      this.toast.show('Login Succesfull', 'success')
-      this.api.getMe().subscribe({
-        next: (me: any) => {
-          localStorage.setItem('role', me.data.role);
-          this.router.navigate(['/home']);
-        },
-        error: () => this.router.navigate(['/home'])
-      });
-    },
-    error: (err) => console.error(err),
-  });
-}
+  onLogin() {
+    this.api.postLogin(this.user).subscribe({
+      next: (data: any) => {
+        console.log(data);
+
+        localStorage.setItem('token', data.data.accessToken);
+        localStorage.setItem('refreshToken', data.data.refreshToken);
+        localStorage.setItem('email', this.user.email);
+        this.toast.show('Login Succesfull', 'success');
+        this.api.getMe().subscribe({
+          next: (me: any) => {
+            localStorage.setItem('role', me.data.role);
+            localStorage.setItem('userName', me.data.firstName);
+            localStorage.setItem('firstName', me.data.lastName);
+            localStorage.setItem('name', me.data.firstName + ' ' + me.data.lastName);
+            (window as any).initN8nChat?.();
+            this.router.navigate(['/home']);
+          },
+          error: () => {
+            (window as any).initN8nChat();
+            this.router.navigate(['/home']);
+          },
+        });
+      },
+      error: (err) => console.error(err),
+    });
+  }
 }

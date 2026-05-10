@@ -8,7 +8,7 @@ import { ToastService } from '../services/toast';
 
 @Component({
   selector: 'app-myaccount',
-  imports: [CommonModule, RouterModule, FormsModule,DatePipe],
+  imports: [CommonModule, RouterModule, FormsModule, DatePipe],
   templateUrl: './myaccount.html',
   styleUrl: './myaccount.scss',
 })
@@ -38,8 +38,7 @@ export class Myaccount {
   ngOnInit() {
     this.loadUser();
     if (this.isAdmin) this.loadAllProducts();
-    this.loadAllCategories()
-    localStorage.setItem('name',this.user.firstName)
+    this.loadAllCategories();
   }
 
   loadUser() {
@@ -56,6 +55,7 @@ export class Myaccount {
           dateOfBirth: this.user.details?.dob || null,
         };
         this.loading = false;
+        localStorage.setItem('name', this.user.firstName);
         this.cdr.detectChanges();
       },
       error: (err) => {
@@ -117,8 +117,11 @@ export class Myaccount {
     this.router.navigate(['/login']);
     localStorage.removeItem('refreshToken');
     localStorage.removeItem('token');
-    localStorage.removeItem('email')
-    localStorage.removeItem('name')
+    localStorage.removeItem('email');
+    localStorage.removeItem('name');
+    localStorage.removeItem('role');
+    localStorage.removeItem('userName');
+    localStorage.removeItem('firstName');
   }
   newProduct: any = {
     name: '',

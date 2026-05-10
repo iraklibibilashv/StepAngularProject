@@ -67,14 +67,31 @@ export class Cart {
     return this.cartArr.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
   }
   onCheckout() {
-    this.api.checkout().subscribe({
-      next: () => {
-        this.toastService.show('Order placed!', 'success');
-        this.loadCart();
-      },
-      error: () => this.toastService.show('Checkout failed.', 'error'),
-    });
-  }
+  this.api.checkout().subscribe({
+    next: () => {
+      this.toastService.show('Order placed!', 'success');
+      const data = {
+        email: localStorage.getItem('email'),
+        name: localStorage.getItem('name'),
+        totalPrice: this.total,
+        date: new Date().toLocaleDateString('ka-GE'),
+        items: this.cartArr.map((item: any) => ({
+          name: item.product.name,
+          brand: item.product.brand,
+          quantity: item.quantity,
+          price: (item.product.price * item.quantity).toFixed(2),
+          imageUrl: item.product.imageUrl
+        }))
+      };
+      this.api.sendEmail(data).subscribe({
+        next: () => console.log(data),
+        error: (err) => console.error('n8n error:', err)
+      });
+      this.loadCart();
+    },
+    error: () => this.toastService.show('Checkout failed.', 'error'),
+  });
+}
   clearCart() {
     const deleteAll = this.cartArr.map((item: any) => this.api.removeFromCart(item.id).toPromise());
     Promise.all(deleteAll)

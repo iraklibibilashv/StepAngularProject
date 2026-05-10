@@ -67,6 +67,8 @@ export class Products implements OnInit {
     this.api.getAll('products?Take=100&Page=1').subscribe({
       next: (data: any) => {
         this.brandsArr = [...new Set(data.data.items.map((p: any) => p.brand))];
+        console.log(this.brandsArr);
+        
         this.cdr.detectChanges();
       },
       error: (err) => {
