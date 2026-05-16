@@ -395,6 +395,95 @@
     &:hover { opacity: 0.9; }
   }
 }
+.survey-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.survey-modal {
+  background: #111118;
+  border: 1px solid rgba(255,107,0,0.3);
+  border-top: 3px solid #FF6B00;
+  padding: 40px;
+  max-width: 420px;
+  width: 90%;
+  text-align: center;
+  animation: slideUp 0.3s ease;
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.survey-icon {
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+}
+
+.survey-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #e8e8f0;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0 0 8px;
+}
+
+.survey-sub {
+  font-size: 0.9rem;
+  color: #5a5a7a;
+  margin: 0 0 28px;
+}
+
+.survey-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.survey-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #FF6B00;
+  color: #fff;
+  text-decoration: none;
+  padding: 12px 28px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+  transition: opacity 0.2s;
+
+  &:hover { opacity: 0.9; }
+}
+
+.survey-skip {
+  background: none;
+  border: none;
+  color: #5a5a7a;
+  font-size: 0.85rem;
+  cursor: pointer;
+  font-family: inherit;
+  transition: color 0.2s;
+
+  &:hover { color: #e8e8f0; }
+}
 
 /* ─── Responsive ─── */
 @media (max-width: 768px) {

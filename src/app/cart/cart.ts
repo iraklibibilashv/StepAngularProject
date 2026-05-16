@@ -16,6 +16,8 @@ import { CartCountService } from '../services/cart-count-service';
 export class Cart {
   cartArr: any[] = [];
   loading = true;
+  showSurveyModal = false;
+  surveyUrl = "https://iraklibib99.app.n8n.cloud/form/7a4f8326-26e0-45ac-a5d9-1126fbc22f61"
 
   constructor(
     private api: Api,
@@ -87,6 +89,8 @@ export class Cart {
         next: () => console.log(data),
         error: (err) => console.error('n8n error:', err)
       });
+      this.showSurveyModal = true
+      this.cdr.detectChanges()
       this.loadCart();
     },
     error: () => this.toastService.show('Checkout failed.', 'error'),
@@ -104,4 +108,8 @@ export class Cart {
         this.toastService.show('Failed to clear cart.', 'error');
       });
   }
+  openSurvey() {
+  this.showSurveyModal = false;
+  window.open(this.surveyUrl, '_blank');
+}
 }
